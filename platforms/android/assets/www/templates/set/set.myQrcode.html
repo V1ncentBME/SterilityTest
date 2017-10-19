@@ -1,0 +1,22 @@
+<ion-view view-title="二维码名片">
+<ion-nav-buttons side="primary">
+      <button class="button button-icon ion-ios-arrow-left" ng-click="nvGoback()">{{lastviewtitle}}</button>
+    </ion-nav-buttons>
+    <ion-content scroll="true">
+        <div class="list card">
+            <div class="item item-avatar">
+                <img src="{{qr_Image}}">
+                <h2>{{qr_UserName}}</h2>
+                <p>{{qr_UserId}}</p>
+            </div>
+
+            <div class="item item-body full-image" style="text-align:center">
+                <qrcode  version=5 error-correction-level="M" size=300 data="{{bar}}" href="{{bar}}"></qrcode>
+                <p>
+                    欢迎使用智能无菌检测App！
+                </p>
+              
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

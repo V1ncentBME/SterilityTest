@@ -1,0 +1,41 @@
+<ion-view title="填写个人信息">
+  <ion-nav-bar class="bar-dark nav-title-slide-ios7" style="" >
+    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <div  style="position: absolute;top: 43px;z-index:100;display: block;height: 2.5px;background-color: #33cd5f;{{barwidth}}" ></div>
+  <ion-content padding="true" style="">
+    <form name="Info">
+    <div  class="list">
+      <label class="item item-input">
+        <span class="input-label">姓名</span>
+        <input  ng-model="userName" type="text">
+      </label>
+
+      <label  class="item item-input item-select">
+        <div class="input-label">角色</div>
+       <!--  <select ng-model="Role"> -->
+       <select ng-model="Role" ng-options="Role.Type as Role.Name for Role in Roles" style="width:100%">
+              <!-- <option value="">请选择</option> -->
+            </select>
+          <!-- <option selected>选择性别</option> -->
+          <!-- <option >管理员</option>
+          <option>技术人员</option>
+        </select> -->
+      </label>
+        <label class="item item-input">
+        <span class="input-label">身份证号码
+        <span class="error" ng-show="Info.IDNo.$error.pattern" style="color:red"></span>
+        </span>
+        <input  ng-model="Identify" type="text" name="IDNo" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/" placeholder="请输入您的身份证号码" style="width:100%" ng-change='change(Info.IDNo.$error.pattern)'>
+      </label>
+      <span style="color:white">00</span><span style="color:#c55e19">{{logStatus}}</span>
+      <button class="button button-block button-balanced" ng-click ="infoSetup(Info.IDNo.$error.pattern,userName,Identify,Role)">
+            注册
+      </button>
+    </div>
+
+  </form>      
+  </ion-content>
+          
+</ion-view>

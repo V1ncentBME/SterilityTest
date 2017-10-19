@@ -1,0 +1,52 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-positive">
+      <h1 class="title">试剂信息</h1>
+    </ion-header-bar>
+    <ion-content class="padding">
+      <div class="list item-list">
+        <label class="item item-input">
+          生产日期：<input type="text" ng-model="Rea.ProductDay" placeholder="YYYY-MM-DD或YYYY/MM/DD">
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+          试剂类型:
+          </div>
+          <select ng-model="Rea.ReagentType" ng-options="ReagentType.Type as ReagentType.Type for ReagentType in ReagentTypes">
+          <option selected value="">请选择</option>
+          </select>
+        </label>
+        <label class="item item-input">
+          保质期：<input type="text" ng-model="Rea.ExpiryDay" placeholder="YYYY-MM-DD或YYYY/MM/DD">
+        </label>
+        <label class="item item-input">
+          试剂名字：<input type="text" ng-model="Rea.ReagentName">
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            试剂适用性试验：
+          </div>
+          <select ng-model="Rea.ReagentTest">
+          <option selected value="">请选择</option>
+          <option>不需要</option>
+          <option>通过</option> 
+          <option>未通过</option> 
+          </select>
+        </label>
+        <label class="item item-input">
+          储存方法：<input type="text" ng-model="Rea.SaveCondition">
+        </label>
+        <label class="item item-input">
+          冗余信息：<input type="text" ng-model="Rea.Description">
+        </label>
+      </div>
+      <div class="row">
+        <button class="button button-positive col col-20 col-offset-20" ng-click="confirm()">
+          确定
+        </button>
+        <button class="button button-positive col col-20 col-offset-20" ng-click="closeModal()">
+          取消
+        </button>
+      
+    </div>
+    </ion-content>
+  </ion-modal-view>

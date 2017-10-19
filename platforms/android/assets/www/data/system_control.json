@@ -1,0 +1,612 @@
+[
+    {
+      "OpOrder": "0",
+      "Op": "复位",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "OpStatus": "已完成",
+      "facility": "ALL",
+      "faciCode": "N"
+    },
+    {
+      "OpOrder": "1",
+      "Op": "灭菌",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "进料区灭菌器|进料待加工区灭菌器|加工区灭菌器|待出料区灭菌器|出料区灭菌器",
+      "faciCode": "ISO-S-001|ISO-S-002|ISO-S-003|ISO-S-004|ISO-S-005"
+    },
+    {
+      "OpOrder": "2",
+      "Op": "停止灭菌",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "进料区灭菌器|进料待加工区灭菌器|加工区灭菌器|待出料区灭菌器|出料区灭菌器",
+      "faciCode": "ISO-S-001|ISO-S-002|ISO-S-003|ISO-S-004|ISO-S-005"
+    },
+    {
+      "OpOrder": "3",
+      "Op": "导轨运动开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "进料区导轨|加工区导轨",
+      "faciCode": "ISO-C-001|ISO-C-002"
+    },
+    {
+      "OpOrder": "4",
+      "Op": "开门",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "进料区与进料待加工区之间的门",
+      "faciCode": "ISO-G-001"
+    },
+    {
+      "OpOrder": "5",
+      "Op": "关门",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "进料区与进料待加工区之间的门",
+      "faciCode": "ISO-G-001"
+    },
+    {
+      "OpOrder": "6",
+      "Op": "导轨运动停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "进料区导轨|加工区导轨",
+      "faciCode": "ISO-C-001|ISO-C-002"
+    },
+    {
+      "OpOrder": "7",
+      "Op": "灭菌",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "进料区灭菌器",
+      "faciCode": "ISO-S-001"
+    },
+    {
+      "OpOrder": "8",
+      "Op": "停止灭菌",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "进料区灭菌器",
+      "faciCode": "ISO-S-001"
+    },
+    {
+      "OpOrder": "9",
+      "Op": "拆垛托盘一送入加工区",
+      "OpStatus": "未完成",
+      "OpCode": "001|002",
+      "facility": "机械臂|加工区导轨",
+      "faciCode": "ARM|ISO-C-002"
+    },
+    {
+      "OpOrder": "10",
+      "Op": "托盘一加工",
+      "OpStatus": "未完成",
+      "OpCode": "001|003",
+      "facility": "机械臂|加工区导轨",
+      "faciCode": "ARM|ISO-C-002"
+    },
+    {
+      "OpOrder": "11",
+      "Op": "码垛托盘一送入待出料区",
+      "OpStatus": "正在进行中",
+      "OpCode": "001|004",
+      "facility": "机械臂|加工区导轨",
+      "faciCode": "ARM|ISO-C-002"
+    },
+    {
+      "OpOrder": "12",
+      "Op": "拆垛托盘二送入加工区",
+      "OpStatus": "正在进行中",
+      "OpCode": "001|005",
+      "facility": "机械臂|加工区导轨",
+      "faciCode": "ARM|ISO-C-002"
+    },
+    {
+      "OpOrder": "13",
+      "Op": "托盘二加工",
+      "OpStatus": "正在进行中",
+      "OpCode": "001|006",
+      "facility": "机械臂|加工区导轨",
+      "faciCode": "ARM|ISO-C-002"
+    },
+    {
+      "OpOrder": "14",
+      "Op": "码垛托盘二送入待出料区",
+      "OpStatus": "正在进行中",
+      "OpCode": "001|007",
+      "facility": "机械臂|加工区导轨",
+      "faciCode": "ARM|ISO-C-002"
+    },
+    {
+      "OpOrder": "15",
+      "Op": "拆垛托盘三送入加工区",
+      "OpStatus": "正在进行中",
+      "OpCode": "001|008",
+      "facility": "机械臂|加工区导轨",
+      "faciCode": "ARM|ISO-C-002"
+    },
+    {
+      "OpOrder": "16",
+      "Op": "托盘三加工",
+      "OpStatus": "正在进行中",
+      "OpCode": "001|009",
+      "facility": "机械臂|加工区导轨",
+      "faciCode": "ARM|ISO-C-002"
+    },
+    {
+      "OpOrder": "17",
+      "Op": "码垛托盘三送入待出料区",
+      "OpStatus": "正在进行中",
+      "OpCode": "001|010",
+      "facility": "机械臂|加工区导轨",
+      "faciCode": "ARM|ISO-C-002"
+    },
+    {
+      "OpOrder": "18",
+      "Op": "导轨运动开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "出料区导轨|加工区导轨",
+      "faciCode": "ISO-C-003|ISO-C-002"
+    },
+    {
+      "OpOrder": "19",
+      "Op": "开门",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "待出料区与出料区之间的门",
+      "faciCode": "ISO-G-002"
+    },
+    {
+      "OpOrder": "20",
+      "Op": "关门",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "待出料区与出料区之间的门",
+      "faciCode": "ISO-G-002"
+    },
+    {
+      "OpOrder": "21",
+      "Op": "导轨运动停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "出料区导轨|加工区导轨",
+      "faciCode": "ISO-C-003|ISO-C-002"
+    },
+    {
+      "OpOrder": "22",
+      "Op": "托盘复位",
+      "OpStatus": "未完成",
+      "OpCode": "N",
+      "facility": "人工",
+      "faciCode": "N"
+    },
+    {
+      "OpOrder": "23",
+      "Op": "开门",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "培养箱门",
+      "faciCode": "INC-G-001"
+    },
+    {
+      "OpOrder": "24",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "上层外圈转盘",
+      "faciCode": "INC-C-001"
+    },
+    {
+      "OpOrder": "25",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "上层外圈转盘",
+      "faciCode": "INC-C-001"
+    },
+    {
+      "OpOrder": "26",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "上层内圈转盘",
+      "faciCode": "INC-C-002"
+    },
+    {
+      "OpOrder": "27",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "上层内圈转盘",
+      "faciCode": "INC-C-002"
+    },
+    {
+      "OpOrder": "28",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "下层外圈转盘",
+      "faciCode": "INC-C-003"
+    },
+    {
+      "OpOrder": "29",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "下层外圈转盘",
+      "faciCode": "INC-C-003"
+    },
+    {
+      "OpOrder": "30",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "下层内圈转盘",
+      "faciCode": "INC-C-004"
+    },
+    {
+      "OpOrder": "31",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "下层内圈转盘",
+      "faciCode": "INC-C-004"
+    },
+    {
+      "OpOrder": "32",
+      "Op": "关门",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "培养箱门",
+      "faciCode": "INC-G-001"
+    },
+    {
+      "OpOrder": "33",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "上层外圈转盘",
+      "faciCode": "INC-C-001"
+    },
+    {
+      "OpOrder": "34",
+      "Op": "电源开",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "顶空电源",
+      "faciCode": "INC-CHG"
+    },
+    {
+      "OpOrder": "35",
+      "Op": "检测并反馈结果",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "顶空分析",
+      "faciCode": "INC-TA"
+    },
+    {
+      "OpOrder": "36",
+      "Op": "电源关",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "顶空电源",
+      "faciCode": "INC-CHG"
+    },
+    {
+      "OpOrder": "37",
+      "Op": "电源开",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "视觉光源",
+      "faciCode": "INC-LED"
+    },
+    {
+      "OpOrder": "38",
+      "Op": "检测并反馈结果",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "工业相机",
+      "faciCode": "INC-CAM"
+    },
+    {
+      "OpOrder": "39",
+      "Op": "电源关",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "视觉光源",
+      "faciCode": "INC-LED"
+    },
+    {
+      "OpOrder": "40",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "上层外圈转盘",
+      "faciCode": "INC-C-001"
+    },
+    {
+      "OpOrder": "41",
+      "Op": "支架进入内圈",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "支架电机",
+      "faciCode": "INC-FRAME"
+    },
+    {
+      "OpOrder": "42",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "上层内圈转盘",
+      "faciCode": "INC-C-002"
+    },
+    {
+      "OpOrder": "43",
+      "Op": "电源开",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "顶空电源",
+      "faciCode": "INC-CHG"
+    },
+    {
+      "OpOrder": "44",
+      "Op": "检测并反馈结果",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "顶空分析",
+      "faciCode": "INC-TA"
+    },
+    {
+      "OpOrder": "45",
+      "Op": "电源关",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "顶空电源",
+      "faciCode": "INC-CHG"
+    },
+    {
+      "OpOrder": "46",
+      "Op": "电源开",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "视觉光源",
+      "faciCode": "INC-LED"
+    },
+    {
+      "OpOrder": "47",
+      "Op": "检测并反馈结果",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "工业相机",
+      "faciCode": "INC-CAM"
+    },
+    {
+      "OpOrder": "48",
+      "Op": "电源关",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "视觉光源",
+      "faciCode": "INC-LED"
+    },
+    {
+      "OpOrder": "49",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "上层内圈转盘",
+      "faciCode": "INC-C-002"
+    },
+    {
+      "OpOrder": "50",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "下层外圈转盘",
+      "faciCode": "INC-C-003"
+    },
+    {
+      "OpOrder": "51",
+      "Op": "电源开",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "顶空电源",
+      "faciCode": "INC-CHG"
+    },
+    {
+      "OpOrder": "52",
+      "Op": "检测并反馈结果",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "顶空分析",
+      "faciCode": "INC-TA"
+    },
+    {
+      "OpOrder": "53",
+      "Op": "电源关",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "顶空电源",
+      "faciCode": "INC-CHG"
+    },
+    {
+      "OpOrder": "54",
+      "Op": "电源开",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "视觉光源",
+      "faciCode": "INC-LED"
+    },
+    {
+      "OpOrder": "55",
+      "Op": "检测并反馈结果",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "工业相机",
+      "faciCode": "INC-CAM"
+    },
+    {
+      "OpOrder": "56",
+      "Op": "电源关",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "视觉光源",
+      "faciCode": "INC-LED"
+    },
+    {
+      "OpOrder": "57",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "下层外圈转盘",
+      "faciCode": "INC-C-003"
+    },
+    {
+      "OpOrder": "58",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "下层内圈转盘",
+      "faciCode": "INC-C-004"
+    },
+    {
+      "OpOrder": "59",
+      "Op": "电源开",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "顶空电源",
+      "faciCode": "INC-CHG"
+    },
+    {
+      "OpOrder": "60",
+      "Op": "检测并反馈结果",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "顶空分析",
+      "faciCode": "INC-TA"
+    },
+    {
+      "OpOrder": "61",
+      "Op": "电源关",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "顶空电源",
+      "faciCode": "INC-CHG"
+    },
+    {
+      "OpOrder": "62",
+      "Op": "电源开",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "视觉光源",
+      "faciCode": "INC-LED"
+    },
+    {
+      "OpOrder": "63",
+      "Op": "检测并反馈结果",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "工业相机",
+      "faciCode": "INC-CAM"
+    },
+    {
+      "OpOrder": "64",
+      "Op": "电源关",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "视觉光源",
+      "faciCode": "INC-LED"
+    },
+    {
+      "OpOrder": "65",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "下层内圈转盘",
+      "faciCode": "INC-C-004"
+    },
+    {
+      "OpOrder": "66",
+      "Op": "开门",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "培养箱门",
+      "faciCode": "INC-G-001"
+    },
+    {
+      "OpOrder": "67",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "上层外圈转盘",
+      "faciCode": "INC-C-001"
+    },
+    {
+      "OpOrder": "68",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "上层外圈转盘",
+      "faciCode": "INC-C-001"
+    },
+    {
+      "OpOrder": "69",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "上层内圈转盘",
+      "faciCode": "INC-C-002"
+    },
+    {
+      "OpOrder": "70",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "上层内圈转盘",
+      "faciCode": "INC-C-002"
+    },
+    {
+      "OpOrder": "71",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "下层外圈转盘",
+      "faciCode": "INC-C-003"
+    },
+    {
+      "OpOrder": "72",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "下层外圈转盘",
+      "faciCode": "INC-C-003"
+    },
+    {
+      "OpOrder": "73",
+      "Op": "转盘开始转动",
+      "OpStatus": "已完成",
+      "OpCode": "001",
+      "facility": "下层内圈转盘",
+      "faciCode": "INC-C-004"
+    },
+    {
+      "OpOrder": "74",
+      "Op": "转盘停止转动",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "下层内圈转盘",
+      "faciCode": "INC-C-004"
+    },
+    {
+      "OpOrder": "75",
+      "Op": "关门",
+      "OpStatus": "已完成",
+      "OpCode": "002",
+      "facility": "培养箱门",
+      "faciCode": "INC-G-001"
+    }
+]
+  

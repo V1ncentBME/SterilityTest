@@ -1,0 +1,99 @@
+<ion-view view-title="新建样品">
+  <ion-nav-buttons side="left">
+      <!-- <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/catalog/Data_input">返回</a> -->
+    </ion-nav-buttons>
+  <ion-content> 
+    <div class="list card">
+       <div >
+          <div class="row">
+            <div class="col" >
+              <h2 style="font-size: 16px;">任务类型:{{tasktype}}</h2>
+          </div> 
+      </div>
+    
+      <ion-item>
+      <div class='row'>
+      <div class="col" style="width:100%">
+          <span class="input-label">产品编号:</span> 
+        </div>  
+        <div class="col col-67">
+          <input type="text" style="width:100%;background:#f4f4f4;" ng-model="ObjNO"> 
+        </div>
+        </div>
+      <div class="row">
+      	
+          <div class="col" style="width:100%">
+            <span class="input-label">供应商</span> 
+          </div>  
+          <div class="col col-67">
+            <select ng-model="Supplier" ng-options="Supplier.ID as Supplier.Name for Supplier in Suppliers" style="width:100%">
+              <option value="">请选择</option>
+            </select>
+          </div>
+        </div>
+        <div class='row'>
+      <div class="col" style="width:100%">
+          <span class="input-label">产品批次:</span> 
+        </div>  
+        <div class="col col-67">
+          <input type="text" style="width:100%;background:#f4f4f4;" ng-model="ObjBatch"> 
+        </div>
+        </div>
+        <div class="row">
+          <div class="col" style="width:100%">
+            <span class="input-label">产品名字</span> 
+          </div>  
+          <div class="col col-67">
+            <select ng-model="ObjectName" ng-options="ObjectName.ID as ObjectName.Name for ObjectName in ObjectNames" style="width:100%">
+              <option value="">请选择</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" style="width:100%">
+            <span class="input-label">产品类型</span> 
+          </div>  
+          <div class="col col-67">
+            <select ng-model="ObjectType" ng-options="ObjectType.ID as ObjectType.Name for ObjectType in ObjectTypes" style="width:100%">
+              <option value="">请选择</option>
+            </select>
+          </div>
+        </div>
+        <div class='row'>
+        <div class='col' style="width:100%">
+          <span class="input-label" >记录人员:</span> 
+        </div>  
+        <div class='col col-67'>
+        <input type="text" ng-model="Recorder" style="width:100%;background:#FF8040;" readonly="readonly"> 
+        </div>
+        </div>
+        <div class='row'>
+        <div class="col" style="width:100%">
+          <span class="input-label">记录时间:</span> 
+        </div>  
+        <div class="col col-67">
+          <input type="datetime-local" style="width:100%;background:#f4f4f4;" ng-model="RecordTime" > 
+        </div>
+        </div>
+
+        <div style="width:100%;">
+          <span class="input-label">注意事项:</span> 
+        </div>  
+        <div>
+        <textarea ng-model="visitInfo.InjuryArea" rows="3" style="width: 100%;background:#f4f4f4;"></textarea>
+        </div>
+
+        <div class="item tabs tabs-secondary tabs-icon-left " style="vertical-align:center;">
+          <a class="tab-item" ng-click="saveVisitInfo()" style="font-size:16px;color:blue">
+            <i class="ion-android-upload" style="font-size:30px;"></i>
+            保存
+          </a>
+          <a class="tab-item"  style="font-size:16px;color:green" ng-click="goMain()">
+           <i class="ion-ios-paper-outline" style="font-size:30px;"></i>
+           主界面
+          </a>
+        </div>
+      </ion-item>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,112 @@
+<ion-view view-title="个人信息设置" cache-view="false">
+  <ion-nav-buttons side="primary">
+      <button class="button button-icon ion-ios-arrow-left" ng-click="nvGoback()">返回
+      </button>
+  </ion-nav-buttons>
+    
+  <ion-content>
+   <form name="Info">
+   
+   
+    <ion-list>
+     <div class="list card">
+      <ion-item class="item-stable">
+        <i class="icon ion-android-arrow-dropdown"></i>
+        &nbsp;
+         基本信息
+      </ion-item> 
+      <ion-item class="item-accordion" ng-show="isShown()">
+        <div class="row">
+            <div class="col">
+              <span class="input-label">姓名</span> 
+            </div>  
+            <div class="col col-67" style="width:100%">
+            <input class="item-input-wrapper" type="text" ng-model="BasicDtInfo.UserName" placeholder="请输入您的姓名" style="width:100%" >
+            </div>
+          </div>
+        <div class="row">
+            <div class="col">
+              <span class="input-label">身份证号码
+      
+                <span class="error" ng-show="Info.IDNo.$error.pattern" style="color:red"></span>
+              </span> 
+            </div>  
+            <div class="col col-67" style="width:100%">
+            <input class="item-input-wrapper" type="text" name="IDNo" ng-model="BasicDtInfo.Iden" readonly="true" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/" placeholder="请输入您的身份证号码" style="width:100%" ng-change='change(Info.IDNo.$error.pattern)'>
+            </div>
+          </div>
+        
+          <div class="row">
+          <div class="col">
+            <span class="input-label">联系电话
+              <!-- <span class="error" ng-show="Info.PhoneNumber.$error.pattern" style="color:red">*请输入正确的手机号码</span> -->
+              <span class="error" ng-show="Info.PhoneNumber.$error.pattern" style="color:red"></span>
+            </span> 
+          </div>  
+          <div class="col col-67" style="width:100%">
+          <input class="item-input-wrapper" type="number" name="PhoneNumber" ng-model="BasicDtInfo.PhoneNo" ng-pattern="/^(17[0-9]|13[0-9]|15[0|3|6|7|8|9]|18[8|9])\d{8}$/" placeholder="请输入您的联系电话" style="width:100%" ng-change='change(Info.PhoneNumber.$error.pattern)'>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="input-label">角色</span> 
+          </div>  
+          <div class="col col-67" style="width:100%">
+              <select ng-model="BasicDtInfo.Role" ng-options="Role.Type as Role.Name for Role in Roles" style="width:100%">
+              <!-- <option value="">-请选择-</option> -->
+              </select>
+          </div>
+        </div>
+      </ion-item>
+     </div>
+    <div class="list card">
+      <ion-item class="item-stable" ng-click="toggle1()" ng-class="{active: isShown1()}">
+        <i class="icon" ng-class="isShown1() ? 'ion-android-arrow-dropdown' : 'ion-android-arrow-dropright'"></i>
+        &nbsp;<!--空格-->
+         更新信息
+      </ion-item> 
+      <ion-item class="item-accordion" ng-show="isShown1()">
+      <!-- <form name="ContactInfo"> -->
+        <div class="row">
+            <div class="col">
+              <span class="input-label">设备IP</span> 
+            </div>  
+            <div class="col col-67" style="width:100%">
+            <input class="item-input-wrapper" type="text" ng-model="TerminalIP" placeholder="请输入设备IP" style="width:100%" readonly="true">
+            </div>
+          </div>
+        <div class="row">
+          <div class="col">
+            <span class="input-label">设备名</span> 
+          </div>  
+          <div class="col col-67" style="width:100%">
+          <input class="item-input-wrapper" type="text" ng-model="TerminalName" placeholder="请输入您的设备名" style="width:100%" readonly="true">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="input-label">用户名</span> 
+          </div>  
+          <div class="col col-67" style="width:100%">
+          <input class="item-input-wrapper" type="text" ng-model="UserId" placeholder="请输入您的用户名" style="width:100%" readonly="true">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="input-label">上次登录时间</span> 
+          </div>  
+          <div class="col col-67" style="width:100%">
+          <input class="item-input-wrapper" type="text" ng-model="LastLoginTime" placeholder="请输入您的用户名" style="width:100%" readonly="true">
+          </div>
+        </div>
+      </ion-item>
+     </div>
+    </ion-list>
+      <div>
+         <button ng-click='SaveInfo(Info.IDNo.$error.pattern, Info.PhoneNumber.$error.pattern)' class="button button-block button-calm" style=" width:80%;margin-left:10% ">更新</button>
+      </div>
+      </form>
+    <!-- </div> -->
+  </ion-content>
+</ion-view>
+

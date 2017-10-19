@@ -1,0 +1,33 @@
+<ion-view view-title="系统控制">
+   <ion-nav-buttons side="left">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/dash">返回</a>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <a class="button button-primary" ng-click="Stop()">停止操作</a>
+    </ion-nav-buttons>
+  <ion-content>
+    <div>
+        <table style="width:100%;text-align:center;vertical-align:center">
+            <thead style="background-color:#9ACD32;border:2px;color:white">
+                <tr>
+                    <th>序号</th>
+                    <th>操作</th>
+                    <th>对应设备</th>
+                    <th>操作状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-style="contents[$index%2]" ng-repeat="system_control in system_controls">
+                    <td>{{system_control.OpOrder}}</td>
+                    <td>{{system_control.Op}}</td>
+                    <td>{{system_control.facility}}</td>
+                    <td ng-style="set_color(system_control)">{{system_control.OpStatus}}</td>
+                    <td>
+                </td>
+                </tr>
+            </tbody>
+        
+        </table>
+    </div>
+  </ion-content>
+</ion-view>

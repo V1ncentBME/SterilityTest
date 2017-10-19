@@ -1,0 +1,55 @@
+<ion-view view-title="监控">
+  <ion-content>
+    <ion-list>
+     <div class="list card">
+      <ion-item class="item-stable" style="background-color: #FFF7FF">
+        <i class="icon ion-android-arrow-dropdown"></i>
+        &nbsp;
+         培养箱信息
+      </ion-item> 
+      <ion-item class="item-accordion" ng-show="isShown()">
+        <a class="item item-avatar" href="#/monitor/opincubator">
+        <img src="img/EnvIncubator.jpg">
+        <h2 style="padding-top:10px">培养箱实时温度</h2>
+       </a>
+       </ion-item>
+       </div>
+    <div class="list card">
+      <ion-item class="item-stable" ng-click="toggle1()" ng-class="{active: isShown1()}" style="background-color: #FFF7FF">
+        <i class="icon" ng-class="isShown1() ? 'ion-android-arrow-dropdown' : 'ion-android-arrow-dropright'"></i>
+        &nbsp;<!--空格-->
+         无菌隔离器信息
+      </ion-item> 
+      <ion-item class="item-accordion" ng-show="isShown1()">
+      <!-- <form name="ContactInfo"> -->
+        <a class="item item-avatar" href="#/monitor/FeedArea">
+        <img src="img/jinliao.jpg">
+        <h2 style="padding-top:10px">进料区实时参数</h2>
+       </a>
+
+       <a class="item item-avatar" href="#/monitor/daijiagong">
+        <img src="img/daijiagong.jpg">
+        <h2 style="padding-top:10px">进料待加工区实时参数</h2>
+       </a>
+
+       <a class="item item-avatar" href="#/monitor/ProcessArea">
+        <img src="img/jiagong.jpg">
+        <h2 style="padding-top:10px">加工区实时参数</h2>
+       </a>
+
+       <a class="item item-avatar" href="#/monitor/MaterialWaiting">
+        <img src="img/daichuliao.jpg">
+        <h2 style="padding-top:10px">待出料区实时参数</h2>
+       </a>
+
+       <a class="item item-avatar" href="#/monitor/DischargeArea">
+        <img src="img/chuliao.jpg">
+        <h2 style="padding-top:10px">出料区区实时参数</h2>
+       </a>
+        
+      </ion-item>
+     </div>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

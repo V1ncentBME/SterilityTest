@@ -1,0 +1,54 @@
+<ion-view view-title="无菌检测仪器操作记录表">
+   <ion-nav-buttons side="left">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="onClickBackward()">返回</a>
+      	
+       
+      
+    </ion-nav-buttons>
+  <ion-content>
+	<div>
+        <table style="width:100%;text-align:center;vertical-align:center">
+            <thead style="background-color:#8B7E66;border:2px;color:white">
+	            <tr>
+	            	<th>仪器编号</th>
+                <th>操作编号</th>
+	            	<th>
+ 						       <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectother" ng-options="other.id as other.name for other in others">
+                    <option selected value="">操作事项</option>
+                  </select>
+	            	</th>
+	            	<th>
+                  <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
+                    <option selected value="">更新记录</option>
+                  </select>
+                </th>
+	          	</tr>
+            </thead>
+            <tbody>
+            	<tr ng-style="contents[$index%2]" ng-repeat="opequipmentinfo in opequipmentinfos">
+                <td>{{opequipmentinfo.EquipmentId}}</td>
+                <td>{{opequipmentinfo.OperationNo}}</td>
+                <td>
+                  <div ng-switch="selectother">
+                    <div ng-switch-when="1">{{opequipmentinfo.OperationTime}}</div>
+                    <div ng-switch-when="2">{{opequipmentinfo.OperationCode}}</div>
+                    <div ng-switch-when="3">{{opequipmentinfo.OperationValue}}</div>
+                    <div ng-switch-when="4">{{opequipmentinfo.OperationResult}}</div>
+                  </div>
+                </td>
+                <td>
+                   <div ng-switch="selectrevision">
+                    <div ng-switch-when="1">{{opequipmentinfo.revDateTime}}</div>
+                    <div ng-switch-when="2">{{opequipmentinfo.TerminalIP}}</div>
+                    <div ng-switch-when="3">{{opequipmentinfo.TerminalName}}</div>
+                    <div ng-switch-when="4">{{opequipmentinfo.revUserId}}</div>
+                    <div ng-switch-when="5">{{opequipmentinfo.revIdentify}}</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+        
+        </table>
+  	</div>
+  </ion-content>
+</ion-view>
