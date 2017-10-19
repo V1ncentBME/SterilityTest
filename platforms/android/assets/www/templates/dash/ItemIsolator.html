@@ -1,0 +1,55 @@
+<ion-view view-title="无菌隔离器信息表">
+   <ion-nav-buttons side="left">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/dash">返回</a>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <a class="button" href="#/tab/dash/envisolator" has-Permission="{{p}}">环境</a>
+      <a class="button" href="#/tab/dash/opequipment">操作</a>
+    </ion-nav-buttons>
+  <ion-content>
+  <ion-scroll direction="xy">
+  <div class="row" style="height:40px">
+    <button class="button button-small icon-right ion-chevron-down col col-20 col-offset-10" style="background-color:#F0F0F0" ng-click="sort()">排序</button>
+    <p class="col col-20 col-offset-20" style="margin-top:1px">查找:</p> <input class="col col-30 "ng-model="query"/>
+  </div>
+  <div>
+        <table style="width:100%;text-align:center;vertical-align:center" >
+            <thead style="background-color:#8B7E66;border:2px;color:white">
+              <tr>
+                <th>隔离器编号</th>
+                <th>生产日期</th>
+                <th>生产厂家</th>
+                <th>参数描述</th>
+                <th><select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
+                    <option selected value="">更新记录</option>
+                  </select>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  ng-style="contents[$index%2]" ng-repeat="isolatorinfo in isolatorinfos|orderObjectBy:field:reverse|filter:query">
+                <td>{{isolatorinfo.IsolatorId}}</td>
+                <td>{{isolatorinfo.ProductDay}}</td>
+                <td>{{isolatorinfo.EquipPro}}</td>
+                <td>{{isolatorinfo.InsDescription}}</td>
+                <td>
+                  <div ng-switch="selectrevision">
+                    <div ng-switch-when="1">{{isolatorinfo.revDateTime}}</div>
+                    <div ng-switch-when="2">{{isolatorinfo.TerminalIP}}</div>
+                    <div ng-switch-when="3">{{isolatorinfo.TerminalName}}</div>
+                    <div ng-switch-when="4">{{isolatorinfo.revUserId}}</div>
+                    <div ng-switch-when="5">{{isolatorinfo.revIdentify}}</div>
+                  </div>
+                </td>
+
+              </tr>
+            </tbody>
+        
+        </table> 
+    </div>
+  </ion-scroll>
+  </ion-content>
+</ion-view>
+
+
+  

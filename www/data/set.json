@@ -1,0 +1,22 @@
+[
+	{
+		"set":"个人信息",
+		"setID":"personalInfo",
+		"url":"img/icon/touxiang.jpg"
+	},
+	{
+		"set":"我的二维码",
+		"setID":"myQrcode",
+		"url":"img/icon/erweima.jpg"
+	},
+	{
+		"set":"修改密码",
+		"setID":"changepassword",
+		"url":"img/icon/password.jpg"
+	},
+	{
+		"set":"消息推送",
+		"setID":"pushmessege",
+		"url":"img/icon/pushmessege.jpg"
+	}
+]

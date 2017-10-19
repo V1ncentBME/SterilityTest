@@ -1,0 +1,70 @@
+<ion-view view-title="样品记录表">
+    <ion-nav-buttons side="left">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/dash">返回</a>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button" ng-click="openModal()">录入新样品</button>
+    </ion-nav-buttons>
+  <ion-content>
+    <ion-scroll direction="xy">
+    <ion-refresher pulling-text="刷新中" on-refresh="doRefresh()">
+    </ion-refresher>
+  <div>
+        <table style="width:100%;text-align:center;vertical-align:center">
+            <thead style="background-color:#8B7E66;border:2px;color:white">
+              <tr>
+                <th>产品编号</th>
+                <th>培养批次</th>
+                <th>
+                 <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectother" ng-options="other.id as other.name for other in others">
+                          <option selected value="">其他样品信息</option>
+                  </select>
+                </th>
+                <th>
+                  <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
+                    <option selected value="">更新记录</option>
+                  </select> 
+                </th>
+                <th>查看</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-style="contents[$index%2]" ng-repeat="sampleinfo in sampleinfos">
+                <td>{{sampleinfo.ObjectNo}}</td>
+                <td>{{sampleinfo.ObjIncuSeq}}</td>
+                <td>
+                  <div ng-switch="selectother">
+                    <div ng-switch-when="1">{{sampleinfo.ObjCompany}}</div>
+                    <div ng-switch-when="2">{{sampleinfo.ObjectName}}</div>
+                    <div ng-switch-when="3">{{sampleinfo.ObjectType}}</div>
+                    <div ng-switch-when="4">{{sampleinfo.SamplingPeople}}</div>
+                    <div ng-switch-when="5">{{sampleinfo.SamplingTime}}</div>
+                    <div ng-switch-when="6">{{sampleinfo.SamplingWay}}</div>
+                    <div ng-switch-when="7">{{sampleinfo.SamplingTool}}</div>
+                    <div ng-switch-when="8">{{sampleinfo.SamAmount}}</div>
+                    <div ng-switch-when="9">{{sampleinfo.DevideWay}}</div>
+                    <div ng-switch-when="10">{{sampleinfo.SamContain}}</div>
+                    <div ng-switch-when="11">{{sampleinfo.Warning}}</div>
+                    <div ng-switch-when="12">{{sampleinfo.SamSave}}</div>
+                  </div>
+                </td>
+                <td>
+                   <div ng-switch="selectrevision">
+                    <div ng-switch-when="1">{{sampleinfo.revDateTime}}</div>
+                    <div ng-switch-when="2">{{sampleinfo.TerminalIP}}</div>
+                    <div ng-switch-when="3">{{sampleinfo.TerminalName}}</div>
+                    <div ng-switch-when="4">{{sampleinfo.revUserId}}</div>
+                    <div ng-switch-when="5">{{sampleinfo.revIdentify}}</div>
+                  </div>
+                </td>
+                <td>
+                  <button style="background-color:#63B8FF;color:white" ng-click="toResult(sampleinfo.ObjectNo,sampleinfo.ObjIncuSeq,sampleinfo.ObjCompany)">结果</button>
+                </td>
+              </tr>
+            </tbody>
+        
+        </table>
+    </div>
+    </ion-scroll>
+  </ion-content>
+</ion-view>

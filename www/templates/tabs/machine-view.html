@@ -1,0 +1,50 @@
+<ion-view view-title="机器视觉分析">
+  <ion-nav-buttons side="left">
+    <button class="button button-positive button-clear no-animation" ng-click="previous()"  ng-if="slideIndex > 0">
+     Previous Slide
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right"> 
+    <button class="button button-positive button-clear no-animation" ng-click="next()" >
+     Next
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-footer" style="margin-top: 0" >
+   <div>
+   <table style="width:100%;text-align:center;vertical-align:center">
+    <thead style="background-color:#9ACD32;border:10px;color:white">
+      <tr>
+        <th>
+        <select style="background-color:#9ACD32;border:10px;color:white;text-align:center;vertical-align:center" ng-model="selectincubator" ng-options="incubator.id as incubator.name for incubator in incubators">
+          <option selected value="">培养箱</option>
+        </select>
+      </th>
+      <th>
+        <select style="background-color:#9ACD32;border:10px;color:white;text-align:center;vertical-align:center" ng-model="selecttestcube" ng-options="testcube.id as testcube.name for testcube in testcubes">
+          <option selected value="">试管</option>
+        </select> 
+      </th>
+    </tr>
+  </thead>
+  </table>
+    <ion-slide-box style="margin-top: 10%" on-slide-changed="slideChanged(index)">
+      <ion-slide ng-repeat="Pic in Pics">
+        <div style="height:4%; width:120%; margin-left:20%">  
+          <img ng-src="{{Pic.face}}" >  
+        </div> 
+        <div style="text-align:center;font-size: 18px">{{Pic.describe}}</div>
+      </ion-slide>     
+    </ion-slide-box>
+  <!-- </tbody>
+  </table> -->
+  </div>
+
+  </ion-content>
+  <ion-footer-bar >
+  <div  class="text-center hide-on-keyboard-open" style="position:absolute;bottom:0px;width:100%;min-height:10%">
+    <button  class="button button-block button-calm" style=" width:80%;margin-left:10% " ng-click="toMonitor()">返回监控界面</button>
+  </div> 
+  </ion-footer-bar>
+
+</ion-view>

@@ -1,0 +1,21 @@
+<ion-view view-title="培养箱实时温度">
+<ion-nav-buttons side="primary">
+   <button class="button button-icon ion-ios-arrow-left" ng-click="nvGoback()">{{lastviewtitle}}</button>
+</ion-nav-buttons>
+   <ion-content class="has-footer" scroll="true">
+      <div class="row">
+              <div class="col-67" style="width:100%;font-size: 20px">
+                  培养箱实时温度 
+              </div>  
+              <div class="col col-67" style="width:100% ;font-size: 20px;color:#FF0000" >
+                {{temp}}
+              </div>
+        </div>
+      <div id="opincubator1" style="height:400px;margin-top:50px" ></div>         
+    </ion-content>
+
+  <div class="bar bar-footer bar-balanced">
+    <button class="button button-clear" ng-click='Stop()'>停止监控</button>
+    <!-- <div class="title"> <button ng-click="captureVideo();" class="button button-clear button-icon icon ion-ios7-videocam-outline"></button></div> -->
+    <button class="button button-clear" ng-click='Start()'>开始监控</button>
+</div>
