@@ -1,0 +1,140 @@
+<ion-view view-title="任务列表">
+   <ion-nav-buttons side="left">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/dash">返回</a>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="secondary">
+    <a class="button icon-left ion-plus button-clear" ng-click = "popover_others.show($event)" ></a>
+  </ion-nav-buttons>
+
+    <ion-content scroll="true">
+
+       <div class="myCalendar" id="myCalendar-1"></div>
+
+        <div class="row">
+            <div class="col col-25">
+                <div class="legend legend_today"></div>
+                <p class="legend_text">今天</p>
+            </div>
+            <div class="col col-25">
+                <div class="legend legend_done"></div>
+                <p class="legend_text">已完成</p>
+            </div>
+            <div class="col col-25">
+                <div class="legend legend_undo"></div>
+                <p class="legend_text">未完成</p>
+            </div>
+            <div class="col col-25">
+                <div class="legend legend_selected"></div>
+                <p class="legend_text">选择</p>
+            </div>
+        </div>
+        
+        <div>
+        {{tasklist}}
+        </div>
+        <!-- <ion-nav-view class="showtasklist">
+            <ion-content scroll="true">
+                <ion-list>
+                    <ion-item ng-repeat="item in showtasklist" ng-click = "showdetail(item.index)">
+                        <i class="icon" ng-class="item.showdetail ? 'ion-minus' : 'ion-plus'"></i>
+                        {{item.Name}}
+                        <div ng-if = "item.showdetail">
+                            <ion-list>
+                                <ion-item ng-repeat="detail in item.SubTasks" style="background-color:#85D2F3;">
+                                    {{detail.Name}}
+                                    <div style="float:right;" ng-if=(detail.Status=='1')>已完成</div>
+                                    <div style="float:right;" ng-if=(detail.Status=='0')>未完成</div>
+                                </ion-item>
+                            </ion-list>
+                        </div>
+                    </ion-item>
+                    {{tasklist}}
+                </ion-list>
+                <div class="iconplace" ng-if=notaskicon>
+                    <img src="img/icon/submitnormal.png"/>
+                    <p>今天没有任务可以查看</p>
+                </div>
+                <div class="iconplace" ng-if=showiniticon>
+                    <img src="img/icon/task.png"/>
+                    <p>点击日期查看任务完成情况</p>
+                </div>
+            </ion-content>
+        </ion-nav-view> -->
+        
+
+  </ion-content>
+  <style type="text/css">
+    body{height:100%;}
+    .showtasklist {
+        position: absolute;
+        top: 275px;
+        width: 100%;
+        height: 60%;
+        margin-top: 60px;
+        border-style: solid;
+        border-width: 2px 2px 2px 2px;
+        border-color: blue ;
+    }
+    .iconplace{
+        text-align: center;
+        margin-top: 50px;
+        /*padding: 10%;*/
+        /*vertical-align: 50%;*/
+    }
+    .legend{
+        width: 20px;
+        height: 20px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .legend_today{
+        background-color: #FAF714;
+    }
+    .legend_done{
+        background-color: #6AD58E;
+    }
+    .legend_undo{
+        background-color: #FFA500;
+    }
+    .legend_selected{
+        background-color: #267AD6;
+    }
+    .legend_text {
+        position: relative;
+        left: 22px;
+        bottom: 25px;
+    }
+</style>
+<script id = "popover-select-button.html" type="text/ng-template">
+  <ion-popover-view style="width:55%;height:50%;margin-top:10px;">
+    <ion-content>
+      <ion-list>
+        <ion-item ng-click="selectPop()">
+          <i class="ion-ios-medkit-outline balanced" style="font-size:20px;"></i>
+          <span>无菌隔离器灭菌</span>
+        </ion-item>
+        <ion-item  ng-click="selectTask(tasktype1)" ng-model='tasktype1'>
+          <i class="ion-ios-flask-outline balanced" style="font-size:20px;" ></i>
+          <span>{{tasktype1}}</span>
+        </ion-item>
+        <ion-item  ng-click="selectTask(tasktype2)">
+          <i class="ion-erlenmeyer-flask assertive" style="font-size:20px;"></i>
+          <span>{{tasktype2}}</span>
+        </ion-item>
+        <ion-item  ng-click="selectTask(tasktype3)">
+          <i class="ion-beaker balanced" style="font-size:20px;"></i>
+          <span>{{tasktype3}}</span>
+        </ion-item>
+        <ion-item  ng-click="selectTask(tasktype4)">
+          <i class="ion-ios-reverse-camera-outline balanced" style="font-size:20px;"></i>
+          <span>{{tasktype4}}</span>
+        </ion-item>
+        <ion-item  ng-click="selectTask(tasktype5)">
+          <i class="ion-social-snapchat-outline assertive" style="font-size:20px;"></i>
+          <span>{{tasktype5}}</span>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-popover-view>
+</script>
+</ion-view>

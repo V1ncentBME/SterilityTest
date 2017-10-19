@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="E:\Project\SterilityTest\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="afe8eb4906b94df000e2b3714c864ec42d4e4ea6">
+        <dex dex="E:\Project\SterilityTest\platforms\android\build\intermediates\pre-dexed\debug\CordovaLib-unspecified-debug_e3176ad5ead0a18f9f3d6659bc8c678456818d2e.jar" />
+    </item>
+
+</items>

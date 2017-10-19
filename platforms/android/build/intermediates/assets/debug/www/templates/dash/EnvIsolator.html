@@ -1,0 +1,47 @@
+<ion-view view-title="隔离器参数记录表">
+    <ion-nav-buttons side="left">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/dash/itemisolator">返回</a>
+    </ion-nav-buttons>
+    
+     
+  
+  <ion-content>
+  	 <div>
+        <table style="width:100%;text-align:center;vertical-align:center">
+            <thead style="background-color:#8B7E66;border:2px;color:white">
+              <tr>
+                <th>隔离器编号</th>
+                <th>仓体编号</th>
+                <th>测量时间</th>
+                <th>参数编码</th>
+                <th>参数值</th>
+                <th>
+                  <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
+                    <option selected value="">更新记录</option>
+                  </select>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-style="contents[$index%2]" ng-repeat="envisolatorinfo in envisolatorinfos">
+                <td>{{envisolatorinfo.IsolatorId}}</td>
+                <td>{{envisolatorinfo.CabinId}}</td>
+                <td>{{envisolatorinfo.MeaTime}}</td>
+                <td>{{envisolatorinfo.IsoCode}}</td>
+                <td>{{envisolatorinfo.IsoValue}}</td>
+                <td>
+                  <div ng-switch="selectrevision">
+                    <div ng-switch-when="1">{{envisolatorinfo.revDateTime}}</div>
+                    <div ng-switch-when="2">{{envisolatorinfo.TerminalIP}}</div>
+                    <div ng-switch-when="3">{{envisolatorinfo.TerminalName}}</div>
+                    <div ng-switch-when="4">{{envisolatorinfo.revUserId}}</div>
+                    <div ng-switch-when="5">{{envisolatorinfo.revIdentify}}</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+        
+        </table>
+    </div>
+  </ion-content>
+</ion-view>
