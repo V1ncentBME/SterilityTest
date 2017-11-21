@@ -2,7 +2,7 @@ angular.module('zjubme.services', ['ionic','btford.socket-io','ngResource'])
 
 // 客户端配置
 .constant('CONFIG', {
-  baseUrl: 'http://121.43.107.106:8063/Api/v1/',
+  baseUrl: 'http://10.12.43.34:8090/Api/v1/',
   
   })
   
