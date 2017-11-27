@@ -2795,7 +2795,43 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     Storage.rm('ObjCompany');
   });
 }])
-.controller('BreakDownCtrl', function($scope) {})
+.controller('BreakDownCtrl', ['$scope','$state','Result', function($scope,$state,Result) {
+  $scope.contents=[{"background":"#CCCCCC"},{"background-color":"#EBEBEB"}]
+  $scope.excepinfos=[
+    {"id":1,"name":"异常参数"},
+    {"id":2,"name":"异常值"}
+  ]
+
+  $scope.breakdown={
+    "BreakId": null,
+    "BreakTimeS": null,
+    "BreakTimeE": null,
+    "BreakEquip": null,
+    "BreakPara": null,
+    "BreakValue": null,
+    "BreakReason": null,
+    "ResponseTimeS": null,
+    "ResponseTimeE": null,
+    "GetBreakTime": 1,
+    "GetBreakEquip": 1,
+    "GetBreakPara": 1,
+    "GetBreakValue": 1,
+    "GetBreakReason": 1,
+    "GetResponseTime": 1
+  }
+
+  $scope.breakdowninfos={};
+  Result.GetBreakDownInfo($scope.breakdown).then(
+    function(data){
+      for(var i=0;i<data.length;i++){
+        $scope.breakdowninfos[i]=data[i];
+      }
+    },function(e){
+
+    });
+
+
+}])
 // 仪器操作-李泽南
 .controller('OpEquipmentCtrl',['$scope','$state','Operation','$ionicHistory', function($scope,$state,Operation,$ionicHistory) {
   $scope.contents=[{"background":"#CCCCCC"},{"background-color":"#EBEBEB"}]

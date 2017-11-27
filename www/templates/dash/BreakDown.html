@@ -13,28 +13,37 @@
 	            	<th>故障编号</th>
 	            	<th>故障时间</th>
 	            	<th>故障机器</th>
-	            	<th>异常参数</th>
-                <th>异常值</th>
-                <th>故障原因</th>
+                    <th>故障响应时间</th>
+                    <th>
+                        <select style="background-color:#AB82FF;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectexcep" ng-options="excepinfo.id as excepinfo.name for excepinfo in excepinfos">
+                            <option selected value="">异常信息</option>
+                        </select>
+                    </th>
+                    <th>故障原因</th>
 	          	</tr>
             </thead>
-            <tbody style="background-color:#CCCCCC">
-            	<tr>
-            		<td>03</td>
-            		<td>20161202</td>
-            		<td>100</td>
-            		<td>3</td>
-                <td>1</td>
-                <td>不详</td>
+            <tbody >
+            	<tr ng-style="contents[$index%2]" ng-repeat="breakdowninfo in breakdowninfos">
+            		<td>{{breakdowninfo.BreakId}}</td>
+                    <td>{{breakdowninfo.BreakTime}}</td>
+                    <td>{{breakdowninfo.BreakEquip}}</td>
+                    <td>{{breakdowninfo.ResponseTime}}</td>
+                    <td>
+                        <div ng-switch="selectexcep">
+                            <div ng-switch-when="1">{{breakdowninfo.BreakPara}}</div>
+                            <div ng-switch-when="2">{{breakdowninfo.BreakValue}}</div>
+                        </div>
+                    </td>
+                    <td>{{breakdowninfo.BreakReason}}</td>
             	</tr>
-            	<tr>
+            	<!-- <tr>
             		<td>01</td>
             		<td>20161202</td>
             		<td>102</td>
             		<td>7</td>
                 <td>0</td>
                 <td>不详</td>
-            	</tr>
+            	</tr> -->
             </tbody>
         
         </table>

@@ -431,8 +431,8 @@ serve.getOptionBar = function(data){
       return $resource(CONFIG.baseUrl + ':path/:route',{
         path:'Result',
       },{
-        GetResult:{method:'POST',params:{route:'ResTestResultGetResultInfosByAnyProperty'},timeout:10000,isArray:true}
-
+        GetResult:{method:'POST',params:{route:'ResTestResultGetResultInfosByAnyProperty'},timeout:10000,isArray:true},
+        GetBreakDownInfo:{method:'POST',params:{route:'BreakDownGetBreakDownsByAnyProperty'},timeout:10000,isArray:true}
       })
     };
    
@@ -688,6 +688,15 @@ serve.getOptionBar = function(data){
   self.GetResult = function(arr){
     var deferred = $q.defer();
     Data.Result.GetResult(arr,function (data,headers){
+      deferred.resolve(data);
+    },function (err) {
+      deferred.reject(err);
+    });
+    return deferred.promise;
+  };
+  self.GetBreakDownInfo = function(arr){
+    var deferred = $q.defer();
+    Data.Result.GetBreakDownInfo(arr,function (data,headers){
       deferred.resolve(data);
     },function (err) {
       deferred.reject(err);
