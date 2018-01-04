@@ -134,8 +134,58 @@ angular.module('zjubme', ['ionic', 'zjubme.controllers', 'zjubme.services','zjub
       url: '/monitor',
       views: {
         'tab-monitor': {
-          templateUrl: 'templates/tabs/tab-monitor.html',
-          controller: 'monitorcontroller'
+          templateUrl: 'templates/tabs/monitor.html',
+          controller: 'monitorCtrl'
+        }
+      }
+    })
+
+  .state('tab.monitor2', {
+      url: '/monitor2',
+      views: {
+        'tab-monitor': {
+          templateUrl: 'templates/tabs/monitor2.html',
+          controller: 'monitor2Ctrl'
+        }
+      }
+    })
+
+  .state('tab.task', {
+      url: '/task',
+      views: {
+        'tab-monitor': {
+          templateUrl: 'templates/tabs/task.html',
+          controller: 'taskCtrl'
+        }
+      }
+    })
+
+  .state('tab.envimonitor', {
+      url: '/envimonitor',
+      views: {
+        'tab-monitor': {
+          templateUrl: 'templates/tabs/envimonitor.html',
+          controller: 'envimonitorCtrl'
+        }
+      }
+    })
+
+  .state('tab.incubatormonitor', {
+      url: '/incubatormonitor',
+      views: {
+        'tab-monitor': {
+          templateUrl: 'templates/tabs/incubatormonitor.html',
+          controller: 'incubatormonitorCtrl'
+        }
+      }
+    })
+
+  .state('tab.monitorx', {
+      url: '/monitorx',
+      views: {
+        'tab-monitor2': {
+          templateUrl: 'templates/tabs/tab-monitor2.html',
+          controller: 'monitor2controller'
         }
       }
     })
@@ -267,6 +317,26 @@ angular.module('zjubme', ['ionic', 'zjubme.controllers', 'zjubme.services','zjub
     }
   })
 
+  .state('tab.machineview',{
+    url:'/dash/machineview',
+    views: {
+      'tab-dash':{
+      templateUrl:'templates/dash/MachineView.html',
+      controller:'MachineViewCtrl'
+      }
+    }
+  })
+
+  .state('tab.machineviewinput',{
+    url:'/dash/machineviewinput',
+    views: {
+      'tab-dash':{
+      templateUrl:'templates/dash/MachineViewInput.html',
+      controller:'MachineViewInputCtrl'
+      }
+    }
+  })
+
   .state('tab.breakdown',{
     url:'/dash/breakdown',
     views: {
@@ -332,11 +402,11 @@ angular.module('zjubme', ['ionic', 'zjubme.controllers', 'zjubme.services','zjub
       {
         //console.log("$stateParams. is "+$stateParams.id);
         // return "partials/index.task.measureweight.html";
-        return "templates/catalog/catalog."+$stateParams.id+".html";
+        return "templates/tabs/"+$stateParams.id+".html";
       },
       controllerProvider:function($stateParams)
       {
-        return $stateParams.id + 'controller';
+        return $stateParams.id + 'Ctrl';
       }
     })
     .state('NewSample',{

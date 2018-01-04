@@ -1,21 +1,21 @@
 [
 	{
-		"catalog":"实时监控",
+		"catalog":"加工隔离器任务监控",
 		"catalogID":"monitor",
 		"url":"img/icon/monitor.png"
 	},
 	{
-		"catalog":"机器视觉",
+		"catalog":"加注隔离器任务监控",
 		"catalogID":"machine_view",
 		"url":"img/icon/machine_view.png"
 	},
 	{
-		"catalog":"系统控制",
+		"catalog":"培养箱任务监控",
 		"catalogID":"system_control",
 		"url":"img/icon/system_control.png"
 	},
 	{
-		"catalog":"数据录入",
+		"catalog":"环境监测",
 		"catalogID":"Data_input",
 		"url":"img/icon/Data_input.png"
 	}

@@ -30,7 +30,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
                 console.log($scope.logStatus);
                 Storage.set('UserId',logOn.UserId);
                 Storage.set('isSignIN','YES');
-                $state.go('tab.itemsample');
+                $state.go('tab.monitor');
               }
             },function(error){
                 if (error.result='密码错误')
@@ -510,7 +510,244 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 .controller('DashCtrl', function($scope) {})
 
 //监控主界面-赵艳霞
-.controller('monitorcontroller', function($scope) {
+.controller('monitorCtrl', function($scope, $state) {
+  // With the new view caching in Ionic, Controllers are only called
+  // when they are recreated or on app start, instead of every page change.
+  // To listen for when this page is active (for example, to refresh data),
+  // listen for the $ionicView.enter event:
+  //
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
+  $scope.monitorlist=[{
+    "a":"gb435",
+    "b":"正在执行：进料舱背门打开",
+    "c":"上一步：进料舱灭菌",
+    "d":"下一步:垛盘移至操作舱",
+    "e":"紧急停止",
+    "f":"20%"
+  },
+  {
+    "a":"kjg86",
+    "b":"正在执行：进料舱背门打开",
+    "c":"上一步：进料舱灭菌",
+    "d":"下一步:垛盘移至操作舱",
+    "e":"xxx",
+    "f":"50%"
+  },
+  {
+    "a":"hg3552",
+    "b":"正在执行：进料舱背门打开",
+    "c":"上一步：进料舱灭菌",
+    "d":"下一步:垛盘移至操作舱",
+    "e":"紧急停止",
+    "f":"100%"
+  }]
+
+  var show = true;
+      $scope.isShown = function() {
+        return show;
+      };
+      var show1 = true;
+      $scope.toggle1 = function() {
+        show1 = !show1;
+      };
+      $scope.isShown1 = function() {
+        return show1;
+      }; 
+
+  $scope.isStopTest =function (item) {  
+      if (item == '紧急停止') {
+        return 1
+      } else {
+        return 0
+      }   
+  }
+
+  $scope.doSomething = function () {
+    $state.go('tab.monitor2');
+  }
+
+  $scope.GoTask = function () {
+    $state.go('tab.task');
+  }
+
+})
+
+.controller('monitor2Ctrl', function($scope, $state) {
+  // With the new view caching in Ionic, Controllers are only called
+  // when they are recreated or on app start, instead of every page change.
+  // To listen for when this page is active (for example, to refresh data),
+  // listen for the $ionicView.enter event:
+  //
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
+  $scope.monitorlist=[{
+    "a":"hsxb535",
+    "b":"正在执行：大肠杆菌加注",
+    "c":"上一步：灭菌",
+    "d":"下一步:开门",
+    "e":"紧急停止",
+    "f":"20%"
+  },
+  {
+    "a":"jhe69",
+    "b":"正在执行：大肠杆菌加注",
+    "c":"上一步：灭菌",
+    "d":"下一步:开门",
+    "e":"紧急停止",
+    "f":"80%"
+  },
+  {
+    "a":"as265",
+    "b":"正在执行：大肠杆菌加注",
+    "c":"上一步：灭菌",
+    "d":"下一步:开门",
+    "e":"xxx",
+    "f":"15%"
+  }]
+
+  var show = true;
+      $scope.isShown = function() {
+        return show;
+      };
+      var show1 = true;
+      $scope.toggle1 = function() {
+        show1 = !show1;
+      };
+      $scope.isShown1 = function() {
+        return show1;
+      }; 
+
+  $scope.isStopTest =function (item) {  
+      if (item == '紧急停止') {
+        return 1
+      } else {
+        return 0
+      }
+  }
+
+  $scope.doSomething = function () {
+    $state.go('tab.envimonitor');
+  }
+
+  $scope.GoTask = function () {
+    $state.go('tab.task');
+  }
+
+})
+
+.controller('taskCtrl', function($scope, $state) {
+  // With the new view caching in Ionic, Controllers are only called
+  // when they are recreated or on app start, instead of every page change.
+  // To listen for when this page is active (for example, to refresh data),
+  // listen for the $ionicView.enter event:
+  //
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
+  $scope.resultinfos=[{
+    "a":"步骤1……完成"
+  },
+  {
+    "a":"步骤2……完成"
+  },
+  {
+    "a":"步骤3……完成"
+  },
+  {
+    "a":"步骤4正在执行"
+  },
+  {
+    "a":"步骤5……未完成"
+  },
+  {
+    "a":"步骤6……未完成"
+  },
+  {
+    "a":"步骤7……未完成"
+  }]
+
+  $scope.isStopTest = function (item) {  
+      if (item == '紧急停止') {
+        return 1
+      } else {
+        return 0
+      }
+  }
+
+  $scope.GoMachineView = function () {
+    $state.go('tab.machineviewinput')
+  }
+  
+})
+
+.controller('envimonitorCtrl', function($scope, $state) {
+  // With the new view caching in Ionic, Controllers are only called
+  // when they are recreated or on app start, instead of every page change.
+  // To listen for when this page is active (for example, to refresh data),
+  // listen for the $ionicView.enter event:
+  //
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
+  $scope.insms=[
+    {"id":1,"name":"培养箱1"},
+    {"id":2,"name":"培养箱2"},
+    {"id":3,"name":"培养箱3"},
+    {"id":4,"name":"培养箱4"}
+    ]
+    
+    $scope.doSomething = function () {
+    $state.go('tab.incubatormonitor');
+  }
+})
+
+.controller('incubatormonitorCtrl', function($scope, $state) {
+  // With the new view caching in Ionic, Controllers are only called
+  // when they are recreated or on app start, instead of every page change.
+  // To listen for when this page is active (for example, to refresh data),
+  // listen for the $ionicView.enter event:
+  //
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
+  $scope.resultinfos=[{
+    "a":"1215",
+    "b":"gregh132",
+    "c":"10min",
+    "d":"20min",
+    "e":"紧急停止",
+    "f":"20%"
+  },
+  {
+    "a":"1008",
+    "b":"phrt543",
+    "c":"1min",
+    "d":"30min",
+    "e":"紧急停止",
+    "f":"80%"
+  },
+  {
+    "a":"0805",
+    "b":"unhi87",
+    "c":"17min",
+    "d":"5min",
+    "e":"xxx",
+    "f":"10%"
+  }]
+
+  $scope.isStopTest = function (item) {  
+      if (item == '紧急停止') {
+        return 1
+      } else {
+        return 0
+      }
+  }
+
+  $scope.GoMachineView = function () {
+    $state.go('tab.machineviewinput')
+  }
+  
+})
+
+.controller('monitor2controller', function($scope) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -1998,7 +2235,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 
                     $scope.time=dt.fullTime;
                     console.log($scope.time);
-
+  
           },function(error){
         });
      
@@ -2592,6 +2829,13 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     "GetInsDescription": 1,
     "GetRevisionInfo": 1
     };
+    
+    $scope.showmenu = function (idid) {
+      console.log("111")
+      var next = document.getElementById(idid)
+        next.style.display = (next.style.display =="none")?"":"none";
+    }
+
     $scope.incubatorinfos={};
     ItemInfo.GetIncubatorInfo($scope.incubator).then(
     function(data){
@@ -2788,6 +3032,10 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
           console.log($scope.result);
         });
   });
+
+   $scope.GoMachineView = function(){
+    $state.go('tab.machineview');   
+  }
      
   $scope.$on('$ionicView.afterLeave', function() {
     Storage.rm('ObjectNo');
@@ -2795,6 +3043,113 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     Storage.rm('ObjCompany');
   });
 }])
+
+.controller('MachineViewCtrl',['$scope','$ionicSlideBoxDelegate','$ionicNavBarDelegate','Pics','$state' ,function($scope,$ionicSlideBoxDelegate,$ionicNavBarDelegate,Pics,$state) {
+  $scope.Pics = Pics.all();
+  $scope.remove = function(Pic) {
+    Pics.remove(chat);
+  };
+  $scope.goBack = function() {
+    $ionicNavBarDelegate.back();
+  };
+  $scope.incubators=[
+    {"id":1,"name":"培养箱1"},
+    {"id":2,"name":"培养箱2"},
+    {"id":3,"name":"培养箱3"},
+    {"id":4,"name":"培养箱4"},
+    {"id":5,"name":"培养箱5"},
+    {"id":6,"name":"培养箱6"}
+    ]
+    $scope.testcubes=[
+    {"id":1,"name":"试管1"},
+    {"id":2,"name":"试管2"},
+    {"id":3,"name":"试管3"},
+    {"id":4,"name":"试管4"},
+    {"id":4,"name":"试管5"},
+    {"id":5,"name":"试管6"}
+    ]
+  $scope.slideIndex = 0;
+
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+    console.log("slide Change");
+    if ($scope.slideIndex == 0){
+      console.log("slide 1");
+      }
+    else if ($scope.slideIndex == 1){
+      console.log("slide 2");
+    }
+    else if ($scope.slideIndex == 2){
+      console.log("slide 3");
+    }
+   };
+
+  $scope.next = function() {
+    $ionicSlideBoxDelegate.next();
+  };
+  $scope.previous = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
+  
+  $scope.toMonitor = function(){
+    $state.go('tab.monitor');   
+  }
+        
+}])
+
+.controller('MachineViewInputCtrl',['$scope','$ionicSlideBoxDelegate','$ionicNavBarDelegate','Pics','$state' ,function($scope,$ionicSlideBoxDelegate,$ionicNavBarDelegate,Pics,$state) {
+  $scope.Pics = Pics.all();
+  $scope.remove = function(Pic) {
+    Pics.remove(chat);
+  };
+  $scope.goBack = function() {
+    $ionicNavBarDelegate.back();
+  };
+  $scope.incubators=[
+    {"id":1,"name":"培养箱1"},
+    {"id":2,"name":"培养箱2"},
+    {"id":3,"name":"培养箱3"},
+    {"id":4,"name":"培养箱4"},
+    {"id":5,"name":"培养箱5"},
+    {"id":6,"name":"培养箱6"}
+    ]
+    $scope.testcubes=[
+    {"id":1,"name":"试管1"},
+    {"id":2,"name":"试管2"},
+    {"id":3,"name":"试管3"},
+    {"id":4,"name":"试管4"},
+    {"id":4,"name":"试管5"},
+    {"id":5,"name":"试管6"}
+    ]
+  $scope.slideIndex = 0;
+
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+    console.log("slide Change");
+    if ($scope.slideIndex == 0){
+      console.log("slide 1");
+      }
+    else if ($scope.slideIndex == 1){
+      console.log("slide 2");
+    }
+    else if ($scope.slideIndex == 2){
+      console.log("slide 3");
+    }
+   };
+
+  $scope.next = function() {
+    $ionicSlideBoxDelegate.next();
+  };
+  $scope.previous = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
+  
+  $scope.toMonitor = function(){
+    $state.go('tab.monitor');   
+  }
+        
+}])
+
 .controller('BreakDownCtrl', ['$scope','$state','Result', function($scope,$state,Result) {
   $scope.contents=[{"background":"#CCCCCC"},{"background-color":"#EBEBEB"}]
   $scope.excepinfos=[

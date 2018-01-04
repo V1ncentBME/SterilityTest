@@ -1,0 +1,97 @@
+<ion-view view-title="机器视觉分析">
+  <ion-nav-buttons side="left">
+    
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right"> 
+    
+  </ion-nav-buttons>
+
+  <ion-content class="has-footer" style="margin-top: 0" >
+    <div>
+      <table cellspacing="0" cellpadding="0" style="border:0; width:100%;  text-align:center;vertical-align:center;"">
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>&nbsp;</th>
+            <th width="10%">&nbsp;</th>
+            <th>&nbsp;</th>
+            <th width="50%" class="tablea" style="border-bottom:1px solid #000;text-align:center;vertical-align:middle;border-right:1px solid #000;">样品号</th>
+            <th>&nbsp;</th>
+            <th width="10%">&nbsp;</th>
+            <th>&nbsp;</th>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr >
+            <td>&nbsp;</td>
+            <td class='tablea' style="border-bottom:1px solid #000;border-right:1px solid #000;"><button class="button button-positive button-clear no-animation icon ion-ios-arrow-back" ng-click="previous()"  ></button></td> <!-- ng-if="slideIndex > 0" -->
+            <td>&nbsp;</td>
+            <td class='tablea' style="border-bottom:1px solid #000;border-right:1px solid #000;text-align:center;vertical-align:middle;">机器视觉时间</td>
+            <td>&nbsp;</td>
+            <td class="tablea" style="border-right:1px solid #000;border-bottom:1px solid #000;"><button class="button button-positive button-clear no-animation icon ion-ios-arrow-forward" ng-click="next()" ></button></td>
+            <td>&nbsp;</td>
+          </tr>
+        
+      </table>
+    </div>
+   <div>
+   <!-- <table style="width:100%;text-align:center;vertical-align:center">
+    <thead style="background-color:#9ACD32;border:2px;color:white">
+      <tr>
+        <th>
+        <select style="background-color:#9ACD32;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectincubator" ng-options="incubator.id as incubator.name for incubator in incubators">
+          <option selected value="">培养箱</option>
+        </select>
+      </th>
+      <th>
+        <select style="background-color:#9ACD32;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selecttestcube" ng-options="testcube.id as testcube.name for testcube in testcubes">
+          <option selected value="">试管</option>
+        </select> 
+      </th>
+    </tr>
+  </thead>
+  </table> -->
+    <ion-slide-box style="margin-top: 10%" on-slide-changed="slideChanged(index)">
+      <ion-slide ng-repeat="Pic in Pics">
+        <div style="height:4%; width:100%; margin-left:23%">  
+          <img ng-src="{{Pic.face}}" >  
+        </div> 
+        <div style="text-align:center;font-size: 18px">{{Pic.describe}}</div>
+      </ion-slide>     
+    </ion-slide-box>
+  <!-- </tbody>
+  </table> -->
+  </div>
+  <div class="text-center " style="position: center;margin-bottom:10px;width:100%;min-height:10%">
+    <table cellspacing="0" cellpadding="0" style="border:0; width:60%;margin-left: 20%;border-bottom:1px solid #000; text-align:center;vertical-align:center;">
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th style="border-right:1px solid #000;" class="tablea">顶空分析结果</th>
+      </tr>
+      <tr>
+        <th style="border-right:1px solid #000;" class="tablea">
+          机器视觉判断结果
+        </th>
+      </tr>
+    </table>
+  </div>
+  </ion-content>
+  <!-- <ion-footer-bar >
+  <div  class="text-center hide-on-keyboard-open" style="position:absolute;bottom:0px;width:100%;min-height:10%">
+    <button  class="button button-block button-calm" style=" width:80%;margin-left:10% " ng-click="toMonitor()">返回监控界面</button>
+  </div> 
+  </ion-footer-bar> -->
+ 
+</ion-view>

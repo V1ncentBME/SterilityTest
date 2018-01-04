@@ -1,6 +1,6 @@
 <ion-view view-title="设置">
 <ion-content scroll="false">
-        <div class="list" style="margin-top: 5%">
+    <div class="list" style="margin-top: 5%">
         <ion-item href='#/set/{{ct.setID}}'  ng-repeat="ct in set" ng-click="showActionsheet(ct.setID)" class="item-avatar item-icon-right">
             <img ng-src="{{ct.url}}">
             <h2 style="margin :5%">{{ct.set}}</h2>
@@ -13,7 +13,7 @@
           <img ng-src="img/icon/exit.jpg">
           <h2 style="margin :5% ;font-weight: bolder;color: red;font-size: 20px"> 退出登录</h2>
         </div>
-        </div>
+    </div>
   
 <style>
 .platform-android .action-sheet-backdrop {

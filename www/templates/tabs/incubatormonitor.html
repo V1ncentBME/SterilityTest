@@ -1,0 +1,41 @@
+<ion-view view-title="环境监测">
+  <ion-nav-buttons side="primary">
+   <button class="button button-icon ion-ios-arrow-left" ng-click="nvGoback()"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div>
+       <table style="width:100%;text-align:center;vertical-align:center">
+            <thead style="background-color:#8B7E66;border:2px;color:white">
+              <tr>
+                <th>检测编号</th>
+                <th>样品</th>
+                <th>已培养时间</th>
+                <th>剩余培养时间</th>
+                <th>查看</th>
+                <th>紧急停止</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-style="contents[$index%2]" ng-repeat="resultinfo in resultinfos|orderObjectBy:'CollectStart':true|filter:query">
+                <td>{{resultinfo.a}}</td>
+                <td>{{resultinfo.b}}</td>
+                <td>{{resultinfo.c}}</td>
+                <td>{{resultinfo.d}}</td>
+                <td>
+                  <button style="background-color:#63B8FF;color:white" ng-click="GoMachineView()">查看</button>
+                </td>
+                <td>
+                  <button class="button button-standard" on-touch="" data-ng-disabled="!isStopTest(resultinfo.e)">  
+                    {{cashBtnName || 'stop'}}  
+                  </button>
+                </td>    
+              </tr>
+            </tbody>
+        
+        </table>
+
+      
+
+
+  </ion-content>
+</ion-view>
