@@ -10,7 +10,7 @@
        <table  cellspacing="0" cellpadding="0" style="border:0; width:100%; border-right:1px solid #000;border-bottom:1px solid #000; text-align:center;vertical-align:center;">
         <tr>
           <td colspan="1"  class="tablea" style="background: white;text-align:center;vertical-align:center;">
-            <select  ng-model="selectinstrument" ng-options="insm.id as insm.name for insm in insms">
+            <select  ng-model="selectinstrument" ng-options="insm.id as insm.name for insm in insms" ng-change="getReult(selectinstrument,-1)">
               <option selected value="">仪器信息</option>
             </select>
           </td>
@@ -18,26 +18,53 @@
             <div ng-switch="selectinstrument">
                     <div ng-switch-default>待选择</div>
                     <div ng-switch-when="1">已连接</div>
-                    <div ng-switch-when="2">未连接</div>
-                    <div ng-switch-when="3">未连接</div>
+                    <div ng-switch-when="2">已连接</div>
+                    <div ng-switch-when="3">已连接</div>
                     <div ng-switch-when="4">已连接</div>
+                    <div ng-switch-when="5">已连接</div>
             </div>
           </td>
         </tr>
         <tr>
           <td colspan="2" class="tablea" style="background: white;text-align:center;vertical-align:center;">
-            <select>
-              <option>2-1B</option>
-              <option>B1</option>
-              <option>C-3PO</option>
-              <option>IG-88</option>
-              <option>IT-O</option>
-              <option selected="">箱体选择</option>
-            </select>
+            <div ng-switch="selectinstrument" >
+              <div ng-switch-when="4">
+                <select  ng-model="selectcabin" ng-options="cabin.id as cabin.name for cabin in cabins" ng-change="getReult(4,selectcabin)">
+                  <option selected value="">箱体选择</option>
+                </select>
+              </div>
+              <div ng-switch-when="5">集菌隔离箱</div>
+              <div ng-switch-when="1">培养箱1</div>
+              <div ng-switch-when="2">培养箱2</div>
+              <div ng-switch-when="3">培养箱3</div>
+              <div ng-switch-default>待选择</div>
+            </div>
           </td>
         </tr>
+        </div>
         <tr>
-          <td colspan="2" class="tablea" style="background: white;text-align:center;vertical-align:center;">温度：37℃ 湿度：60% 压力：1atm</td>
+          <td colspan="2" class="tablea" style="background: white;text-align:center;vertical-align:center;">
+            <div ng-switch="selectinstrument">
+              <div ng-switch-default>待选择</div>
+              <div ng-switch-when="1">
+                温度1：{{result.temperature1}}℃,
+                温度2：{{result.temperature2}}℃,
+                温度3：{{result.temperature3}}℃
+              </div>
+              <div ng-switch-when="2">
+                温度1：{{result.temperature1}}℃,温度2：{{result.temperature2}}℃,温度3：{{result.temperature3}}℃
+              </div>
+              <div ng-switch-when="3">
+                温度1：{{result.temperature1}}℃,温度2：{{result.temperature2}}℃,温度3：{{result.temperature3}}℃
+              </div>
+              <div ng-switch-when="4">                
+                温度：{{result.temperature}}℃,湿度：{{result.humid}},压力：{{result.pressure}},过氧化氢浓度高：{{result.H2O2h}},过氧化氢浓度低：{{result.H2O2l}}
+              </div>
+              <div ng-switch-when="5">
+                温度：{{result.temperature}}℃,湿度：{{result.humid}},压力：{{result.pressure}},过氧化氢浓度高：{{result.H2O2h}},过氧化氢浓度低：{{result.H2O2l}}
+              </div>
+            </div>
+          </td>
         </tr>
       </table>
 

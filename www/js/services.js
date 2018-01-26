@@ -2,7 +2,7 @@ angular.module('zjubme.services', ['ionic','btford.socket-io','ngResource'])
 
 // 客户端配置
 .constant('CONFIG', {
-  baseUrl: 'http://10.12.43.34:8090/Api/v1/',
+  baseUrl: 'http://121.43.107.106:8063/Api/v1/',
   
   })
   
@@ -417,14 +417,17 @@ serve.getOptionBar = function(data){
         GetReagentInfo:{method:'POST',params:{route:'ItemReagentGetReagentsInfoByAnyProperty'},timeout:10000,isArray:true},
         GetSampleInfo:{method:'POST',params:{route:'ItemSampleGetSamplesInfoByAnyProperty'},timeout:10000,isArray:true},
         GetIncubatorEnv:{method:'POST',params:{route:'EnvIncubatorGetIncubatorEnvsByAnyProperty'},timeout:10000,isArray:true},
-        GetIsolatorEnv:{method:'POST',params:{route:'EnvIsolatorGetIsolatorEnvsByAnyProperty'},timeout:10000,isArray:true}
+        GetIsolatorEnv:{method:'POST',params:{route:'EnvIsolatorGetIsolatorEnvsByAnyProperty'},timeout:10000,isArray:true},
+        GetNewIsolatorEnv:{method:'GET',params:{route:'EnvIsolatorGetNewIsolatorEnv'},timeout:10000,isArray:true},
+        GetNewIncubatorEnv:{method:'GET',params:{route:'EnvIncubatorGetNewIncubatorEnv'},timeout:10000,isArray:true}
       })
     };
     var Operation = function(){
       return $resource(CONFIG.baseUrl + ':path/:route',{
         path:'Operation',
       },{
-        GetEquipmentOps:{method:'POST',params:{route:'OpEquipmentGetEquipmentOpsByAnyProperty'},timeout:10000,isArray:true}
+        GetEquipmentOps:{method:'POST',params:{route:'OpEquipmentGetEquipmentOpsByAnyProperty'},timeout:10000,isArray:true},
+        GetOperationOrders:{method:'POST',params:{route:'MstOperationOrdersBySampleType'},timeout:10000,isArray:true}
       })
     };
     var Result = function(){
@@ -665,6 +668,24 @@ serve.getOptionBar = function(data){
         deferred.reject(err);
       });    
       return deferred.promise;
+    };
+    self.GetNewIsolatorEnv = function(arr){
+      var deferred = $q.defer();
+      Data.ItemInfo.GetNewIsolatorEnv(arr,function (data,headers){
+        deferred.resolve(data);
+      },function (err) {
+        deferred.reject(err);
+      });    
+      return deferred.promise;
+    };
+    self.GetNewIncubatorEnv = function(arr){
+      var deferred = $q.defer();
+      Data.ItemInfo.GetNewIncubatorEnv(arr,function (data,headers){
+        deferred.resolve(data);
+      },function (err) {
+        deferred.reject(err);
+      });    
+      return deferred.promise;
     }
     return self;
 }])
@@ -679,7 +700,16 @@ serve.getOptionBar = function(data){
       deferred.reject(err);
     });
     return deferred.promise;
-  }
+  };
+  self.GetOperationOrders = function(arr){
+    var deferred = $q.defer();
+    Data.Operation.GetOperationOrders(arr,function (data,headers){
+      deferred.resolve(data);
+    },function (err) {
+      deferred.reject(err);
+    });
+    return deferred.promise;
+  };
   return self;
 }])
 
