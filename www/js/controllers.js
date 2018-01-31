@@ -343,9 +343,12 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
           "PhoneNo":1,
           "UserName": 1,
           "Role": 1,
-          "Password":1,
-          "LastLoginTime":1,
+          "Password": 1,
+          "LastLoginTime": 1,
           "RevisionInfo": 1,
+          "Token": 1,
+          "LastLogoutTime": 1,
+          "RevisionInfo": 1
       }] 
         $scope.Roles = [{ Type: 1, Name: '管理员' }, { Type: 2, Name: '操作员' }];
         UserInfo.GetUserInfo($scope.BasicInfo[0]).then(function(data, headers){
@@ -3922,16 +3925,31 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       "GetAnalResult": 1
     }
     $scope.resultinfos={}
+    $scope.Pics = []
     Result.GetTestPictures($scope.result).then(
       function(data){
         $scope.resultinfos = data
         console.log('resultinfos',$scope.resultinfos)
+        $scope.Pics = []
+        angular.forEach($scope.resultinfos, function (value, key) {
+          if (value.TubeNo == 1) {
+            $scope.Pics.push(
+              { "Address" : "http://121.43.107.106:8063" + value.ImageAddress,
+                "Result" : value.AnalResult,
+                "Time": value.CameraTime
+              }
+            )
+          }   
+        });
+        console.log("Pics", $scope.Pics)
       },function(e){
     });
+
   })
 
   $scope.getReult = function(TubeNo)  {
     $scope.Pics = []
+    console.log("TubeNo", TubeNo)
     angular.forEach($scope.resultinfos, function (value, key) {
       if (value.TubeNo == TubeNo) {
         $scope.Pics.push(
@@ -3955,9 +3973,10 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     {"id":2,"name":"试管2"},
     {"id":3,"name":"试管3"},
     {"id":4,"name":"试管4"},
-    {"id":4,"name":"试管5"},
-    {"id":5,"name":"试管6"}
+    {"id":5,"name":"试管5"},
+    {"id":6,"name":"试管6"}
   ]
+  $scope.selecttube = 1
   $scope.slideIndex = 0;
 
   $scope.slideChanged = function(index) {

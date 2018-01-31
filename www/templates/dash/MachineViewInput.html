@@ -20,7 +20,7 @@
             <th>&nbsp;</th>
             <th width="10%">&nbsp;</th>
             <th>&nbsp;</th>
-            <th colspan="2" class="tablea" style="border-bottom:1px solid #000;text-align:center;vertical-align:middle;border-right:1px solid #000;">样品号</th>
+            <th colspan="2" class="tablea" style="border-bottom:1px solid #000;text-align:center;vertical-align:middle;border-right:1px solid #000;">样品号：{{result.TestId}}</th>
             <th>&nbsp;</th>
             <th width="10%">&nbsp;</th>
             <th>&nbsp;</th>
@@ -37,16 +37,15 @@
             <td class='tablea' style="border-bottom:1px solid #000;border-right:1px solid #000;"><button class="button button-positive button-clear no-animation icon ion-ios-arrow-back" ng-click="previous()"  ></button></td> <!-- ng-if="slideIndex > 0" -->
             <td>&nbsp;</td>
             <td width="10%" class='tablea' style="border-bottom:1px solid #000;border-right:1px solid #000;text-align:center;vertical-align:middle;">
-              <select  ng-model="selecttube" ng-options="tube.id as tube.name for tube in testtubes" ng-change="getReult(selecttube)">
-                <option selected value="">管号</option>
+              <select  ng-model="selecttube" ng-options="tube.id as tube.name for tube in testtubes" ng-change="getReult(selecttube)" >
               </select>
             </td>
             <td width="40%" class='tablea' style="border-bottom:1px solid #000;border-right:1px solid #000;text-align:center;vertical-align:middle;">
-              <ion-slide-box style="margin-top: 10%" on-slide-changed="slideChanged(index)">
+              
                 <ion-slide ng-repeat="Pic in Pics">
-                  <div style="text-align:center;word-wrap:break-word;word-break:break-all;">{{Pic.Time}}</div>
+                  <div style="text-align:center;table-layout:fixed;word-break:break-all;">{{Pic.Time}}</div>
                 </ion-slide>     
-              </ion-slide-box>
+              
             </td>
             <td>&nbsp;</td>
             <td class="tablea" style="border-right:1px solid #000;border-bottom:1px solid #000;"><button class="button button-positive button-clear no-animation icon ion-ios-arrow-forward" ng-click="next()" ></button></td>
@@ -74,10 +73,10 @@
   </table> -->
     <ion-slide-box style="margin-top: 10%" on-slide-changed="slideChanged(index)">
       <ion-slide ng-repeat="Pic in Pics">
-        <div style="height:10%; width:100%; margin-left:23%">  
-          <img src="{{Pic.Address}}">    
+        <div style="margin-left: 30px">  <!--  -->
+          <img src="{{Pic.Address}}"  style="width:320px; height:320px" >    
         </div> 
-        <div style="text-align:center;font-size: 18px">{{Pic.Result}}</div>
+        <!-- <div style="text-align:center;font-size: 18px">{{Pic.Result}}</div> -->
       </ion-slide>     
     </ion-slide-box>
   <!-- </tbody>
@@ -97,7 +96,13 @@
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <th style="border-right:1px solid #000;" class="tablea">顶空分析结果</th>
+        <th style="border-right:1px solid #000;" class="tablea">
+          
+                <ion-slide ng-repeat="Pic in Pics">
+                  <div style="text-align:center;vertical-align:center;">{{Pic.Result}}</div>
+                </ion-slide>     
+          
+        </th>
       </tr>
       <tr>
         <th style="border-right:1px solid #000;" class="tablea">
