@@ -435,7 +435,9 @@ serve.getOptionBar = function(data){
         path:'Result',
       },{
         GetResult:{method:'POST',params:{route:'ResTestResultGetResultInfosByAnyProperty'},timeout:10000,isArray:true},
-        GetBreakDownInfo:{method:'POST',params:{route:'BreakDownGetBreakDownsByAnyProperty'},timeout:10000,isArray:true}
+        GetBreakDownInfo:{method:'POST',params:{route:'BreakDownGetBreakDownsByAnyProperty'},timeout:10000,isArray:true},
+        GetResultTubes:{method:'POST',params:{route:'ResIncubatorGetResultTubesByAnyProperty'},timeout:10000,isArray:true},
+        GetTestPictures:{method:'POST',params:{route:'ResTestPictureGetTestPicturesByAnyProperty'},timeout:10000,isArray:true}
       })
     };
    
@@ -731,6 +733,24 @@ serve.getOptionBar = function(data){
     },function (err) {
       deferred.reject(err);
     });
+    return deferred.promise;
+  };
+  self.GetResultTubes = function(arr){
+    var deferred = $q.defer();
+    Data.Result.GetResultTubes(arr,function (data,headers){
+      deferred.resolve(data);
+    },function (err) {
+      deferred.reject(err);
+    })
+    return deferred.promise;
+  };
+  self.GetTestPictures = function(arr){
+    var deferred = $q.defer();
+    Data.Result.GetTestPictures(arr,function (data,headers){
+      deferred.resolve(data);
+    },function (err) {
+      deferred.reject(err);
+    })
     return deferred.promise;
   }
   return self;

@@ -510,7 +510,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 .controller('DashCtrl', function($scope) {})
 
 //监控主界面-赵艳霞
-.controller('monitorCtrl', ['$scope','$state','Result','Storage', function($scope, $state, Result, Storage) {
+.controller('monitorCtrl', ['$scope','$state','$interval','Result','Storage', function($scope, $state, $interval, Result, Storage) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -588,6 +588,15 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 
   });
   
+  var timer =  $interval(function(){
+    $scope.monitorlist={}
+    Result.GetResult($scope.result).then(
+      function(data){
+        $scope.monitorlist=data;
+        console.log("monitorlist",$scope.monitorlist);
+      },function(e){
+    });
+  },30000,-1);  
 
   var show = true;
       $scope.isShown = function() {
@@ -619,9 +628,13 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     $state.go('tab.task');
   }
 
+  $scope.$on('$ionicView.afterLeave',function(){
+    $interval.cancel(timer);
+  })
+
 }])
 
-.controller('monitor2Ctrl', ['$scope','$state','Result','Storage', function($scope, $state, Result, Storage) {
+.controller('monitor2Ctrl', ['$scope','$state','$interval','Result','Storage', function($scope, $state, $interval, Result, Storage) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -697,6 +710,15 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     });
   });
   
+  var timer =  $interval(function(){
+    $scope.monitorlist={}
+    Result.GetResult($scope.result).then(
+      function(data){
+        $scope.monitorlist=data;
+        console.log("monitorlist",$scope.monitorlist);
+      },function(e){
+    });
+  },30000,-1);     
 
   var show = true;
       $scope.isShown = function() {
@@ -728,9 +750,12 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     $state.go('tab.task');
   }
 
+  $scope.$on('$ionicView.afterLeave',function(){
+    $interval.cancel(timer);
+  })
 }])
 
-.controller('taskCtrl', ['$scope','$state','$interval','Operation','Result','Storage', function($scope, $state, $interval, Operation, Result, Storage) {
+.controller('taskCtrl', ['$scope','$state','$interval','Operation','Result','ItemInfo','Storage', function($scope, $state, $interval, Operation, Result, ItemInfo, Storage) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -741,9 +766,15 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   //   console.log(Storage.get('TestType')); 
   // });
   $scope.$on('$ionicView.enter', function() {
-    $scope.resultinfos = {}
+    $scope.resultinfo = [{},{},{}]
     $scope.NowStep={}
     $scope.Progress={}
+    $scope.TestType = Storage.get('TestType')
+    $scope.show = {
+      "SOB" : 0,
+      "SOS" : 0,
+      "WSP" : 0
+    }
     $scope.result={
       "TestId": Storage.get('TestId'),
       "ObjectNo": null,
@@ -804,107 +835,262 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       "GetNowStep": 1,
       "GetLaterStep": 0
     }
-    $scope.OrderList = [
-      {"OrderId":"SOB001", "Order":1, "Status":""},
-      {"OrderId":"SOB002", "Order":2, "Status":""},
-      {"OrderId":"SOB003", "Order":3, "Status":""},
-      {"OrderId":"SOB004", "Order":4, "Status":""},
-      {"OrderId":"SOB005", "Order":5, "Status":""},
-      {"OrderId":"SOB006", "Order":6, "Status":""},
-      {"OrderId":"SOB007", "Order":7, "Status":""},
-      {"OrderId":"SOB008", "Order":8, "Status":""},
-      {"OrderId":"SOB009", "Order":9, "Status":""},
-      {"OrderId":"SOB010", "Order":10, "Status":""},
-      {"OrderId":"SOB011", "Order":11, "Status":""},
-      {"OrderId":"SOB012", "Order":12, "Status":""},
-      {"OrderId":"SOB013", "Order":13, "Status":""},
-      {"OrderId":"SOB014", "Order":14, "Status":""},
-      {"OrderId":"SOB015", "Order":15, "Status":""},
-      {"OrderId":"SOB016", "Order":16, "Status":""},
-      {"OrderId":"SOB017", "Order":17, "Status":""},
-      {"OrderId":"SOB018", "Order":18, "Status":""},
-      {"OrderId":"SOB019", "Order":19, "Status":""},
-      {"OrderId":"SOB020", "Order":20, "Status":""},
-      {"OrderId":"SOB021", "Order":21, "Status":""},
-      {"OrderId":"SOB022", "Order":22, "Status":""},
-      {"OrderId":"SOB023", "Order":23, "Status":""},
-      {"OrderId":"SOB024", "Order":24, "Status":""},
-      {"OrderId":"SOB025", "Order":25, "Status":""},
-      {"OrderId":"SOB026", "Order":26, "Status":""}
-    ]
-    Operation.GetOperationOrders({"SampleType":Storage.get('TestType')}).then(
-      function(data){
-        $scope.resultinfos = data;
-        
-        console.log("resultinfos",$scope.resultinfos);
-      },function(e){
-    });
+    if ($scope.TestType == "SOB") {
+      $scope.show.SOB = 1
+      $scope.OrderList = [
+        {"OrderId":"SOB001", "Order":1, "Status":""},
+        {"OrderId":"SOB002", "Order":2, "Status":""},
+        {"OrderId":"SOB003", "Order":3, "Status":""},
+        {"OrderId":"SOB004", "Order":4, "Status":""},
+        {"OrderId":"SOB005", "Order":5, "Status":""},
+        {"OrderId":"SOB006", "Order":6, "Status":""},
+        {"OrderId":"SOB007", "Order":7, "Status":""},
+        {"OrderId":"SOB008", "Order":8, "Status":""},
+        {"OrderId":"SOB009", "Order":9, "Status":""},
+        {"OrderId":"SOB010", "Order":10, "Status":""},
+        {"OrderId":"SOB011", "Order":11, "Status":""},
+        {"OrderId":"SOB012", "Order":12, "Status":""},
+        {"OrderId":"SOB013", "Order":13, "Status":""},
+        {"OrderId":"SOB014", "Order":14, "Status":""},
+        {"OrderId":"SOB015", "Order":15, "Status":""},
+        {"OrderId":"SOB016", "Order":16, "Status":""},
+        {"OrderId":"SOB017", "Order":17, "Status":""},
+        {"OrderId":"SOB018", "Order":18, "Status":""},
+        {"OrderId":"SOB019", "Order":19, "Status":""},
+        {"OrderId":"SOB020", "Order":20, "Status":""},
+        {"OrderId":"SOB021", "Order":21, "Status":""},
+        {"OrderId":"SOB022", "Order":22, "Status":""},
+        {"OrderId":"SOB023", "Order":23, "Status":""},
+        {"OrderId":"SOB024", "Order":24, "Status":""},
+        {"OrderId":"SOB025", "Order":25, "Status":""},
+        {"OrderId":"SOB026", "Order":26, "Status":""}
+      ]
+    } else if ($scope.TestType == "SOS") {
+      $scope.show.SOS = 1
+      $scope.OrderList = [
+        {"OrderId":"SOS001", "Order":1, "Status":""},
+        {"OrderId":"SOS002", "Order":2, "Status":""},
+        {"OrderId":"SOS003", "Order":3, "Status":""},
+        {"OrderId":"SOS004", "Order":4, "Status":""},
+        {"OrderId":"SOS005", "Order":5, "Status":""},
+        {"OrderId":"SOS006", "Order":6, "Status":""},
+        {"OrderId":"SOS007", "Order":7, "Status":""},
+        {"OrderId":"SOS008", "Order":8, "Status":""},
+        {"OrderId":"SOS009", "Order":9, "Status":""},
+        {"OrderId":"SOS010", "Order":10, "Status":""},
+        {"OrderId":"SOS011", "Order":11, "Status":""},
+        {"OrderId":"SOS012", "Order":12, "Status":""},
+        {"OrderId":"SOS013", "Order":13, "Status":""},
+        {"OrderId":"SOS014", "Order":14, "Status":""},
+        {"OrderId":"SOS015", "Order":15, "Status":""},
+        {"OrderId":"SOS016", "Order":16, "Status":""},
+        {"OrderId":"SOS017", "Order":17, "Status":""},
+        {"OrderId":"SOS018", "Order":18, "Status":""},
+        {"OrderId":"SOS019", "Order":19, "Status":""},
+        {"OrderId":"SOS020", "Order":20, "Status":""}        
+      ]
+    } else if ($scope.TestType == "WSP") {
+      $scope.show.WSP = 1
+      $scope.OrderList = [
+        {"OrderId":"WSP001", "Order":1, "Status":""},
+        {"OrderId":"WSP002", "Order":2, "Status":""},
+        {"OrderId":"WSP003", "Order":3, "Status":""},
+        {"OrderId":"WSP004", "Order":4, "Status":""},
+        {"OrderId":"WSP005", "Order":5, "Status":""},
+        {"OrderId":"WSP006", "Order":6, "Status":""},
+        {"OrderId":"WSP007", "Order":7, "Status":""},
+        {"OrderId":"WSP008", "Order":8, "Status":""},
+        {"OrderId":"WSP009", "Order":9, "Status":""},
+        {"OrderId":"WSP010", "Order":10, "Status":""},
+        {"OrderId":"WSP011", "Order":11, "Status":""},
+        {"OrderId":"WSP012", "Order":12, "Status":""},
+        {"OrderId":"WSP013", "Order":13, "Status":""},
+        {"OrderId":"WSP014", "Order":14, "Status":""},
+        {"OrderId":"WSP015", "Order":15, "Status":""},
+        {"OrderId":"WSP016", "Order":16, "Status":""},
+        {"OrderId":"WSP017", "Order":17, "Status":""},
+        {"OrderId":"WSP018", "Order":18, "Status":""},
+        {"OrderId":"WSP019", "Order":19, "Status":""},
+        {"OrderId":"WSP020", "Order":20, "Status":""}        
+      ]
+    }
+    
     Result.GetResult($scope.result).then(
       function(data){
         $scope.NowStep = data[0].NowStep;
         $scope.Progress= data[0].JinDu;
         console.log("NowStep",$scope.NowStep);
-        for (var i = 0; i < 26; i++) {
-          if (!$scope.OrderList[i].OrderId == $scope.NowStep) {
+        for (var i = 0; i < $scope.OrderList.length; i++) {
+          if ($scope.OrderList[i].OrderId != $scope.NowStep) {
             $scope.OrderList[i].Status = "...已完成"
           } else {
             $scope.OrderList[i].Status = "...正在执行"
             i ++;
-            for ( i ; i < 26; i++) {
+            for ( i ; i < $scope.OrderList.length; i++) {
               $scope.OrderList[i].Status = "...未完成"
             }
           }
         }
       },function(e){
+    });
+    ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "1"}).then(
+          function(data){
+            console.log("PROCESS",data)
+            $scope.resultinfo[0].temperature = data[0]
+            $scope.resultinfo[0].humid = data[1]
+            $scope.resultinfo[0].pressure = data[2]
+            $scope.resultinfo[0].H2O2h = data[3]
+            $scope.resultinfo[0].H2O2l = data[4]
+          },function(e){
+    });
+    ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "2"}).then(
+          function(data){
+            console.log("PROCESS",data)
+            $scope.resultinfo[1].temperature = data[0]
+            $scope.resultinfo[1].humid = data[1]
+            $scope.resultinfo[1].pressure = data[2]
+            $scope.resultinfo[1].H2O2h = data[3]
+            $scope.resultinfo[1].H2O2l = data[4]
+          },function(e){
+    });
+    ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "3"}).then(
+          function(data){
+            console.log("PROCESS",data)
+            $scope.resultinfo[2].temperature = data[0]
+            $scope.resultinfo[2].humid = data[1]
+            $scope.resultinfo[2].pressure = data[2]
+            $scope.resultinfo[2].H2O2h = data[3]
+            $scope.resultinfo[2].H2O2l = data[4]
+          },function(e){
     });
   });
   
   var timer =  $interval(function(){
-    $scope.OrderList = [
-      {"OrderId":"SOB001", "Order":1, "Status":""},
-      {"OrderId":"SOB002", "Order":2, "Status":""},
-      {"OrderId":"SOB003", "Order":3, "Status":""},
-      {"OrderId":"SOB004", "Order":4, "Status":""},
-      {"OrderId":"SOB005", "Order":5, "Status":""},
-      {"OrderId":"SOB006", "Order":6, "Status":""},
-      {"OrderId":"SOB007", "Order":7, "Status":""},
-      {"OrderId":"SOB008", "Order":8, "Status":""},
-      {"OrderId":"SOB009", "Order":9, "Status":""},
-      {"OrderId":"SOB010", "Order":10, "Status":""},
-      {"OrderId":"SOB011", "Order":11, "Status":""},
-      {"OrderId":"SOB012", "Order":12, "Status":""},
-      {"OrderId":"SOB013", "Order":13, "Status":""},
-      {"OrderId":"SOB014", "Order":14, "Status":""},
-      {"OrderId":"SOB015", "Order":15, "Status":""},
-      {"OrderId":"SOB016", "Order":16, "Status":""},
-      {"OrderId":"SOB017", "Order":17, "Status":""},
-      {"OrderId":"SOB018", "Order":18, "Status":""},
-      {"OrderId":"SOB019", "Order":19, "Status":""},
-      {"OrderId":"SOB020", "Order":20, "Status":""},
-      {"OrderId":"SOB021", "Order":21, "Status":""},
-      {"OrderId":"SOB022", "Order":22, "Status":""},
-      {"OrderId":"SOB023", "Order":23, "Status":""},
-      {"OrderId":"SOB024", "Order":24, "Status":""},
-      {"OrderId":"SOB025", "Order":25, "Status":""},
-      {"OrderId":"SOB026", "Order":26, "Status":""}
-    ]
+    if ($scope.TestType == "SOB") {
+      $scope.show.SOB = 1
+      $scope.OrderList = [
+        {"OrderId":"SOB001", "Order":1, "Status":""},
+        {"OrderId":"SOB002", "Order":2, "Status":""},
+        {"OrderId":"SOB003", "Order":3, "Status":""},
+        {"OrderId":"SOB004", "Order":4, "Status":""},
+        {"OrderId":"SOB005", "Order":5, "Status":""},
+        {"OrderId":"SOB006", "Order":6, "Status":""},
+        {"OrderId":"SOB007", "Order":7, "Status":""},
+        {"OrderId":"SOB008", "Order":8, "Status":""},
+        {"OrderId":"SOB009", "Order":9, "Status":""},
+        {"OrderId":"SOB010", "Order":10, "Status":""},
+        {"OrderId":"SOB011", "Order":11, "Status":""},
+        {"OrderId":"SOB012", "Order":12, "Status":""},
+        {"OrderId":"SOB013", "Order":13, "Status":""},
+        {"OrderId":"SOB014", "Order":14, "Status":""},
+        {"OrderId":"SOB015", "Order":15, "Status":""},
+        {"OrderId":"SOB016", "Order":16, "Status":""},
+        {"OrderId":"SOB017", "Order":17, "Status":""},
+        {"OrderId":"SOB018", "Order":18, "Status":""},
+        {"OrderId":"SOB019", "Order":19, "Status":""},
+        {"OrderId":"SOB020", "Order":20, "Status":""},
+        {"OrderId":"SOB021", "Order":21, "Status":""},
+        {"OrderId":"SOB022", "Order":22, "Status":""},
+        {"OrderId":"SOB023", "Order":23, "Status":""},
+        {"OrderId":"SOB024", "Order":24, "Status":""},
+        {"OrderId":"SOB025", "Order":25, "Status":""},
+        {"OrderId":"SOB026", "Order":26, "Status":""}
+      ]
+    } else if ($scope.TestType == "SOS") {
+      $scope.show.SOS = 1
+      $scope.OrderList = [
+        {"OrderId":"SOS001", "Order":1, "Status":""},
+        {"OrderId":"SOS002", "Order":2, "Status":""},
+        {"OrderId":"SOS003", "Order":3, "Status":""},
+        {"OrderId":"SOS004", "Order":4, "Status":""},
+        {"OrderId":"SOS005", "Order":5, "Status":""},
+        {"OrderId":"SOS006", "Order":6, "Status":""},
+        {"OrderId":"SOS007", "Order":7, "Status":""},
+        {"OrderId":"SOS008", "Order":8, "Status":""},
+        {"OrderId":"SOS009", "Order":9, "Status":""},
+        {"OrderId":"SOS010", "Order":10, "Status":""},
+        {"OrderId":"SOS011", "Order":11, "Status":""},
+        {"OrderId":"SOS012", "Order":12, "Status":""},
+        {"OrderId":"SOS013", "Order":13, "Status":""},
+        {"OrderId":"SOS014", "Order":14, "Status":""},
+        {"OrderId":"SOS015", "Order":15, "Status":""},
+        {"OrderId":"SOS016", "Order":16, "Status":""},
+        {"OrderId":"SOS017", "Order":17, "Status":""},
+        {"OrderId":"SOS018", "Order":18, "Status":""},
+        {"OrderId":"SOS019", "Order":19, "Status":""},
+        {"OrderId":"SOS020", "Order":20, "Status":""}        
+      ]
+    } else if ($scope.TestType == "WSP") {
+      $scope.show.WSP = 1
+      $scope.OrderList = [
+        {"OrderId":"WSP001", "Order":1, "Status":""},
+        {"OrderId":"WSP002", "Order":2, "Status":""},
+        {"OrderId":"WSP003", "Order":3, "Status":""},
+        {"OrderId":"WSP004", "Order":4, "Status":""},
+        {"OrderId":"WSP005", "Order":5, "Status":""},
+        {"OrderId":"WSP006", "Order":6, "Status":""},
+        {"OrderId":"WSP007", "Order":7, "Status":""},
+        {"OrderId":"WSP008", "Order":8, "Status":""},
+        {"OrderId":"WSP009", "Order":9, "Status":""},
+        {"OrderId":"WSP010", "Order":10, "Status":""},
+        {"OrderId":"WSP011", "Order":11, "Status":""},
+        {"OrderId":"WSP012", "Order":12, "Status":""},
+        {"OrderId":"WSP013", "Order":13, "Status":""},
+        {"OrderId":"WSP014", "Order":14, "Status":""},
+        {"OrderId":"WSP015", "Order":15, "Status":""},
+        {"OrderId":"WSP016", "Order":16, "Status":""},
+        {"OrderId":"WSP017", "Order":17, "Status":""},
+        {"OrderId":"WSP018", "Order":18, "Status":""},
+        {"OrderId":"WSP019", "Order":19, "Status":""},
+        {"OrderId":"WSP020", "Order":20, "Status":""}        
+      ]
+    }
     Result.GetResult($scope.result).then(
       function(data){
         $scope.NowStep = data[0].NowStep;
         $scope.Progress= data[0].JinDu;
-        console.log("NowStep",$scope.NowStep);
-        for (var i = 0; i < 26; i++) {
-          if (!$scope.OrderList[i].OrderId == $scope.NowStep) {
+        for (var i = 0; i < $scope.OrderList.length; i++) {
+          if ($scope.OrderList[i].OrderId != $scope.NowStep) {
             $scope.OrderList[i].Status = "...已完成"
           } else {
             $scope.OrderList[i].Status = "...正在执行"
             i ++;
-            for ( i ; i < 26; i++) {
+            for ( i ; i < $scope.OrderList.length; i++) {
               $scope.OrderList[i].Status = "...未完成"
             }
           }
         }
       },function(e){
+    });
+    ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "1"}).then(
+          function(data){
+            console.log("PROCESS",data)
+            $scope.resultinfo[0].temperature = data[0]
+            $scope.resultinfo[0].humid = data[1]
+            $scope.resultinfo[0].pressure = data[2]
+            $scope.resultinfo[0].H2O2h = data[3]
+            $scope.resultinfo[0].H2O2l = data[4]
+          },function(e){
+    });
+    ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "2"}).then(
+          function(data){
+            console.log("PROCESS",data)
+            $scope.resultinfo[1].temperature = data[0]
+            $scope.resultinfo[1].humid = data[1]
+            $scope.resultinfo[1].pressure = data[2]
+            $scope.resultinfo[1].H2O2h = data[3]
+            $scope.resultinfo[1].H2O2l = data[4]
+          },function(e){
+    });
+    ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "3"}).then(
+          function(data){
+            console.log("PROCESS",data)
+            $scope.resultinfo[2].temperature = data[0]
+            $scope.resultinfo[2].humid = data[1]
+            $scope.resultinfo[2].pressure = data[2]
+            $scope.resultinfo[2].H2O2h = data[3]
+            $scope.resultinfo[2].H2O2l = data[4]
+          },function(e){
     });
   },30000,-1); 
   
@@ -915,10 +1101,6 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   //       return 0
   //     }
   // }
-
-  $scope.GoMachineView = function () {
-    $state.go('tab.machineviewinput')
-  }
   
   $scope.$on('$destroy',function(){
     $interval.cancel(timer);
@@ -926,11 +1108,11 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 
   $scope.$on('$ionicView.afterLeave', function() {
     Storage.rm('TestType');
-    
+    Storage.rm('TestId');
   });
 }])
 
-.controller('envimonitorCtrl', ['$scope','$state','ItemInfo',function($scope, $state, ItemInfo) {
+.controller('envimonitorCtrl', ['$scope','$state','$interval','ItemInfo',function($scope, $state, $interval, ItemInfo) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -947,7 +1129,10 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       "H2O2h":null,
       "H2O2l":null
     }
-
+    $scope.ID = {
+      "insid" : null,
+      "cabinId" : null
+    }
   })
 
   $scope.insms=[
@@ -967,6 +1152,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   $scope.getReult = function(insid, cabinId) {
     console.log("insid",insid)
     console.log("cabinId",cabinId)
+    $scope.ID.insid = insid
+    $scope.ID.cabinId = cabinId
     if (insid == 4) {
       if (cabinId == 1) {
         ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "1"}).then(
@@ -1050,12 +1237,116 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     }
   }
 
+  var timer =  $interval(function(){
+    $scope.result={
+      "temperature1" :null,
+      "temperature2" :null,
+      "temperature3" :null,
+      "temperature":null,
+      "humid":null,
+      "pressure":null,
+      "H2O2h":null,
+      "H2O2l":null
+    }
+    if ($scope.ID.insid == 4) {
+      if ($scope.ID.cabinId == 1) {
+        ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "1"}).then(
+          function(data){
+            console.log("PROCESS",data)
+            $scope.result.temperature = data[0]
+            $scope.result.humid = data[1]
+            $scope.result.pressure = data[2]
+            $scope.result.H2O2h = data[3]
+            $scope.result.H2O2l = data[4]
+          },function(e){
+        });
+      }
+      if ($scope.ID.cabinId == 2) {
+        ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "2"}).then(
+          function(data){
+            console.log("PROCESS",data)
+            $scope.result.temperature = data[0]
+            $scope.result.humid = data[1]
+            $scope.result.pressure = data[2]
+            $scope.result.H2O2h = data[3]
+            $scope.result.H2O2l = data[4]
+          },function(e){
+        });
+      }
+      if ($scope.ID.cabinId == 3) {
+        ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "3"}).then(
+          function(data){
+            console.log("PROCESS",data)
+            $scope.result.temperature = data[0]
+            $scope.result.humid = data[1]
+            $scope.result.pressure = data[2]
+            $scope.result.H2O2h = data[3]
+            $scope.result.H2O2l = data[4]
+          },function(e){
+        });
+      }
+    }
+    if ($scope.ID.insid == 5) {
+      ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Collect","CabinId": "1"}).then(
+          function(data){
+            console.log("collect",data)
+            $scope.result.temperature = data[0]
+            $scope.result.humid = data[1]
+            $scope.result.pressure = data[2]
+            $scope.result.H2O2h = data[3]
+            $scope.result.H2O2l = data[4]
+            console.log("res",$scope.result)
+          },function(e){
+        });
+    }
+    if ($scope.ID.insid == 1) {
+      ItemInfo.GetNewIncubatorEnv({"IncubatorId": "Incu_001"}).then(
+          function(data){
+            console.log("Incu1",data)
+            $scope.result.temperature1 = data[0]
+            $scope.result.temperature2 = data[1]
+            $scope.result.temperature3 = data[2]
+          },function(e){
+        });
+    }
+    if ($scope.ID.insid == 2) {
+      ItemInfo.GetNewIncubatorEnv({"IncubatorId": "Incu_002"}).then(
+          function(data){
+            console.log("Incu2",data)
+            $scope.result.temperature1 = data[0]
+            $scope.result.temperature2 = data[1]
+            $scope.result.temperature3 = data[2]
+          },function(e){
+        });
+    }
+    if ($scope.ID.insid == 3) {
+      ItemInfo.GetNewIncubatorEnv({"IncubatorId": "Incu_003"}).then(
+          function(data){
+            console.log("Incu3",data)
+            $scope.result.temperature1 = data[0]
+            $scope.result.temperature2 = data[1]
+            $scope.result.temperature3 = data[2]
+          },function(e){
+        });
+    }
+    // Result.GetResult($scope.result).then(
+    //   function(data){
+    //     $scope.monitorlist=data;
+    //     console.log("monitorlist",$scope.monitorlist);
+    //   },function(e){
+    // });
+  },30000,-1);
+
   $scope.doSomething = function () {
     $state.go('tab.incubatormonitor');
   }
+
+  $scope.$on('$ionicView.afterLeave',function(){
+    $interval.cancel(timer);
+  })
 }])
 
-.controller('incubatormonitorCtrl', function($scope, $state) {
+.controller('incubatormonitorCtrl', ['$scope','$state','$interval','Result','Storage',function($scope, $state, $interval, Result, Storage) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -1121,32 +1412,129 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       "GetFormerStep": 0,
       "GetNowStep": 0,
       "GetLaterStep": 0
-      }
+    }
+    
+    $scope.resultinfos = {}
+    var now = new Date()
+    console.log("time",now);
+    Result.GetResult($scope.result).then(
+      function(data){
+        $scope.resultinfos = data;
+        console.log("resultinfos",$scope.resultinfos);
+        angular.forEach($scope.resultinfos, function (value, key) {
+          $scope.tubes = {
+            "TestId": $scope.resultinfos[key].TestId,
+            "TubeNo": null,
+            "CultureId": null,
+            "BacterId": null,
+            "OtherRea": null,
+            "IncubatorId": null,
+            "Place": null,
+            "StartTimeS": null,
+            "StartTimeE": null,
+            "EndTimeS": null,
+            "EndTimeE": null,
+            "AnalResult": null,
+            "GetCultureId": 1,
+            "GetBacterId": 1,
+            "GetOtherRea": 1,
+            "GetIncubatorId": 1,
+            "GetPlace": 1,
+            "GetStartTime": 1,
+            "GetEndTime": 1,
+            "GetAnalResult": 1
+          }
+          Result.GetResultTubes($scope.tubes).then(
+            function(r){
+              console.log("tubes",r)
+              var starttime = new Date(r[0].StartTime)
+              var endtime = new Date(r[0].EndTime)
+              var time1 = now - starttime
+              var time2 = endtime - now
+              if (time1 > 24*60*60*1000) {
+                time1 = parseInt(time1/86400000) + '天' + parseInt(time1%86400000/3600000) + '小时'
+                console.log(time1)
+              } else {
+                time1 = parseInt(time1/3600000) + '小时' + parseInt(time1%3600000/60000) + '分'
+              }
+              if (time2 > 24*60*60*1000) {
+                time2 = parseInt(time2/86400000) + '天' + parseInt(time2%86400000/3600000) + '小时'
+                console.log(time2)
+              } else if (time2 > 0) {
+                time2 = parseInt(time2/3600000) + '小时' + parseInt(time2%3600000/60000) + '分'
+              } else {
+                time2 = '0分'
+              }
+              $scope.resultinfos[key].time1 = time1
+              $scope.resultinfos[key].time2 = time2
+          },function(e){
+          });
+        });
+      },function(e){
+    });
+    // 根据任何筛选条件得到样品培养记录们的信息
   })
-  $scope.resultinfos=[{
-    "a":"1215",
-    "b":"gregh132",
-    "c":"10min",
-    "d":"20min",
-    "e":"紧急停止",
-    "f":"20%"
-  },
-  {
-    "a":"1008",
-    "b":"phrt543",
-    "c":"1min",
-    "d":"30min",
-    "e":"紧急停止",
-    "f":"80%"
-  },
-  {
-    "a":"0805",
-    "b":"unhi87",
-    "c":"17min",
-    "d":"5min",
-    "e":"xxx",
-    "f":"10%"
-  }]
+  
+  var timer =  $interval(function(){
+    $scope.resultinfos = {}
+    var now = new Date()
+    console.log("time",now);
+    Result.GetResult($scope.result).then(
+      function(data){
+        $scope.resultinfos = data;
+        console.log("resultinfos",$scope.resultinfos);
+        angular.forEach($scope.resultinfos, function (value, key) {
+          $scope.tubes = {
+            "TestId": $scope.resultinfos[key].TestId,
+            "TubeNo": null,
+            "CultureId": null,
+            "BacterId": null,
+            "OtherRea": null,
+            "IncubatorId": null,
+            "Place": null,
+            "StartTimeS": null,
+            "StartTimeE": null,
+            "EndTimeS": null,
+            "EndTimeE": null,
+            "AnalResult": null,
+            "GetCultureId": 1,
+            "GetBacterId": 1,
+            "GetOtherRea": 1,
+            "GetIncubatorId": 1,
+            "GetPlace": 1,
+            "GetStartTime": 1,
+            "GetEndTime": 1,
+            "GetAnalResult": 1
+          }
+          Result.GetResultTubes($scope.tubes).then(
+            function(r){
+              console.log("tubes",r)
+              var starttime = new Date(r[0].StartTime)
+              var endtime = new Date(r[0].EndTime)
+              var time1 = now - starttime
+              var time2 = endtime - now
+              if (time1 > 24*60*60*1000) {
+                time1 = parseInt(time1/86400000) + '天' + parseInt(time1%86400000/3600000) + '小时'
+                console.log(time1)
+              } else {
+                time1 = parseInt(time1/3600000) + '小时' + parseInt(time1%3600000/60000) + '分'
+              }
+              if (time2 > 24*60*60*1000) {
+                time2 = parseInt(time2/86400000) + '天' + parseInt(time2%86400000/3600000) + '小时'
+                console.log(time2)
+              } else if (time2 > 0) {
+                time2 = parseInt(time2/3600000) + '小时' + parseInt(time2%3600000/60000) + '分'
+              } else {
+                time2 = '0分'
+              }
+              $scope.resultinfos[key].time1 = time1
+              $scope.resultinfos[key].time2 = time2
+          },function(e){
+          });
+        });
+      },function(e){
+    });
+  },30000,-1);
 
   $scope.isStopTest = function (item) {  
       if (item == '紧急停止') {
@@ -1156,11 +1544,16 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       }
   }
 
-  $scope.GoMachineView = function () {
+  $scope.$on('$ionicView.afterLeave',function(){
+    $interval.cancel(timer);
+  })
+  
+  $scope.GoMachineView = function (TestId) {
     $state.go('tab.machineviewinput')
+    Storage.set('TestId',TestId)
   }
   
-})
+}])
 
 .controller('monitor2controller', function($scope) {
   // With the new view caching in Ionic, Controllers are only called
@@ -3513,30 +3906,58 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         
 }])
 
-.controller('MachineViewInputCtrl',['$scope','$ionicSlideBoxDelegate','$ionicNavBarDelegate','Pics','$state' ,function($scope,$ionicSlideBoxDelegate,$ionicNavBarDelegate,Pics,$state) {
-  $scope.Pics = Pics.all();
-  $scope.remove = function(Pic) {
-    Pics.remove(chat);
-  };
+.controller('MachineViewInputCtrl',['$scope','$ionicSlideBoxDelegate','$ionicNavBarDelegate','Pics','$state','Result','Storage' ,function($scope,$ionicSlideBoxDelegate,$ionicNavBarDelegate,Pics,$state,Result,Storage) {
+  
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.result = {
+      "TestId": Storage.get('TestId'),
+      "TubeNo": null,
+      "PictureId": null,
+      "CameraTimeS": null,
+      "CameraTimeE": null,
+      "ImageAddress": null,
+      "AnalResult": null,
+      "GetCameraTime": 1,
+      "GetImageAddress": 1,
+      "GetAnalResult": 1
+    }
+    $scope.resultinfos={}
+    Result.GetTestPictures($scope.result).then(
+      function(data){
+        $scope.resultinfos = data
+        console.log('resultinfos',$scope.resultinfos)
+      },function(e){
+    });
+  })
+
+  $scope.getReult = function(TubeNo)  {
+    $scope.Pics = []
+    angular.forEach($scope.resultinfos, function (value, key) {
+      if (value.TubeNo == TubeNo) {
+        $scope.Pics.push(
+          { "Address" : "http://121.43.107.106:8063" + value.ImageAddress,
+            "Result" : value.AnalResult,
+            "Time": value.CameraTime
+          }
+        )
+      }   
+    });
+    console.log("Pics", $scope.Pics)
+  }
+
+  
   $scope.goBack = function() {
     $ionicNavBarDelegate.back();
   };
-  $scope.incubators=[
-    {"id":1,"name":"培养箱1"},
-    {"id":2,"name":"培养箱2"},
-    {"id":3,"name":"培养箱3"},
-    {"id":4,"name":"培养箱4"},
-    {"id":5,"name":"培养箱5"},
-    {"id":6,"name":"培养箱6"}
-    ]
-    $scope.testcubes=[
+  
+  $scope.testtubes=[
     {"id":1,"name":"试管1"},
     {"id":2,"name":"试管2"},
     {"id":3,"name":"试管3"},
     {"id":4,"name":"试管4"},
     {"id":4,"name":"试管5"},
     {"id":5,"name":"试管6"}
-    ]
+  ]
   $scope.slideIndex = 0;
 
   $scope.slideChanged = function(index) {

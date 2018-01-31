@@ -17,12 +17,12 @@
             </thead>
             <tbody>
               <tr ng-style="contents[$index%2]" ng-repeat="resultinfo in resultinfos|orderObjectBy:'CollectStart':true|filter:query">
-                <td>{{resultinfo.a}}</td>
-                <td>{{resultinfo.b}}</td>
-                <td>{{resultinfo.c}}</td>
-                <td>{{resultinfo.d}}</td>
+                <td>{{resultinfo.TestId}}</td>
+                <td>{{resultinfo.ObjectName}}</td>
+                <td>{{resultinfo.time1}}</td>
+                <td>{{resultinfo.time2}}</td>
                 <td>
-                  <button style="background-color:#63B8FF;color:white" ng-click="GoMachineView()">查看</button>
+                  <button style="background-color:#63B8FF;color:white" ng-click="GoMachineView('{{resultinfo.TestId}}')">查看</button>
                 </td>
                 <td>
                   <button class="button button-standard" on-touch="" data-ng-disabled="!isStopTest(resultinfo.e)">  
