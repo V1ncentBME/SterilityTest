@@ -24,10 +24,12 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
           if((logOn.password!="")&&(logOn.password!=null))
           {
             UserInfo.LogOn(logOn.UserId,logOn.password).then(function(data){
-              if(data.result=="登录成功")
+              if(data.result && data.result.length >= 16)
               {
                 $scope.logStatus="登录成功";
                 console.log($scope.logStatus);
+                console.log(data.result.slice(5));
+                Storage.set('Token', data.result.slice(5))
                 Storage.set('UserId',logOn.UserId);
                 Storage.set('isSignIN','YES');
                 $state.go('tab.monitor');

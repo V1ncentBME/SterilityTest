@@ -79,12 +79,35 @@ angular.module('zjubme', ['ionic', 'zjubme.controllers', 'zjubme.services','zjub
 })
 
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+  $httpProvider.interceptors.push(function ($q, $location, $rootScope, Storage) {
+    return {
+        'request': function (config) {
+            config.headers = config.headers || {};
+            var token = Storage.get('Token')
+            if (token && token.length >= 16) {
+              console.log('token', token)
+                config.headers.Authorization = Storage.get('Token')
+            }
+            return config;
+        },
+        'responseError': function (response) {
+            if (response.status === 401 || response.status === 403) {
+                //如果之前登陆过
+                
+                    $rootScope.$broadcast('unAuthenticed');
+                
+            }
+            return $q.reject(response);
+        }
+    };
+})
+  
   $stateProvider
    
    .state('signin', {
@@ -432,4 +455,4 @@ angular.module('zjubme', ['ionic', 'zjubme.controllers', 'zjubme.services','zjub
   $ionicConfigProvider.navBar.positionPrimaryButtons('left');
   $ionicConfigProvider.navBar.positionSecondaryButtons('right');
   $ionicConfigProvider.form.checkbox('circle');
-});
+})
