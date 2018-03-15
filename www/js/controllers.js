@@ -28,11 +28,14 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
               {
                 $scope.logStatus="登录成功";
                 console.log($scope.logStatus);
-                console.log(data.result.slice(5));
+                // console.log(data.result.slice(5));
                 Storage.set('Token', data.result.slice(5))
                 Storage.set('UserId',logOn.UserId);
                 Storage.set('isSignIN','YES');
+                Storage.set('TerminalIP', returnCitySN["cip"]);
                 $state.go('tab.monitor');
+                  
+                // console.log(returnCitySN["cip"])
               }
             },function(error){
                 if (error.result='密码错误')
@@ -79,7 +82,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     "UserName": '',
     "Role": $scope.Role,
     "Password":$rootScope.password,
-    "TerminalIP":extraInfo.postInformation().TerminalIP,
+    "TerminalIP":Storage.get('TerminalIP'),
     "TerminalName": extraInfo.postInformation().TerminalName,
     "revUserId": extraInfo.postInformation().revUserId
   }]
@@ -393,23 +396,24 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
                 "PhoneNo":$scope.BasicDtInfo.PhoneNo,
                 "UserName": $scope.BasicDtInfo.UserName,
                 "Role": $scope.BasicDtInfo.Role,
-                "TerminalIP":extraInfo.postInformation().TerminalIP,
+                "TerminalIP":Storage.get('TerminalIP'),
                 "revUserId": extraInfo.postInformation().revUserId
       };
          UserInfo.UpdateUserInfo($scope.UpdateUserInfo).then( function (data, headers) {
          if(data.result=="插入成功"){
          
          console.log($scope.BasicDtInfo.Role);
-
+          console.log('ip',$scope.UpdateUserInfo);
        Storage.set('UserName', $scope.BasicDtInfo.UserName);
        Storage.set('USERNAME', $scope.BasicDtInfo.PhoneNo);
         $ionicLoading.show({
-                 template: '数据更新成功',
-                 duration:1000
+                 template: '数据更新成功，请重新登录',
+                 duration:2000
                 });
        }
-             
-              
+          Storage.rm('Token')
+          Storage.rm('TerminalIP') 
+          $state.go('signin');    
         },function(error){
 
           });
@@ -1418,7 +1422,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       "GetNowStep": 0,
       "GetLaterStep": 0
     }
-    
+    $scope.contents=[{"background":"#CCCCCC"},{"background-color":"#EBEBEB"}]
     $scope.resultinfos = {}
     var now = new Date()
     console.log("time",now);
@@ -2762,7 +2766,15 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         $ionicHistory.goBack();
       }
       $scope.lastviewtitle = $ionicHistory.backTitle();
-    
+      $scope.toPage = function(catalogID) {
+        $state.go('tab.'+catalogID)
+      }
+      $scope.toDash = function() {
+        $state.go('tab.dash')
+      }
+      $scope.toMonitor = function() {
+        $state.go('tab.monitor')
+      }
 }])
 
 
@@ -3058,7 +3070,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 }])
 
 //退出登录-赵艳霞
-.controller('setCtrl',['$http','$scope','$ionicPopup','$state', '$ionicActionSheet','$ionicModal',function($http,$scope,$ionicPopup,$state,$ionicActionSheet,$ionicModal) {
+.controller('setCtrl',['$http','$scope','$ionicPopup','$state', '$ionicActionSheet','$ionicModal', 'Storage', function($http,$scope,$ionicPopup,$state,$ionicActionSheet,$ionicModal,Storage) {
    ///获取菜单栏列表数据
       $http.get('data/set.json').success(function(data){
         $scope.set = data;
@@ -3111,6 +3123,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
                 type: 'button-small button-positive ',
                 onTap: function(e) {
                     $state.go('signin');
+                    Storage.rm('Token')
+                    Storage.rm('TerminalIP')
                 }
               }
             ]
@@ -3219,6 +3233,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     $scope.sampleinfos={};
     ItemInfo.GetSampleInfo($scope.sample).then(
     function(data){
+      console.log('sample',data)
       for(var i=0;i<data.length;i++){
         $scope.sampleinfos[i]=data[i];
       }
@@ -3313,7 +3328,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         "SamplingTime":"",
         "Warning":$scope.Sam.Warning,
         "SamSave":$scope.Sam.SamSave,
-        "TerminalIP":extraInfo.postInformation().TerminalIP,
+        "TerminalIP":Storage.get('TerminalIP'),
         "TerminalName":extraInfo.postInformation().TerminalName,
         "revUserId":extraInfo.postInformation().revUserId
       }
@@ -3483,7 +3498,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         "ReagentTest":$scope.Rea.ReagentTest,
         "SaveCondition":$scope.Rea.SaveCondition,
         "Description":$scope.Rea.Description,
-        "TerminalIP":extraInfo.postInformation().TerminalIP,
+        "TerminalIP":Storage.get('TerminalIP'),
         "TerminalName":extraInfo.postInformation().TerminalName,
         "revUserId":extraInfo.postInformation().revUserId
       }

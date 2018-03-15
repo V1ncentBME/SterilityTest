@@ -91,7 +91,7 @@ angular.module('zjubme', ['ionic', 'zjubme.controllers', 'zjubme.services','zjub
             config.headers = config.headers || {};
             var token = Storage.get('Token')
             if (token && token.length >= 16) {
-              console.log('token', token)
+              // console.log('token', token)
                 config.headers.Authorization = Storage.get('Token')
             }
             return config;
@@ -203,15 +203,15 @@ angular.module('zjubme', ['ionic', 'zjubme.controllers', 'zjubme.services','zjub
       }
     })
 
-  .state('tab.monitorx', {
-      url: '/monitorx',
-      views: {
-        'tab-monitor2': {
-          templateUrl: 'templates/tabs/tab-monitor2.html',
-          controller: 'monitor2controller'
-        }
-      }
-    })
+  // .state('tab.monitorx', {
+  //     url: '/monitorx',
+  //     views: {
+  //       'tab-monitor2': {
+  //         templateUrl: 'templates/tabs/tab-monitor2.html',
+  //         controller: 'monitor2controller'
+  //       }
+  //     }
+  //   })
   .state('monitor',{
       abstract:true,
       url:"/monitor",
@@ -353,7 +353,7 @@ angular.module('zjubme', ['ionic', 'zjubme.controllers', 'zjubme.services','zjub
   .state('tab.machineviewinput',{
     url:'/dash/machineviewinput',
     views: {
-      'tab-dash':{
+      'tab-monitor':{
       templateUrl:'templates/dash/MachineViewInput.html',
       controller:'MachineViewInputCtrl'
       }

@@ -6,17 +6,17 @@
 	},
 	{
 		"catalog":"加注隔离器任务监控",
-		"catalogID":"machine_view",
+		"catalogID":"monitor2",
 		"url":"img/icon/machine_view.png"
 	},
 	{
 		"catalog":"培养箱任务监控",
-		"catalogID":"system_control",
+		"catalogID":"incubatormonitor",
 		"url":"img/icon/system_control.png"
 	},
 	{
 		"catalog":"环境监测",
-		"catalogID":"Data_input",
+		"catalogID":"envimonitor",
 		"url":"img/icon/Data_input.png"
 	}
 ]
