@@ -2759,9 +2759,31 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       
     
       ///获取菜单栏列表数据
-      $http.get('data/catalog.json').success(function(data){
-        $scope.catalog = data;
-      })
+      // $http.get('data/catalog.json').success(function(data){
+      //   $scope.catalog = data;
+      // })
+      $scope.catalog = [
+        {
+          "catalog":"加工隔离器任务监控",
+          "catalogID":"monitor",
+          "url":"img/icon/monitor.png"
+        },
+        {
+          "catalog":"加注隔离器任务监控",
+          "catalogID":"monitor2",
+          "url":"img/icon/machine_view.png"
+        },
+        {
+          "catalog":"培养箱任务监控",
+          "catalogID":"incubatormonitor",
+          "url":"img/icon/system_control.png"
+        },
+        {
+          "catalog":"环境监测",
+          "catalogID":"envimonitor",
+          "url":"img/icon/Data_input.png"
+        }
+      ]
       $scope.nvGoback = function() {
         $ionicHistory.goBack();
       }
@@ -3072,10 +3094,21 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 //退出登录-赵艳霞
 .controller('setCtrl',['$http','$scope','$ionicPopup','$state', '$ionicActionSheet','$ionicModal', 'Storage', function($http,$scope,$ionicPopup,$state,$ionicActionSheet,$ionicModal,Storage) {
    ///获取菜单栏列表数据
-      $http.get('data/set.json').success(function(data){
-        $scope.set = data;
-      })
-  
+      // $http.get('data/set.json').success(function(data){
+      //   $scope.set = data;
+      // })
+      $scope.set = [
+        {
+          "set":"个人信息",
+          "setID":"personalInfo",
+          "url":"img/icon/touxiang.jpg"
+        },
+        {
+          "set":"修改密码",
+          "setID":"changepassword",
+          "url":"img/icon/password.jpg"
+        } 
+      ]
       $scope.showActionsheet = function () {
         $ionicActionSheet.show({
           titleText: '退出后不会删除历史数据，下次登录依然可以使用本账号',
