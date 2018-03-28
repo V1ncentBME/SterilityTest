@@ -12,7 +12,7 @@
 	            <tr>
 	            	<th width="20%">检测编号</th>
 	            	<th width="20%">供应商</th>
-                <th width="5%">样品名</th>
+                <!-- <th width="5%">样品名</th> -->
 	            	<th width="40%">
  						         <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectother" ng-options="other.id as other.name for other in others">
                       <option selected id="1">产品编号</option>
@@ -23,14 +23,14 @@
                             <option selected value="">更新记录</option>
                         </select>
                     </th> -->
-                  <th width="15%">检测结果数据</th>
+                  <th width="20%">检测结果</th>
 	          	</tr>
             </thead>
             <tbody>
             	<tr ng-style="contents[$index%2]" ng-repeat="resultinfo in resultinfos|orderObjectBy:'CollectStart':true|filter:query">
                 <td>{{resultinfo.TestId.slice(4)}}</td>
                 <td>{{resultinfo.ObjCompany}}</td>
-                <td></td>
+                <!-- <td></td> -->
                 <td>
                   <div ng-switch="selectother">
                     <div ng-switch-when="1">{{resultinfo.ObjectNo}}</div>

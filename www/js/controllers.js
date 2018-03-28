@@ -3432,6 +3432,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     "GetProductDay": 1,
     "GetReagentType": 1,
     "GetExpiryDay": 1,
+    "GetReagentSource": 1,
     "GetReagentName": 1,
     "GetReagentTest": 1,
     "GetSaveCondition": 1,
