@@ -13,41 +13,42 @@
         <table style="width:100%;text-align:center;vertical-align:center;">
             <thead style="background-color:#8B7E66;border:2px;color:white;overflow: auto;">
 	            <tr>
-	            	<th >培养箱编号</th>
-	            	<th >生产日期</th>
-	            	<th >生产厂家</th>
-	            	<th >参数描述</th>
+	            	<th width="20%">培养箱编号</th>
+	            	<th width="20%">生产日期</th>
+	            	<th width="10%">生产厂家</th>
+	            	<!-- <th >参数描述</th> -->
                 
-	            	<th>
+	            	<th width="40%">
                   <!-- <div style="width:100px;word-wrap:break-word;"> -->
                     <select style="width:120px;background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center;word-wrap:break-word;overflow: auto;text-overflow:ellipsis;white-space: nowrap;" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
-                      <option selected value="">更新记录</option>
+                      <!-- <option selected value="6">参数描述/option> -->
                     </select>
                   <!-- </div> -->
                 </th>
-                <th>仪器信息</th>
+                <th width="10%">仪器信息</th>
 	          	</tr>
             </thead>
             <tbody>
             	<tr ng-style="contents[$index%2]" ng-repeat="incubatorinfo in incubatorinfos">
-            		<td ><div style="width:40px;word-wrap:break-word;" >{{incubatorinfo.IncubatorId}}</div></td>
-            		<td ><div style="width:40px;word-wrap:break-word;" >{{incubatorinfo.ProductDay}}</div></td>
-            		<td ><div style="width:40px;word-wrap:break-word;" >{{incubatorinfo.EquipPro}}</div></td>
-            		<td ><div style="width:40px;word-wrap:break-word;" >{{incubatorinfo.InsDescription}}</div></td>
+            		<td >{{incubatorinfo.IncubatorId}}</td>
+            		<td >{{incubatorinfo.ProductDay.slice(0,10)}}</td>
+            		<td >{{incubatorinfo.EquipPro}}</td>
+            		<!-- <td ><div style="width:40px;word-wrap:break-word;" >{{incubatorinfo.InsDescription}}</div></td> -->
                 
             		<td>
-                   <div style="width:100px;word-wrap:break-word;" ng-switch="selectrevision">
+                   <div style="text-align:center;vertical-align:center;word-wrap:break-word;" ng-switch="selectrevision">
                     <div ng-switch-when="1">{{incubatorinfo.revDateTime}}</div>
                     <div ng-switch-when="2">{{incubatorinfo.TerminalIP}}</div>
                     <div ng-switch-when="3">{{incubatorinfo.TerminalName}}</div>
                     <div ng-switch-when="4">{{incubatorinfo.revUserId}}</div>
                     <div ng-switch-when="5">{{incubatorinfo.revIdentify}}</div>
+                    <div ng-switch-when="6">{{incubatorinfo.InsDescription}}</div>
                   </div>
                 </td>
                 <td>
                   <div style="width:40px;word-wrap:break-word;">
-                    <h3 style="cursor:pointer;font-size: 10px" ng-click="showmenu('{{incubatorinfo.IncubatorId}}')"> 查看</h3>
-                    <div id="{{incubatorinfo.IncubatorId}}" style="display:none ; border:none; border-top:none">
+                    <!-- <h3 style="cursor:pointer;font-size: 10px" ng-click="showmenu('{{incubatorinfo.IncubatorId}}')"> 查看</h3> -->
+                    <div id="{{incubatorinfo.IncubatorId}}" style=" border:none; border-top:none">
                       <ul>
                         <li><button style="cursor:pointer;font-size: 10px" ng-click="toResult(sampleinfo.ObjectNo,sampleinfo.ObjIncuSeq,sampleinfo.ObjCompany)">操作</button></li>
                         <li><button style="cursor:pointer;font-size: 10px" ng-click="toResult(sampleinfo.ObjectNo,sampleinfo.ObjIncuSeq,sampleinfo.ObjCompany)">环境</button></li>

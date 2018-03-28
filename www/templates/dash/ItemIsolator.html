@@ -16,12 +16,12 @@
         <table style="width:100%;text-align:center;vertical-align:center" >
             <thead style="background-color:#8B7E66;border:2px;color:white">
               <tr>
-                <th>隔离器编号</th>
-                <th>生产日期</th>
-                <th>生产厂家</th>
-                <th>参数描述</th>
+                <th width="20%">隔离器编号</th>
+                <th width="20%">生产日期</th>
+                <th width="20%">生产厂家</th>
+                <!-- <th>参数描述</th> -->
                 <th><select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
-                    <option selected value="">更新记录</option>
+                    <!-- <option selected revisioninfo.id="6">参数描述</option> -->
                   </select>
                 </th>
               </tr>
@@ -29,9 +29,9 @@
             <tbody>
               <tr  ng-style="contents[$index%2]" ng-repeat="isolatorinfo in isolatorinfos|orderObjectBy:field:reverse|filter:query">
                 <td>{{isolatorinfo.IsolatorId}}</td>
-                <td>{{isolatorinfo.ProductDay}}</td>
+                <td>{{isolatorinfo.ProductDay.slice(0,10)}}</td>
                 <td>{{isolatorinfo.EquipPro}}</td>
-                <td>{{isolatorinfo.InsDescription}}</td>
+                <!-- <td>{{isolatorinfo.InsDescription}}</td> -->
                 <td>
                   <div ng-switch="selectrevision">
                     <div ng-switch-when="1">{{isolatorinfo.revDateTime}}</div>
@@ -39,6 +39,7 @@
                     <div ng-switch-when="3">{{isolatorinfo.TerminalName}}</div>
                     <div ng-switch-when="4">{{isolatorinfo.revUserId}}</div>
                     <div ng-switch-when="5">{{isolatorinfo.revIdentify}}</div>
+                    <div ng-switch-when="6">{{isolatorinfo.InsDescription}}</div>
                   </div>
                 </td>
 

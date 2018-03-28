@@ -1142,6 +1142,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       "insid" : null,
       "cabinId" : null
     }
+    $scope.selectinstrument = $scope.insms[3].id
+    $scope.selectcabin = $scope.cabins[1].id
   })
 
   $scope.insms=[
@@ -3208,8 +3210,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 .controller('ItemSampleCtrl', ['$scope','$state','ItemInfo','Common','extraInfo','Storage','$ionicModal','$ionicPopup',function($scope,$state,ItemInfo,Common,extraInfo,Storage,$ionicModal,$ionicPopup) {
    $scope.contents=[{"background-color":"#CCCCCC"},{"background-color":"#EBEBEB"}]
    $scope.others=[
-    {"id":1,"name":"样品来源"},
-    {"id":2,"name":"产品名字"},
+    {"id":1,"name":"产品编号"},
+    {"id":2,"name":"重检标识"},
     {"id":3,"name":"产品类型"},
     {"id":4,"name":"录入人员"},
     {"id":5,"name":"样品记录时间"},
@@ -3217,8 +3219,13 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     //{"id":7,"name":"取样器具"},
     //{"id":8,"name":"取样量"},
     //{"id":9,"name":"分样方法"},
-    {"id":10,"name":"样品容器"},
-    {"id":11,"name":"注意事项"},
+    {"id":6,"name":"样品容器"},
+    {"id":7,"name":"注意事项"},
+    {"id":8,"name":"更新时间"},
+    {"id":9,"name":"终端IP"},
+    {"id":10,"name":"终端名字"},
+    {"id":11,"name":"用户名"},
+    {"id":12,"name":"身份证"}
     //{"id":12,"name":"储存条件"}
     ]
     $scope.revisioninfos=[
@@ -3228,51 +3235,53 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     {"id":4,"name":"用户名"},
     {"id":5,"name":"身份证"}
     ]
-    $scope.sample={
-    "ObjectNo": null,
-    "ObjCompany": null,
-    "ObjIncuSeq": null,
-    "ObjectName": null,
-    "ObjectType": null,
-    "SamplingPeople": null,
-    "SamplingTimeS": null,
-    "SamplingTimeE": null,
-    "SamplingWay": null,
-    "SamplingTool": null,
-    "SamAmount": null,
-    "DevideWay": null,
-    "SamContain": null,
-    "Warning": null,
-    "SamSave": null,
-    "ReDateTimeS": null,
-    "ReDateTimeE": null,
-    "ReTerminalIP": null,
-    "ReTerminalName": null,
-    "ReUserId": null,
-    "ReIdentify": null,
-    "GetObjectName": 1,
-    "GetObjectType": 1,
-    "GetSamplingPeople": 1,
-    "GetSamplingTime": 1,
-    "GetSamplingWay": 1,
-    "GetSamplingTool": 1,
-    "GetSamAmount": 1,
-    "GetDevideWay": 1,
-    "GetSamContain": 1,
-    "GetWarning": 1,
-    "GetSamSave": 1,
-    "GetRevisionInfo": 1
-    };
-    $scope.sampleinfos={};
-    ItemInfo.GetSampleInfo($scope.sample).then(
-    function(data){
-      console.log('sample',data)
-      for(var i=0;i<data.length;i++){
-        $scope.sampleinfos[i]=data[i];
-      }
-    },function(e){
-
-    });
+    $scope.$on("$ionicView.enter",function(){
+      $scope.sample={
+        "ObjectNo": null,
+        "ObjCompany": null,
+        "ObjIncuSeq": null,
+        "ObjectName": null,
+        "ObjectType": null,
+        "SamplingPeople": null,
+        "SamplingTimeS": null,
+        "SamplingTimeE": null,
+        "SamplingWay": null,
+        "SamplingTool": null,
+        "SamAmount": null,
+        "DevideWay": null,
+        "SamContain": null,
+        "Warning": null,
+        "SamSave": null,
+        "ReDateTimeS": null,
+        "ReDateTimeE": null,
+        "ReTerminalIP": null,
+        "ReTerminalName": null,
+        "ReUserId": null,
+        "ReIdentify": null,
+        "GetObjectName": 1,
+        "GetObjectType": 1,
+        "GetSamplingPeople": 1,
+        "GetSamplingTime": 1,
+        "GetSamplingWay": 1,
+        "GetSamplingTool": 1,
+        "GetSamAmount": 1,
+        "GetDevideWay": 1,
+        "GetSamContain": 1,
+        "GetWarning": 1,
+        "GetSamSave": 1,
+        "GetRevisionInfo": 1
+      };
+      $scope.sampleinfos={};
+      $scope.selectother = $scope.others[0].id
+      ItemInfo.GetSampleInfo($scope.sample).then(
+        function(data){
+          console.log('sample',data)
+          for(var i=0;i<data.length;i++){
+            $scope.sampleinfos[i]=data[i];
+          }
+        },function(e){
+      });
+    })
     $scope.toResult = function(ObjectNo,ObjIncuSeq,ObjCompany) {
     Storage.set('ObjectNo',ObjectNo);
     Storage.set('ObjIncuSeq',ObjIncuSeq);
@@ -3400,7 +3409,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     {"id":2,"name":"终端IP"},
     {"id":3,"name":"终端名字"},
     {"id":4,"name":"终端用户ID"},
-    {"id":5,"name":"终端用户身份证号"}
+    {"id":5,"name":"终端用户身份证号"},
+    {"id":6,"name":"试剂名字"}
   ]
   $scope.reagent={    
     "ReagentId": null,
@@ -3429,6 +3439,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     "GetRevisionInfo": 1
   };
   $scope.reagentinfos={};
+  $scope.selectrevision = $scope.revisioninfos[5].id
   ItemInfo.GetReagentInfo($scope.reagent).then(
     function(data){
       $scope.reagentinfos=data;
@@ -3565,7 +3576,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     {"id":2,"name":"终端IP"},
     {"id":3,"name":"终端名字"},
     {"id":4,"name":"终端用户ID"},
-    {"id":5,"name":"终端用户身份证号"}
+    {"id":5,"name":"终端用户身份证号"},
+    {"id":6,"name":"参数描述"},
   ]
   $scope.isolator={
     "IsolatorId": null,
@@ -3585,6 +3597,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     "GetRevisionInfo": 1
   };
   $scope.isolatorinfos={};
+  $scope.selectrevision = $scope.revisioninfos[5].id
   ItemInfo.GetIsolatorInfo($scope.isolator).then(
     function(data){
       
@@ -3671,7 +3684,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     {"id":2,"name":"终端IP"},
     {"id":3,"name":"终端名字"},
     {"id":4,"name":"终端用户ID"},
-    {"id":5,"name":"终端用户身份证号"}
+    {"id":5,"name":"终端用户身份证号"},
+    {"id":6,"name":"参数描述"},
    ]
     $scope.incubator={
     "IncubatorId": null,
@@ -3698,6 +3712,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     }
 
     $scope.incubatorinfos={};
+    $scope.selectrevision = $scope.revisioninfos[5].id
     ItemInfo.GetIncubatorInfo($scope.incubator).then(
     function(data){
       // var tmp=data[0].split("|",3);
@@ -3770,7 +3785,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   });
   $scope.contents=[{"background":"#CCCCCC"},{"background-color":"#EBEBEB"}]
   $scope.others=[
-    {"id":1,"name":"供应商"},
+    {"id":1,"name":"产品编号"},
     {"id":2,"name":"培养批次"},
     {"id":3,"name":"检测类型"},
     {"id":4,"name":"检测标准"},
@@ -3783,7 +3798,12 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     {"id":11,"name":"检测人员"},
     {"id":12,"name":"是否复核"},
     {"id":13,"name":"复核人员"},
-    {"id":14,"name":"复核时间"}
+    {"id":14,"name":"复核时间"},
+    {"id":15,"name":"更新时间"},
+    {"id":16,"name":"终端IP"},
+    {"id":17,"name":"终端名字"},
+    {"id":18,"name":"终端用户ID"},
+    {"id":19,"name":"终端用户身份证号"}
   ]
   $scope.revisioninfos=[
     {"id":1,"name":"更新时间"},
@@ -3838,6 +3858,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         "GetRevisionInfo": 1
       };
     console.log($scope.result);
+    $scope.selectother = $scope.others[0].id
     $scope.resultinfos={};
       Result.GetResult($scope.result).then(
         function(data){
@@ -3845,7 +3866,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
           //   $scope.resultinfos[i]=data[i];
           //   console.log($scope.result);
           // }
-          $scope.resultinfos=data;
+          $scope.resultinfos = data;
           // 跳转至监控 
           // if(data.length==0){
           //   var confirmPopup = $ionicPopup.confirm({

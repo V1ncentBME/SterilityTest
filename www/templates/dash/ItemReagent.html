@@ -13,9 +13,9 @@
         <table style="width:100%;text-align:center;vertical-align:center">
             <thead style="background-color:#8B7E66;border:2px;color:white">
               <tr>
-                <th>试剂批号</th>
-                <th>试剂来源</th>
-                <th>试剂名字</th>
+                <th width="25%">试剂批号</th>
+                <th width="25%">试剂来源</th>
+                <!-- <th>试剂名字</th> -->
                 <!-- <th>
                   <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectother" ng-options="other.id as other.name for other in others">
                     <option selected value="">试剂来源</option>
@@ -23,7 +23,7 @@
                 </th> -->
                 <th>
                   <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
-                    <option selected value="">更新记录</option>
+                    <!-- <option selected id="6" ></option> -->
                   </select>
                 </th>
               </tr>
@@ -32,7 +32,7 @@
               <tr ng-style="contents[$index%2]" ng-repeat="reagentinfo in reagentinfos">
                 <td>{{reagentinfo.ReagentId}}</td>
                 <td>{{reagentinfo.ReagentSource}}</td>
-                <td>{{reagentinfo.ReagentName}}</td>
+                <!-- <td>{{reagentinfo.ReagentName}}</td> -->
                 <!-- <td>
                   <div ng-switch="selectother">
                     <div ng-switch-when="1">{{reagentinfo.ReagentType}}</div>
@@ -50,7 +50,7 @@
                     <div ng-switch-when="3">{{reagentinfo.TerminalName}}</div>
                     <div ng-switch-when="4">{{reagentinfo.revUserId}}</div>
                     <div ng-switch-when="5">{{reagentinfo.revIdentify}}</div>
-                  </div>
+                    <div ng-switch-when="6">{{reagentinfo.ReagentName}}</div>
                 </td>
               </tr>
             </tbody>

@@ -10,28 +10,30 @@
         <table style="width:100%;text-align:center;vertical-align:center">
             <thead style="background-color:#8B7E66;border:2px;color:white">
 	            <tr>
-	            	<th>检测编号</th>
-	            	<th>产品编号</th>
-	            	<th>
- 						<select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectother" ng-options="other.id as other.name for other in others">
-                          <option selected value="">其他信息</option>
-                        </select>
+	            	<th width="20%">检测编号</th>
+	            	<th width="20%">供应商</th>
+                <th width="5%">样品名</th>
+	            	<th width="40%">
+ 						         <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectother" ng-options="other.id as other.name for other in others">
+                      <option selected id="1">产品编号</option>
+                    </select>
 	            	</th>
-	            	<th>
+	            	<!-- <th>
                         <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
                             <option selected value="">更新记录</option>
                         </select>
-                    </th>
-                  <th>检测结果数据</th>
+                    </th> -->
+                  <th width="15%">检测结果数据</th>
 	          	</tr>
             </thead>
             <tbody>
             	<tr ng-style="contents[$index%2]" ng-repeat="resultinfo in resultinfos|orderObjectBy:'CollectStart':true|filter:query">
-                <td>{{resultinfo.TestId}}</td>
-                <td>{{resultinfo.ObjectNo}}</td>
+                <td>{{resultinfo.TestId.slice(4)}}</td>
+                <td>{{resultinfo.ObjCompany}}</td>
+                <td></td>
                 <td>
                   <div ng-switch="selectother">
-                    <div ng-switch-when="1">{{resultinfo.ObjCompany}}</div>
+                    <div ng-switch-when="1">{{resultinfo.ObjectNo}}</div>
                     <div ng-switch-when="2">{{resultinfo.ObjIncuSeq}}</div>
                     <div ng-switch-when="3">{{resultinfo.TestType}}</div>
                     <div ng-switch-when="4">{{resultinfo.TestStand}}</div>
@@ -45,9 +47,14 @@
                     <div ng-switch-when="12">{{resultinfo.ReStatus}}</div>
                     <div ng-switch-when="13">{{resultinfo.RePeople}}</div>
                     <div ng-switch-when="14">{{resultinfo.ReTime}}</div>
+                    <div ng-switch-when="15">{{resultinfo.revDateTime}}</div>
+                    <div ng-switch-when="16">{{resultinfo.TerminalIP}}</div>
+                    <div ng-switch-when="17">{{resultinfo.TerminalName}}</div>
+                    <div ng-switch-when="18">{{resultinfo.revUserId}}</div>
+                    <div ng-switch-when="19">{{resultinfo.revIdentify}}</div>
                   </div>
                 </td>
-                <td>
+                <!-- <td>
                    <div ng-switch="selectrevision">
                     <div ng-switch-when="1">{{resultinfo.revDateTime}}</div>
                     <div ng-switch-when="2">{{resultinfo.TerminalIP}}</div>
@@ -55,7 +62,7 @@
                     <div ng-switch-when="4">{{resultinfo.revUserId}}</div>
                     <div ng-switch-when="5">{{resultinfo.revIdentify}}</div>
                   </div>
-                </td>
+                </td> -->
                 <td>
                   <button style="background-color:#63B8FF;color:white" ng-click="GoMachineView()">查看</button>
                 </td>

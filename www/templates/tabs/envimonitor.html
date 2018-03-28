@@ -12,7 +12,7 @@
         <tr>
           <td colspan="1"  class="tablea" style="background: white;text-align:center;vertical-align:center;">
             <select  ng-model="selectinstrument" ng-options="insm.id as insm.name for insm in insms" ng-change="getReult(selectinstrument,-1)">
-              <option selected value="">仪器信息</option>
+              <!-- <option selected value="">仪器信息</option> -->
             </select>
           </td>
           <td colspan="1"  class="tablea" style="background: white;text-align:center;vertical-align:center;">
@@ -31,7 +31,7 @@
             <div ng-switch="selectinstrument" >
               <div ng-switch-when="4">
                 <select  ng-model="selectcabin" ng-options="cabin.id as cabin.name for cabin in cabins" ng-change="getReult(4,selectcabin)">
-                  <option selected value="">箱体选择</option>
+                  <!-- <option selected value="">箱体选择</option> -->
                 </select>
               </div>
               <div ng-switch-when="5">集菌隔离箱</div>

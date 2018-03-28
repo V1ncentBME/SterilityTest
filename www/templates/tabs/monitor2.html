@@ -12,16 +12,19 @@
         <div class="card" ng-click="GoTask('{{item.TestType}}', '{{item.TestId}}')">
           <table cellspacing="0" cellpadding="0" style="border:0; width:100%; border-right:1px solid #000;border-bottom:1px solid #000; text-align:center;vertical-align:center;">
             <tbody  style="color:black;overflow: auto;background: white">
-              <tr >
-                <td width="50px" style="background: white;border-left:1px solid #000;border-top:1px solid #000;text-align:center;vertical-align:center;" ><div>样品名：{{item.ObjectName}}</div></td>
-                <td width="80px" style="background: white;border-left:1px solid #000;border-top:1px solid #000;text-align:center;vertical-align:center;" ><div>正在执行的步骤：{{item.NowStep}}</div></td>
-                <td width="80px" style="background: white;border-left:1px solid #000;border-top:1px solid #000;text-align:center;vertical-align:center;" ><div>上一步骤：{{item.FormerStep}}</div></td>
-                <td width="80px" style="background: white;border-left:1px solid #000;border-top:1px solid #000;text-align:center;vertical-align:center;" ><div>下一步骤：{{item.LaterStep}}</div></td>
-                <td style="background: white;border-left:1px solid #000;border-top:1px solid #000" >
-                  <div>
+              <tr>
+                <td colspan="4" class="tablea" style="background: white;text-align:center;vertical-align:center;" >样品名：{{item.ObjectName}}</td>
+              </tr>
+              <tr>
+                
+                <td width="30%" class="tablea" style="background: white;text-align:center;vertical-align:center;" >正在执行的步骤：{{item.NowStep}}</td>
+                <td width="25%" class="tablea" style="background: white;text-align:center;vertical-align:center;" >上一步骤：{{item.FormerStep}}</td>
+                <td width="25%" class="tablea" style="background: white;text-align:center;vertical-align:center;" >下一步骤：{{item.LaterStep}}</td>
+                <td width="20%" class="tablea" style="background: white;">
+                  
                     <button class="button button-standard" on-touch="" data-ng-disabled="!isStopTest('紧急停止')">  
                       {{cashBtnName || '紧急停止'}}  
-                    </button>
+                    
                   </div>
                 </td>
               </tr>
