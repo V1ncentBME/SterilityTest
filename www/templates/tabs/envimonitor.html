@@ -48,21 +48,77 @@
             <div ng-switch="selectinstrument">
               <div ng-switch-default>待选择</div>
               <div ng-switch-when="1">
-                温度1：{{result.temperature1}}℃,
-                温度2：{{result.temperature2}}℃,
-                温度3：{{result.temperature3}}℃
+                <table width="100%" style="text-align:center;vertical-align:center">
+                  <thead style="border:2px">
+                    <tr>
+                      <th width="33.3%">温度1：{{result.temperature1.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度2：{{result.temperature2.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度3：{{result.temperature3.slice(0,5)}}℃</th>
+                    </tr>
+                  </thead>
+                </table>
               </div>
               <div ng-switch-when="2">
-                温度1：{{result.temperature1}}℃,温度2：{{result.temperature2}}℃,温度3：{{result.temperature3}}℃
+                <table width="100%" style="text-align:center;vertical-align:center">
+                  <thead style="border:2px">
+                    <tr>
+                      <th width="33.3%">温度1：{{result.temperature1.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度2：{{result.temperature2.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度3：{{result.temperature3.slice(0,5)}}℃</th>
+                    </tr>
+                  </thead>
+                </table>
               </div>
               <div ng-switch-when="3">
-                温度1：{{result.temperature1}}℃,温度2：{{result.temperature2}}℃,温度3：{{result.temperature3}}℃
+                <table width="100%" style="text-align:center;vertical-align:center">
+                  <thead style="border:2px">
+                    <tr>
+                      <th width="33.3%">温度1：{{result.temperature1.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度2：{{result.temperature2.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度3：{{result.temperature3.slice(0,5)}}℃</th>
+                    </tr>
+                  </thead>
+                </table>
               </div>
-              <div ng-switch-when="4">                
-                温度：{{result.temperature}}℃,湿度：{{result.humid}},压力：{{result.pressure}},过氧化氢浓度高：{{result.H2O2h}},过氧化氢浓度低：{{result.H2O2l}}
+              <div ng-switch-when="4">
+                <table width="100%" style="text-align:center;vertical-align:center">
+                  <thead style="border:2px">
+                    <tr>
+                      <th width="15%">温度</th>
+                      <th width="15%">湿度</th>
+                      <th width="15%">压力</th>
+                      <th width="27.5%">过氧化氢浓度高</th>
+                      <th width="27.5%">过氧化氢浓度低</th>
+                    </tr>
+                    <tr>
+                      <th>{{result.temperature}}℃</th>
+                      <th>{{result.humid}}</th>
+                      <th>{{result.pressure}}</th>
+                      <th>{{result.H2O2h}}</th>
+                      <th>{{result.H2O2l}}</th>
+                    </tr>
+                  </thead>
+                </table>                
               </div>
               <div ng-switch-when="5">
-                温度：{{result.temperature}}℃,湿度：{{result.humid}},压力：{{result.pressure}},过氧化氢浓度高：{{result.H2O2h}},过氧化氢浓度低：{{result.H2O2l}}
+                <table width="100%" style="text-align:center;vertical-align:center">
+                  <thead style="border:2px">
+                    <tr>
+                      <th width="15%">温度</th>
+                      <th width="15%">湿度</th>
+                      <th width="15%">压力</th>
+                      <th width="27.5%">过氧化氢浓度高</th>
+                      <th width="27.5%">过氧化氢浓度低</th>
+                    </tr>
+                    <tr>
+                      <th>{{result.temperature}}℃</th>
+                      <th>{{result.humid}}</th>
+                      <th>{{result.pressure}}</th>
+                      <th>{{result.H2O2h}}</th>
+                      <th>{{result.H2O2l}}</th>
+                    </tr>
+                  </thead>
+                </table> 
               </div>
             </div>
           </td>

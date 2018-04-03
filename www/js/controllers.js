@@ -1144,6 +1144,16 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     }
     $scope.selectinstrument = $scope.insms[3].id
     $scope.selectcabin = $scope.cabins[1].id
+    ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "2"}).then(
+          function(data){
+            console.log("PROCESS",data)
+            $scope.result.temperature = data[0]
+            $scope.result.humid = data[1]
+            $scope.result.pressure = data[2]
+            $scope.result.H2O2h = data[3]
+            $scope.result.H2O2l = data[4]
+          },function(e){
+    });
   })
 
   $scope.insms=[
@@ -1178,7 +1188,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
           },function(e){
         });
       }
-      if (cabinId == 2) {
+      if (cabinId == 2 || cabinId == -1) {
         ItemInfo.GetNewIsolatorEnv({"IsolatorId": "Iso_Process","CabinId": "2"}).then(
           function(data){
             console.log("PROCESS",data)
@@ -3685,7 +3695,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     {"id":2,"name":"终端IP"},
     {"id":3,"name":"终端名字"},
     {"id":4,"name":"终端用户ID"},
-    {"id":5,"name":"终端用户身份证号"},
+    {"id":5,"name":"终端用户身份证"},
     {"id":6,"name":"参数描述"},
    ]
     $scope.incubator={
