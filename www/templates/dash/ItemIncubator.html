@@ -48,11 +48,11 @@
                 <td>
                   <div style="width:40px;word-wrap:break-word;">
                     <!-- <h3 style="cursor:pointer;font-size: 10px" ng-click="showmenu('{{incubatorinfo.IncubatorId}}')"> 查看</h3> -->
-                    <div id="{{incubatorinfo.IncubatorId}}" style="text-align:center;vertical-align:middle; border:none; border-top:none">
+                    <div  style="text-align:center;vertical-align:middle; border:none; border-top:none">
                       <ul>
-                        <li><button style="text-align:center;vertical-align:middle;cursor:pointer;font-size: 10px" ng-click="toResult(sampleinfo.ObjectNo,sampleinfo.ObjIncuSeq,sampleinfo.ObjCompany)">操作</button></li>
-                        <li><button style="text-align:center;vertical-align:middle;cursor:pointer;font-size: 10px" ng-click="toResult(sampleinfo.ObjectNo,sampleinfo.ObjIncuSeq,sampleinfo.ObjCompany)">环境</button></li>
-                        <li><button style="text-align:center;vertical-align:middle;cursor:pointer;font-size: 10px" ng-click="toResult(sampleinfo.ObjectNo,sampleinfo.ObjIncuSeq,sampleinfo.ObjCompany)">故障</button></li>
+                        <li><button style="text-align:center;vertical-align:middle;cursor:pointer;font-size: 10px" ng-click="toOpra(incubatorinfo.IncubatorId)">操作</button></li>
+                        <li><button style="text-align:center;vertical-align:middle;cursor:pointer;font-size: 10px" ng-click="toEnvi(incubatorinfo.IncubatorId)">环境</button></li>
+                        <li><button style="text-align:center;vertical-align:middle;cursor:pointer;font-size: 10px" ng-click="toResult(incubatorinfo.IncubatorId)">故障</button></li>
                       </ul>
                     </div>
                   </div>

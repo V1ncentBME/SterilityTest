@@ -3182,7 +3182,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 .controller('ConfigCtrl', function($scope) {})
 
 //环境-李泽南
-.controller('EnvIncubatorCtrl',['$scope','$state','ItemInfo', function($scope,$state,ItemInfo) {
+.controller('EnvIncubatorCtrl',['$scope','$state','ItemInfo','Storage', function($scope,$state,ItemInfo,Storage) {
   $scope.contents=[{"background":"#CCCCCC"},{"background-color":"#EBEBEB"}]
   $scope.revisioninfos=[
     {"id":1,"name":"更新时间"},
@@ -3192,7 +3192,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     {"id":5,"name":"终端用户身份证号"}
   ]
   $scope.envincubator={
-    "IncubatorId": null,
+    "IncubatorId": Storage.get('IncubatorId'),
     "MeaTimeS": null,
     "MeaTimeE": null,
     "Temperature": null,
@@ -3214,6 +3214,11 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     },function(e){
 
     });
+
+  $scope.$on('$ionicView.afterLeave', function() {
+    Storage.rm('IncubatorId');
+    
+  });
 }])
 
 //样品记录表-李泽南
@@ -3579,7 +3584,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 
 
 // 无菌隔离器-李泽南
-.controller('ItemIsolatorCtrl',['$scope','$state','$ionicModal','ItemInfo','Encryption',function($scope,$state,$ionicModal,ItemInfo,Encryption){
+.controller('ItemIsolatorCtrl',['$scope','$state','$ionicModal','ItemInfo','Encryption','Storage',function($scope,$state,$ionicModal,ItemInfo,Encryption,Storage){
   $scope.p="jump";
   $scope.contents=[{"background-color":"#CCCCCC"},{"background-color":"#EBEBEB"}]
   $scope.revisioninfos=[
@@ -3684,11 +3689,19 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   $scope.sort = function() {
     $scope.openModal();
   }
-  
- 
+  $scope.toEnvi = function (IsolatorId) {
+      Storage.set('IsolatorId',IsolatorId);
+      // Storage.set('TestId',TestId)
+      $state.go('tab.envisolator');
+  }
+  $scope.toOpra = function (IsolatorId) {
+      Storage.set('EquipmentId',IsolatorId);
+      // Storage.set('TestId',TestId)
+      $state.go('tab.opequipment');
+  }
 }])
 // 培养箱-李泽南
-.controller('ItemIncubatorCtrl',['$scope','$state','ItemInfo',function($scope,$state,ItemInfo){
+.controller('ItemIncubatorCtrl',['$scope','$state','ItemInfo','Storage',function($scope,$state,ItemInfo,Storage){
    $scope.contents=[{"background":"#CCCCCC"},{"background-color":"#EBEBEB"}]
    $scope.revisioninfos=[
     {"id":1,"name":"更新时间"},
@@ -3748,9 +3761,22 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       }
     },function(e){
     });
+
+    $scope.toOpra = function (IncubatorId) {
+      Storage.set('EquipmentId',IncubatorId);
+      // Storage.set('TestId',TestId)
+      $state.go('tab.opequipment');
+    }
+
+    $scope.toEnvi = function (IncubatorId) {
+      Storage.set('IncubatorId',IncubatorId);
+      // Storage.set('TestId',TestId)
+      $state.go('tab.envincubator');
+    }
+
 }])
 // 无菌隔离器环境-李泽南
-.controller('EnvIsolatorCtrl', ['$scope','$state','ItemInfo',function($scope,$state,ItemInfo) {
+.controller('EnvIsolatorCtrl', ['$scope','$state','ItemInfo','Storage',function($scope,$state,ItemInfo,Storage) {
     $scope.contents=[{"background":"#CCCCCC"},{"background-color":"#EBEBEB"}]
     $scope.revisioninfos=[
       {"id":1,"name":"更新时间"},
@@ -3760,7 +3786,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       {"id":5,"name":"终端用户身份证号"}
     ]
     $scope.envisolator={
-    "IsolatorId": null,
+    "IsolatorId": Storage.get('IsolatorId'),
     "CabinId": null,
     "MeaTimeS": null,
     "MeaTimeE": null,
@@ -3785,6 +3811,11 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       },function(e){
 
       });
+
+    $scope.$on('$ionicView.afterLeave', function() {
+      Storage.rm('IsolatorId');
+    
+    });
 }])
 // 检测结果-李泽南
 .controller('ResTestResultCtrl',['$scope','$state','Result','Storage','$ionicPopup',function($scope,$state,Result,Storage,$ionicPopup) {
@@ -4126,7 +4157,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
 
 }])
 // 仪器操作-李泽南
-.controller('OpEquipmentCtrl',['$scope','$state','Operation','$ionicHistory', function($scope,$state,Operation,$ionicHistory) {
+.controller('OpEquipmentCtrl',['$scope','$state','Operation','$ionicHistory','Storage', function($scope,$state,Operation,$ionicHistory,Storage) {
   $scope.contents=[{"background":"#CCCCCC"},{"background-color":"#EBEBEB"}]
   $scope.others=[
     {"id":1,"name":"操作时间"},
@@ -4142,7 +4173,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     {"id":5,"name":"终端用户身份证号"}
   ]
   $scope.opequipment={
-    "EquipmentId": null,
+    "EquipmentId": Storage.get('EquipmentId'),
     "OperationNo": null,
     "OperationTimeS": null,
     "OperationTimeE": null,
@@ -4174,6 +4205,12 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   $scope.onClickBackward = function(){
     $ionicHistory.goBack();
   };
+
+  $scope.$on('$ionicView.afterLeave', function() {
+    Storage.rm('EquipmentId');
+    
+  });
+
 }])
 
 .controller('AuthorityCtrl',['$scope',function($scope) {

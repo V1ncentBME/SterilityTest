@@ -2,10 +2,10 @@
    <ion-nav-buttons side="left">
       <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/dash">返回</a>
     </ion-nav-buttons>
-    <ion-nav-buttons side="right">
+    <!-- <ion-nav-buttons side="right">
       <a class="button" href="#/tab/dash/envisolator" has-Permission="{{p}}">环境</a>
       <a class="button" href="#/tab/dash/opequipment">操作</a>
-    </ion-nav-buttons>
+    </ion-nav-buttons> -->
   <ion-content>
   <ion-scroll direction="xy">
   <div class="row" style="height:40px">
@@ -15,24 +15,25 @@
   <div>
         <table style="width:100%;text-align:center;vertical-align:center" >
             <thead style="background-color:#8B7E66;border:2px;color:white">
-              <tr>
-                <th width="20%">隔离器编号</th>
-                <th width="20%">生产日期</th>
-                <th width="20%">生产厂家</th>
+              <tr height="50px">
+                <th style="text-align:center;vertical-align:middle;" width="20%">隔离器编号</th>
+                <th style="text-align:center;vertical-align:middle;" width="20%">生产日期</th>
+                <th style="text-align:center;vertical-align:middle;" width="15%">供应商</th>
                 <!-- <th>参数描述</th> -->
-                <th><select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
+                <th style="text-align:center;vertical-align:middle;" width="35%"><select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
                     <!-- <option selected revisioninfo.id="6">参数描述</option> -->
                   </select>
                 </th>
+                <th style="text-align:center;vertical-align:middle;" width="10%">仪器信息</th>
               </tr>
             </thead>
             <tbody>
-              <tr  ng-style="contents[$index%2]" ng-repeat="isolatorinfo in isolatorinfos|orderObjectBy:field:reverse|filter:query">
-                <td>{{isolatorinfo.IsolatorId}}</td>
-                <td>{{isolatorinfo.ProductDay.slice(0,10)}}</td>
-                <td>{{isolatorinfo.EquipPro}}</td>
+              <tr height="50px" ng-style="contents[$index%2]" ng-repeat="isolatorinfo in isolatorinfos|orderObjectBy:field:reverse|filter:query">
+                <td style="text-align:center;vertical-align:middle;" >{{isolatorinfo.IsolatorId}}</td>
+                <td style="text-align:center;vertical-align:middle;" >{{isolatorinfo.ProductDay.slice(0,10)}}</td>
+                <td style="text-align:center;vertical-align:middle;" >{{isolatorinfo.EquipPro}}</td>
                 <!-- <td>{{isolatorinfo.InsDescription}}</td> -->
-                <td>
+                <td style="text-align:center;vertical-align:middle;" >
                   <div ng-switch="selectrevision">
                     <div ng-switch-when="1">{{isolatorinfo.revDateTime}}</div>
                     <div ng-switch-when="2">{{isolatorinfo.TerminalIP}}</div>
@@ -42,7 +43,18 @@
                     <div ng-switch-when="6">{{isolatorinfo.InsDescription}}</div>
                   </div>
                 </td>
-
+                <td>
+                  <div style="width:40px;word-wrap:break-word;">
+                    <!-- <h3 style="cursor:pointer;font-size: 10px" ng-click="showmenu('{{incubatorinfo.IncubatorId}}')"> 查看</h3> -->
+                    <div  style="text-align:center;vertical-align:middle; border:none; border-top:none">
+                      <ul>
+                        <li><button style="text-align:center;vertical-align:middle;cursor:pointer;font-size: 10px" ng-click="toOpra(isolatorinfo.IsolatorId)">操作</button></li>
+                        <li><button style="text-align:center;vertical-align:middle;cursor:pointer;font-size: 10px" ng-click="toEnvi(isolatorinfo.IsolatorId)">环境</button></li>
+                        <!-- <li><button style="text-align:center;vertical-align:middle;cursor:pointer;font-size: 10px" ng-click="toResult(sampleinfo.ObjectNo,sampleinfo.ObjIncuSeq,sampleinfo.ObjCompany)">故障</button></li> -->
+                      </ul>
+                    </div>
+                  </div>
+                </td> 
               </tr>
             </tbody>
         
