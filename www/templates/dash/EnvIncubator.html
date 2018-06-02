@@ -9,11 +9,11 @@
   	 <div>
         <table style="width:100%;text-align:center;vertical-align:center">
             <thead style="background-color:#8B7E66;border:2px;color:white">
-	            <tr>
-	            	<th>培养箱编号</th>
-	            	<th>测量时间</th>
-	            	<th>温度</th>
-	            	<th>
+	            <tr height="50px">
+	            	<th style="text-align:center;vertical-align:middle;" >培养箱编号</th>
+	            	<th style="text-align:center;vertical-align:middle;" >测量时间</th>
+	            	<th style="text-align:center;vertical-align:middle;" >温度</th>
+	            	<th style="text-align:center;vertical-align:middle;" >
                   <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
                     <option selected value="">更新记录</option>
                   </select>
@@ -21,11 +21,11 @@
 	          	</tr>
             </thead>
             <tbody>
-            	<tr ng-style="contents[$index%2]" ng-repeat="envincubatorinfo in envincubatorinfos">
-                <td>{{envincubatorinfo.IncubatorId}}</td>
-                <td>{{envincubatorinfo.MeaTime}}</td>
-                <td>{{envincubatorinfo.Temperature}}</td>
-                <td>
+            	<tr height="50px" ng-style="contents[$index%2]" ng-repeat="envincubatorinfo in envincubatorinfos">
+                <td style="text-align:center;vertical-align:middle;" >{{envincubatorinfo.IncubatorId}}</td>
+                <td style="text-align:center;vertical-align:middle;" >{{envincubatorinfo.MeaTime}}</td>
+                <td style="text-align:center;vertical-align:middle;" >{{envincubatorinfo.Temperature}}</td>
+                <td style="text-align:center;vertical-align:middle;" >
                   <div ng-switch="selectrevision">
                     <div ng-switch-when="1">{{envincubatorinfo.revDateTime}}</div>
                     <div ng-switch-when="2">{{envincubatorinfo.TerminalIP}}</div>

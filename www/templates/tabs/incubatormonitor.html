@@ -10,25 +10,25 @@
     <div>
        <table style="width:100%;text-align:center;vertical-align:center">
             <thead style="background-color:#8B7E66;border:2px;color:white">
-              <tr>
-                <th>检测编号</th>
-                <th>样品</th>
-                <th>已培养时间</th>
-                <th>剩余培养时间</th>
-                <th>查看</th>
-                <th>紧急停止</th>
+              <tr height="50px" >
+                <th width="15%" style="text-align:center;vertical-align:middle;">检测编号</th>
+                <th width="12%" style="text-align:center;vertical-align:middle;">样品</th>
+                <th width="20%" style="text-align:center;vertical-align:middle;">已培养时间</th>
+                <th width="20%" style="text-align:center;vertical-align:middle;">剩余时间</th>
+                <th width="10%" style="text-align:center;vertical-align:middle;">查看</th>
+                <th width="13%" style="text-align:center;vertical-align:middle;">紧急停止</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-style="contents[$index%2]" ng-repeat="resultinfo in resultinfos|orderObjectBy:'CollectStart':true|filter:query">
-                <td>{{resultinfo.TestId}}</td>
-                <td>{{resultinfo.ObjectName}}</td>
-                <td>{{resultinfo.time1}}</td>
-                <td>{{resultinfo.time2}}</td>
-                <td>
+              <tr height="50px" ng-style="contents[$index%2]" ng-repeat="resultinfo in resultinfos|orderObjectBy:'CollectStart':true|filter:query">
+                <td style="text-align:center;vertical-align:middle;">{{resultinfo.TestId.slice(4)}}</td>
+                <td style="text-align:center;vertical-align:middle;">{{resultinfo.ObjectName}}</td>
+                <td style="text-align:center;vertical-align:middle;">{{resultinfo.time1}}</td>
+                <td style="text-align:center;vertical-align:middle;">{{resultinfo.time2}}</td>
+                <td style="text-align:center;vertical-align:middle;">
                   <button style="background-color:#63B8FF;color:white" ng-click="GoMachineView('{{resultinfo.TestId}}')">查看</button>
                 </td>
-                <td>
+                <td style="text-align:center;vertical-align:middle;">
                   <button class="button button-standard" on-touch="" data-ng-disabled="!isStopTest(resultinfo.e)">  
                     {{cashBtnName || 'stop'}}  
                   </button>

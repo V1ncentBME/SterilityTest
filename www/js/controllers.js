@@ -3205,6 +3205,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     "GetTemperature": 1,
     "GetRevisionInfo": 1
   }
+  $scope.selectrevision = $scope.revisioninfos[0].id;
   $scope.envincubatorinfos={};
   ItemInfo.GetIncubatorEnv($scope.envincubator).then(
     function(data){
@@ -3234,7 +3235,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     //{"id":7,"name":"取样器具"},
     //{"id":8,"name":"取样量"},
     //{"id":9,"name":"分样方法"},
-    {"id":6,"name":"样品容器"},
+    {"id":6,"name":"状态"},
     {"id":7,"name":"注意事项"},
     {"id":8,"name":"更新时间"},
     {"id":9,"name":"终端IP"},
@@ -3260,13 +3261,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         "SamplingPeople": null,
         "SamplingTimeS": null,
         "SamplingTimeE": null,
-        "SamplingWay": null,
-        "SamplingTool": null,
-        "SamAmount": null,
-        "DevideWay": null,
-        "SamContain": null,
         "Warning": null,
-        "SamSave": null,
+        "Status":null,
         "ReDateTimeS": null,
         "ReDateTimeE": null,
         "ReTerminalIP": null,
@@ -3277,13 +3273,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         "GetObjectType": 1,
         "GetSamplingPeople": 1,
         "GetSamplingTime": 1,
-        "GetSamplingWay": 1,
-        "GetSamplingTool": 1,
-        "GetSamAmount": 1,
-        "GetDevideWay": 1,
-        "GetSamContain": 1,
         "GetWarning": 1,
-        "GetSamSave": 1,
+        "GetStatus": 1,
         "GetRevisionInfo": 1
       };
       $scope.sampleinfos={};
@@ -3803,6 +3794,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     "GetRevisionInfo": 1
     };
     $scope.envisolatorinfos={};
+    $scope.selectrevision = $scope.revisioninfos[0].id;
     ItemInfo.GetIsolatorEnv($scope.envisolator).then(
       function(data){
         for(var i=0;i<data.length;i++){
@@ -3958,8 +3950,9 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         });
   });
 
-   $scope.GoMachineView = function(){
-    $state.go('tab.machineview');   
+   $scope.GoMachineView = function(TestId){
+    $state.go('tab.machineview'); 
+    Storage.set('TestId', TestId)  
   }
      
   $scope.$on('$ionicView.afterLeave', function() {
@@ -3969,30 +3962,75 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   });
 }])
 
-.controller('MachineViewCtrl',['$scope','$ionicSlideBoxDelegate','$ionicNavBarDelegate','Pics','$state' ,function($scope,$ionicSlideBoxDelegate,$ionicNavBarDelegate,Pics,$state) {
-  $scope.Pics = Pics.all();
-  $scope.remove = function(Pic) {
-    Pics.remove(chat);
-  };
+.controller('MachineViewCtrl',['$scope','$ionicSlideBoxDelegate','$ionicNavBarDelegate','Pics','$state','Result','Storage' ,function($scope,$ionicSlideBoxDelegate,$ionicNavBarDelegate,Pics,$state,Result,Storage) {
+  
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.result = {
+      "TestId": Storage.get('TestId'),
+      "TubeNo": null,
+      "PictureId": null,
+      "CameraTimeS": null,
+      "CameraTimeE": null,
+      "ImageAddress": null,
+      "AnalResult": null,
+      "GetCameraTime": 1,
+      "GetImageAddress": 1,
+      "GetAnalResult": 1
+    }
+    console.log($scope.result)
+    $scope.resultinfos={}
+    $scope.Pics = []
+    Result.GetTestPictures($scope.result).then(
+      function(data){
+        $scope.resultinfos = data
+        console.log('resultinfos',$scope.resultinfos)
+        $scope.Pics = []
+        angular.forEach($scope.resultinfos, function (value, key) {
+          if (value.TubeNo == 1) {
+            $scope.Pics.push(
+              { "Address" : "http://121.43.107.106:8063" + value.ImageAddress,
+                "Result" : value.AnalResult,
+                "Time": value.CameraTime
+              }
+            )
+          }   
+        });
+        console.log("Pics", $scope.Pics)
+      },function(e){
+    });
+
+  })
+
+  $scope.getReult = function(TubeNo)  {
+    $scope.Pics = []
+    console.log("TubeNo", TubeNo)
+    angular.forEach($scope.resultinfos, function (value, key) {
+      if (value.TubeNo == TubeNo) {
+        $scope.Pics.push(
+          { "Address" : "http://121.43.107.106:8063" + value.ImageAddress,
+            "Result" : value.AnalResult,
+            "Time": value.CameraTime
+          }
+        )
+      }   
+    });
+    console.log("Pics", $scope.Pics)
+  }
+
+  
   $scope.goBack = function() {
     $ionicNavBarDelegate.back();
   };
-  $scope.incubators=[
-    {"id":1,"name":"培养箱1"},
-    {"id":2,"name":"培养箱2"},
-    {"id":3,"name":"培养箱3"},
-    {"id":4,"name":"培养箱4"},
-    {"id":5,"name":"培养箱5"},
-    {"id":6,"name":"培养箱6"}
-    ]
-    $scope.testcubes=[
+  
+  $scope.testtubes=[
     {"id":1,"name":"试管1"},
     {"id":2,"name":"试管2"},
     {"id":3,"name":"试管3"},
     {"id":4,"name":"试管4"},
-    {"id":4,"name":"试管5"},
-    {"id":5,"name":"试管6"}
-    ]
+    {"id":5,"name":"试管5"},
+    {"id":6,"name":"试管6"}
+  ]
+  $scope.selecttube = 1
   $scope.slideIndex = 0;
 
   $scope.slideChanged = function(index) {
@@ -4019,6 +4057,10 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   $scope.toMonitor = function(){
     $state.go('tab.monitor');   
   }
+  
+  $scope.$on('$ionicView.afterLeave', function() {
+    Storage.rm('TestId');
+  });
         
 }])
 
@@ -4116,7 +4158,10 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   $scope.toMonitor = function(){
     $state.go('tab.monitor');   
   }
-        
+  
+  $scope.$on('$ionicView.afterLeave', function() {
+    Storage.rm('TestId');
+  });      
 }])
 
 .controller('BreakDownCtrl', ['$scope','$state','Result', function($scope,$state,Result) {
