@@ -108,8 +108,12 @@
       </tr> -->
       <tr>
         <th style="border-right:1px solid #000;" class="tablea">
-          <button style="background-color:#63B8FF;color:white" ng-click="">有菌</button>
-          <button style="background-color:#63B8FF;color:white" ng-click="">无菌</button>
+          <!-- <button style="background-color:#63B8FF;color:white" ng-click="">有菌</button>
+          <button style="background-color:#63B8FF;color:white" ng-click="">无菌</button> -->
+          <ion-slide ng-repeat="Pic in Pics">
+            <div style="text-align:center;table-layout:fixed;word-break:break-all;">机器视觉结果：{{Pic.Result}}</div>
+            <div style="text-align:center;table-layout:fixed;word-break:break-all;">顶空分析结果：{{Pic.Result}}</div>
+          </ion-slide>
         </th>
       </tr>
     </table>

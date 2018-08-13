@@ -1,0 +1,62 @@
+<ion-view view-title="无菌检测试剂信息表">
+   <ion-nav-buttons side="left">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/dash">返回</a>
+   </ion-nav-buttons>
+   <!-- <ion-nav-buttons side="right">
+      <button class="button" ng-click="openModal()">录入新试剂</button>
+    </ion-nav-buttons> -->
+  <ion-content>
+  <ion-scroll direction="xy">
+    <ion-refresher pulling-text="刷新中" on-refresh="doRefresh()">
+    </ion-refresher>
+    <div>
+        <table style="width:100%;text-align:center;vertical-align:center">
+            <thead style="background-color:#8B7E66;border:2px;color:white">
+              <tr height="50px">
+                <th style="text-align:center;vertical-align:middle;" width="25%">试剂批号</th>
+                <th style="text-align:center;vertical-align:middle;" width="25%">试剂来源</th>
+                <!-- <th>试剂名字</th> -->
+                <!-- <th>
+                  <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectother" ng-options="other.id as other.name for other in others">
+                    <option selected value="">试剂来源</option>
+                  </select>
+                </th> -->
+                <th style="text-align:center;vertical-align:middle;" > 
+                  <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
+                    <!-- <option selected id="6" ></option> -->
+                  </select>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr height="50px" ng-style="contents[$index%2]" ng-repeat="reagentinfo in reagentinfos">
+                <td style="text-align:center;vertical-align:middle;" >{{reagentinfo.ReagentId}}</td>
+                <td style="text-align:center;vertical-align:middle;" > {{reagentinfo.ReagentSource}}</td>
+                <!-- <td>{{reagentinfo.ReagentName}}</td> -->
+                <!-- <td>
+                  <div ng-switch="selectother">
+                    <div ng-switch-when="1">{{reagentinfo.ReagentType}}</div>
+                    <div ng-switch-when="2">{{reagentinfo.ExpiryDay}}</div>
+                    <div ng-switch-when="3">{{reagentinfo.ReagentName}}</div>
+                    <div ng-switch-when="4">{{reagentinfo.ReagentTest}}</div>
+                    <div ng-switch-when="5">{{reagentinfo.SaveCondition}}</div>
+                    <div ng-switch-when="6">{{reagentinfo.Description}}</div>
+                  </div>
+                </td> -->
+                <td style="text-align:center;vertical-align:middle;" >
+                   <div ng-switch="selectrevision">
+                    <div ng-switch-when="1">{{reagentinfo.revDateTime}}</div>
+                    <div ng-switch-when="2">{{reagentinfo.TerminalIP}}</div>
+                    <div ng-switch-when="3">{{reagentinfo.TerminalName}}</div>
+                    <div ng-switch-when="4">{{reagentinfo.revUserId}}</div>
+                    <div ng-switch-when="5">{{reagentinfo.revIdentify}}</div>
+                    <div ng-switch-when="6">{{reagentinfo.ReagentName}}</div>
+                </td>
+              </tr>
+            </tbody>
+        
+        </table>
+     </div>
+  </ion-scroll>
+  </ion-content>
+</ion-view>

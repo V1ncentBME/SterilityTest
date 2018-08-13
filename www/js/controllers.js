@@ -588,13 +588,35 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     }
     $scope.monitorlist={}
     Result.GetResult($scope.result).then(
-      function(data){
-      
+      function(data){      
        $scope.monitorlist=data;
       console.log("monitorlist",$scope.monitorlist);
     },function(e){
     });
-
+    $scope.break={
+      "BreakId": null,
+      "BreakTimeS": null,
+      "BreakTimeE": null,
+      "BreakEquip": 'Iso_Process',
+      "BreakPara": null,
+      "BreakValue": null,
+      "BreakReason": null,
+      "ResponseTimeS": 1,
+      "ResponseTimeE": null,
+      "GetBreakTime": 1,
+      "GetBreakEquip": 1,
+      "GetBreakPara": 1,
+      "GetBreakValue": 1,
+      "GetBreakReason": 1,
+      "GetResponseTime": 1
+    }
+    $scope.breakdowninfo={}    
+    Result.GetBreakDownInfo($scope.break).then(
+      function(r){
+        $scope.breakdowninfo = r;
+        console.log("break",$scope.breakdowninfo);
+      },function(e){
+    });
   });
   
   var timer =  $interval(function(){
@@ -620,7 +642,7 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       }; 
 
   $scope.isStopTest =function (item) {  
-      if (item == '紧急停止') {
+      if ($scope.breakdowninfo.length > 0) {
         return 1
       } else {
         return 0
@@ -635,6 +657,10 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     Storage.set('TestType',TestType);
     Storage.set('TestId',TestId)
     $state.go('tab.task');
+  }
+
+  $scope.still = function () {
+    
   }
 
   $scope.$on('$ionicView.afterLeave',function(){
@@ -717,6 +743,30 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         console.log("monitorlist",$scope.monitorlist);
       },function(e){
     });
+    $scope.break={
+      "BreakId": null,
+      "BreakTimeS": null,
+      "BreakTimeE": null,
+      "BreakEquip": 'Iso_Collect',
+      "BreakPara": null,
+      "BreakValue": null,
+      "BreakReason": null,
+      "ResponseTimeS": 1,
+      "ResponseTimeE": null,
+      "GetBreakTime": 1,
+      "GetBreakEquip": 1,
+      "GetBreakPara": 1,
+      "GetBreakValue": 1,
+      "GetBreakReason": 1,
+      "GetResponseTime": 1
+    }
+    $scope.breakdowninfo={}    
+    Result.GetBreakDownInfo($scope.break).then(
+      function(r){
+        $scope.breakdowninfo = r;
+        console.log("break",$scope.breakdowninfo);
+      },function(e){
+    });
   });
   
   var timer =  $interval(function(){
@@ -741,8 +791,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         return show1;
       }; 
 
-  $scope.isStopTest =function (item) {  
-      if (item == '紧急停止') {
+  $scope.isStopTest =function () {  
+      if ($scope.breakdowninfo.length > 0) {
         return 1
       } else {
         return 0
@@ -1155,6 +1205,15 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
           },function(e){
     });
   })
+
+  var videoObject = {
+          container: '.video',//“#”代表容器的ID，“.”或“”代表容器的class
+          variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
+          autoplay:true,//自动播放
+          live:true,//直播视频形式
+          video:'rtmp://121.43.107.106:1935/live/stream'//视频地址
+        };
+  var player=new ckplayer(videoObject);
 
   $scope.insms=[
     {"id":1,"name":"培养箱1"},
@@ -3690,6 +3749,11 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       // Storage.set('TestId',TestId)
       $state.go('tab.opequipment');
   }
+  $scope.toBreak = function (IsolatorId) {
+      Storage.set('EquipId',IsolatorId);
+      // Storage.set('TestId',TestId)
+      $state.go('tab.breakdown');
+    }
 }])
 // 培养箱-李泽南
 .controller('ItemIncubatorCtrl',['$scope','$state','ItemInfo','Storage',function($scope,$state,ItemInfo,Storage){
@@ -3763,6 +3827,12 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       Storage.set('IncubatorId',IncubatorId);
       // Storage.set('TestId',TestId)
       $state.go('tab.envincubator');
+    }
+
+    $scope.toBreak = function (IncubatorId) {
+      Storage.set('EquipId',IncubatorId);
+      // Storage.set('TestId',TestId)
+      $state.go('tab.breakdown');
     }
 
 }])
@@ -3979,12 +4049,13 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     }
     console.log($scope.result)
     $scope.resultinfos={}
+    $scope.TopAnalysis={}
     $scope.Pics = []
     Result.GetTestPictures($scope.result).then(
       function(data){
         $scope.resultinfos = data
         console.log('resultinfos',$scope.resultinfos)
-        $scope.Pics = []
+        
         angular.forEach($scope.resultinfos, function (value, key) {
           if (value.TubeNo == 1) {
             $scope.Pics.push(
@@ -3998,7 +4069,34 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         console.log("Pics", $scope.Pics)
       },function(e){
     });
-
+    $scope.TopAnalysis={
+      "TestId":  Storage.get('TestId'),
+      "TubeNo": null,
+      "PictureId": null,
+      "CameraTimeS": null,
+      "CameraTimeE": null,
+      "AnalResult": null,
+      "GetCameraTime": 1,
+      "GetAnalResult": 1
+    }
+    Result.GetTopAnalysis($scope.result).then(
+      function(data){
+        $scope.TopAnalysis = data
+        console.log('TopAnalysis',$scope.TopAnalysis)
+        
+        // angular.forEach($scope.resultinfos, function (value, key) {
+        //   if (value.TubeNo == 1) {
+        //     $scope.Pics.push(
+        //       { "Address" : "http://121.43.107.106:8063" + value.ImageAddress,
+        //         "Result" : value.AnalResult,
+        //         "Time": value.CameraTime
+        //       }
+        //     )
+        //   }   
+        // });
+        console.log("Pics", $scope.Pics)
+      },function(e){
+    });
   })
 
   $scope.getReult = function(TubeNo)  {
@@ -4025,10 +4123,10 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   $scope.testtubes=[
     {"id":1,"name":"试管1"},
     {"id":2,"name":"试管2"},
-    {"id":3,"name":"试管3"},
-    {"id":4,"name":"试管4"},
-    {"id":5,"name":"试管5"},
-    {"id":6,"name":"试管6"}
+    {"id":3,"name":"试管3"}
+    // {"id":4,"name":"试管4"},
+    // {"id":5,"name":"试管5"},
+    // {"id":6,"name":"试管6"}
   ]
   $scope.selecttube = 1
   $scope.slideIndex = 0;
@@ -4080,12 +4178,13 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
       "GetAnalResult": 1
     }
     $scope.resultinfos={}
+    $scope.TopAnalysis={}
     $scope.Pics = []
     Result.GetTestPictures($scope.result).then(
       function(data){
         $scope.resultinfos = data
         console.log('resultinfos',$scope.resultinfos)
-        $scope.Pics = []
+        
         angular.forEach($scope.resultinfos, function (value, key) {
           if (value.TubeNo == 1) {
             $scope.Pics.push(
@@ -4099,7 +4198,34 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
         console.log("Pics", $scope.Pics)
       },function(e){
     });
-
+    $scope.TopAnalysis={
+      "TestId":  Storage.get('TestId'),
+      "TubeNo": null,
+      "PictureId": null,
+      "CameraTimeS": null,
+      "CameraTimeE": null,
+      "AnalResult": null,
+      "GetCameraTime": 1,
+      "GetAnalResult": 1
+    }
+    Result.GetTopAnalysis($scope.result).then(
+      function(data){
+        $scope.TopAnalysis = data
+        console.log('TopAnalysis',$scope.TopAnalysis)
+        
+        // angular.forEach($scope.resultinfos, function (value, key) {
+        //   if (value.TubeNo == 1) {
+        //     $scope.Pics.push(
+        //       { "Address" : "http://121.43.107.106:8063" + value.ImageAddress,
+        //         "Result" : value.AnalResult,
+        //         "Time": value.CameraTime
+        //       }
+        //     )
+        //   }   
+        // });
+        console.log("Pics", $scope.Pics)
+      },function(e){
+    });
   })
 
   $scope.getReult = function(TubeNo)  {
@@ -4126,10 +4252,8 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   $scope.testtubes=[
     {"id":1,"name":"试管1"},
     {"id":2,"name":"试管2"},
-    {"id":3,"name":"试管3"},
-    {"id":4,"name":"试管4"},
-    {"id":5,"name":"试管5"},
-    {"id":6,"name":"试管6"}
+    {"id":3,"name":"试管3"}
+    
   ]
   $scope.selecttube = 1
   $scope.slideIndex = 0;
@@ -4164,41 +4288,51 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
   });      
 }])
 
-.controller('BreakDownCtrl', ['$scope','$state','Result', function($scope,$state,Result) {
+.controller('BreakDownCtrl', ['$scope','$state','Result','Storage', function($scope,$state,Result,Storage) {
   $scope.contents=[{"background":"#CCCCCC"},{"background-color":"#EBEBEB"}]
   $scope.excepinfos=[
     {"id":1,"name":"异常参数"},
     {"id":2,"name":"异常值"}
   ]
 
-  $scope.breakdown={
-    "BreakId": null,
-    "BreakTimeS": null,
-    "BreakTimeE": null,
-    "BreakEquip": null,
-    "BreakPara": null,
-    "BreakValue": null,
-    "BreakReason": null,
-    "ResponseTimeS": null,
-    "ResponseTimeE": null,
-    "GetBreakTime": 1,
-    "GetBreakEquip": 1,
-    "GetBreakPara": 1,
-    "GetBreakValue": 1,
-    "GetBreakReason": 1,
-    "GetResponseTime": 1
-  }
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.breakdown={
+      "BreakId": null,
+      "BreakTimeS": null,
+      "BreakTimeE": null,
+      "BreakEquip": Storage.get('EquipId'),
+      "BreakPara": null,
+      "BreakValue": null,
+      "BreakReason": null,
+      "ResponseTimeS": null,
+      "ResponseTimeE": null,
+      "GetBreakTime": 1,
+      "GetBreakEquip": 1,
+      "GetBreakPara": 1,
+      "GetBreakValue": 1,
+      "GetBreakReason": 1,
+      "GetResponseTime": 1
+    }
+    console.log('breakdown',$scope.breakdown)
+    $scope.breakdowninfos={};
+    $scope.selectexcep = $scope.excepinfos[0].id
+    Result.GetBreakDownInfo($scope.breakdown).then(
+      function(data){
+        console.log('Result',data)
+        for(var i=0;i<data.length;i++){
+          $scope.breakdowninfos[i]=data[i];
+        }
+      },function(e){
 
-  $scope.breakdowninfos={};
-  Result.GetBreakDownInfo($scope.breakdown).then(
-    function(data){
-      for(var i=0;i<data.length;i++){
-        $scope.breakdowninfos[i]=data[i];
-      }
-    },function(e){
+      });
 
-    });
+  })
 
+  
+
+  $scope.$on('$ionicView.afterLeave', function() {
+    Storage.rm('EquipId');    
+  });
 
 }])
 // 仪器操作-李泽南
@@ -4217,36 +4351,45 @@ angular.module('zjubme.controllers', ['ionic','ngResource','zjubme.services'])
     {"id":4,"name":"终端用户ID"},
     {"id":5,"name":"终端用户身份证号"}
   ]
-  $scope.opequipment={
-    "EquipmentId": Storage.get('EquipmentId'),
-    "OperationNo": null,
-    "OperationTimeS": null,
-    "OperationTimeE": null,
-    "OperationCode": null,
-    "OperationValue": null,
-    "OperationResult": null,
-    "ReDateTimeS": null,
-    "ReDateTimeE": null,
-    "ReTerminalIP": null,
-    "ReTerminalName": null,
-    "ReUserId": null,
-    "ReIdentify": null,
-    "GetOperationTime": 1,
-    "GetOperationCode": 1,
-    "GetOperationValue": 1,
-    "GetOperationResult": 1,
-    "GetRevisionInfo": 1
-  };
-  // 可以根据Storage存值判断iso还是inc，进行筛选
-  $scope.opequipmentinfos={};
-  Operation.GetEquipmentOps($scope.opequipment).then(
-    function(data){
-      for(var i=0;i<data.length;i++){
-        $scope.opequipmentinfos[i]=data[i];
-      }
-    },function(e){
 
-    });
+
+  $scope.$on('$ionicView.enter',function(e) {
+    $scope.opequipment={
+      "EquipmentId": Storage.get('EquipmentId'),
+      "OperationNo": null,
+      "OperationTimeS": null,
+      "OperationTimeE": null,
+      "OperationCode": null,
+      "OperationValue": null,
+      "OperationResult": null,
+      "ReDateTimeS": null,
+      "ReDateTimeE": null,
+      "ReTerminalIP": null,
+      "ReTerminalName": null,
+      "ReUserId": null,
+      "ReIdentify": null,
+      "GetOperationTime": 1,
+      "GetOperationCode": 1,
+      "GetOperationValue": 1,
+      "GetOperationResult": 1,
+      "GetRevisionInfo": 1
+    };
+    // 可以根据Storage存值判断iso还是inc，进行筛选
+    $scope.opequipmentinfos={};
+    $scope.selectother = $scope.others[0].id
+    $scope.selectrevision = $scope.revisioninfos[0].id
+    Operation.GetEquipmentOps($scope.opequipment).then(
+      function(data){
+        for(var i=0;i<data.length;i++){
+          $scope.opequipmentinfos[i]=data[i];
+        }
+      },function(e){
+
+      });
+
+  })
+  
+
   $scope.onClickBackward = function(){
     $ionicHistory.goBack();
   };

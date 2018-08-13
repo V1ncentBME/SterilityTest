@@ -1,0 +1,22 @@
+[
+	{
+		"catalog":"加工隔离器任务监控",
+		"catalogID":"monitor",
+		"url":"img/icon/monitor.png"
+	},
+	{
+		"catalog":"加注隔离器任务监控",
+		"catalogID":"monitor2",
+		"url":"img/icon/machine_view.png"
+	},
+	{
+		"catalog":"培养箱任务监控",
+		"catalogID":"incubatormonitor",
+		"url":"img/icon/system_control.png"
+	},
+	{
+		"catalog":"环境监测",
+		"catalogID":"envimonitor",
+		"url":"img/icon/Data_input.png"
+	}
+]

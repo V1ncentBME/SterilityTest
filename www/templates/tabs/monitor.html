@@ -15,27 +15,27 @@
   <ion-content>
     <div class="list">
       <div ng-repeat="item in monitorlist">
-        <div class="card" ng-click="GoTask('{{item.TestType}}', '{{item.TestId}}')">
+        <div class="card" >
           <table  cellspacing="0" cellpadding="0" style="border:0; width:100%; border-right:1px solid #000;border-bottom:1px solid #000; text-align:center;vertical-align:center;">
               <tr>
-                <td colspan="4" class="tablea" style="background: white;text-align:center;vertical-align:center;" >样品名：{{item.ObjectName}}</td>
+                <td colspan="4" class="tablea" style="background: white;text-align:center;vertical-align:center;" ng-click="GoTask('{{item.TestType}}', '{{item.TestId}}')">样品名：{{item.ObjectName}}</td>
               </tr>
               <tr>
                 
-                <td width="30%" class="tablea" style="background: white;text-align:center;vertical-align:center;" >正在执行的步骤：{{item.NowStep}}</td>
-                <td width="25%" class="tablea" style="background: white;text-align:center;vertical-align:center;" >上一步骤：{{item.FormerStep}}</td>
-                <td width="25%" class="tablea" style="background: white;text-align:center;vertical-align:center;" >下一步骤：{{item.LaterStep}}</td>
+                <td width="30%" class="tablea" style="background: white;text-align:center;vertical-align:center;" ng-click="GoTask('{{item.TestType}}', '{{item.TestId}}')">正在执行的步骤：{{item.NowStep}}</td>
+                <td width="25%" class="tablea" style="background: white;text-align:center;vertical-align:center;" ng-click="GoTask('{{item.TestType}}', '{{item.TestId}}')">上一步骤：{{item.FormerStep}}</td>
+                <td width="25%" class="tablea" style="background: white;text-align:center;vertical-align:center;" ng-click="GoTask('{{item.TestType}}', '{{item.TestId}}')">下一步骤：{{item.LaterStep}}</td>
                 <td width="20%" class="tablea" style="background: white;">
-                  
-                  <button  class="button button-standard" on-touch="" data-ng-disabled="!isStopTest('紧急停止')">  
+                  <div>
+                    <button  class="button button-standard"  data-ng-disabled="!isStopTest()">  
                     紧急停止 
-                  </button>
-                  
+                    </button>
+                  </div>
                 </td>
               </tr>
             
           </table>
-          <div class="progress">
+          <div class="progress" ng-click="GoTask('{{item.TestType}}', '{{item.TestId}}')">
             <span style="width: {{item.JinDu}}%;"><span>{{item.JinDu}}%</span></span>
           </div>
         </div>

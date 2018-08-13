@@ -1,0 +1,12 @@
+[
+	{
+		"set":"个人信息",
+		"setID":"personalInfo",
+		"url":"img/icon/touxiang.jpg"
+	},
+	{
+		"set":"修改密码",
+		"setID":"changepassword",
+		"url":"img/icon/password.jpg"
+	}	
+]

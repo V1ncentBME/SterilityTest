@@ -1,0 +1,148 @@
+<ion-view view-title="环境监测">
+  <!-- <ion-nav-buttons side="primary">
+   <button class="button button-icon ion-ios-arrow-left" ng-click="nvGoback()"></button>
+  </ion-nav-buttons> -->
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <div>
+       <table  cellspacing="0" cellpadding="0" style="border:0; width:100%; border-right:1px solid #000;border-bottom:1px solid #000; text-align:center;vertical-align:center;">
+        <tr>
+          <td colspan="1"  class="tablea" style="background: white;text-align:center;vertical-align:center;">
+            <select  ng-model="selectinstrument" ng-options="insm.id as insm.name for insm in insms" ng-change="getReult(selectinstrument,-1)">
+              <!-- <option selected value="">仪器信息</option> -->
+            </select>
+          </td>
+          <td colspan="1"  class="tablea" style="background: white;text-align:center;vertical-align:center;">
+            <div ng-switch="selectinstrument">
+                    <div ng-switch-default>待选择</div>
+                    <div ng-switch-when="1">已连接</div>
+                    <div ng-switch-when="2">已连接</div>
+                    <div ng-switch-when="3">已连接</div>
+                    <div ng-switch-when="4">已连接</div>
+                    <div ng-switch-when="5">已连接</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="tablea" style="background: white;text-align:center;vertical-align:center;">
+            <div ng-switch="selectinstrument" >
+              <div ng-switch-when="4">
+                <select  ng-model="selectcabin" ng-options="cabin.id as cabin.name for cabin in cabins" ng-change="getReult(4,selectcabin)">
+                  <!-- <option selected value="">箱体选择</option> -->
+                </select>
+              </div>
+              <div ng-switch-when="5">集菌隔离箱</div>
+              <div ng-switch-when="1">培养箱1</div>
+              <div ng-switch-when="2">培养箱2</div>
+              <div ng-switch-when="3">培养箱3</div>
+              <div ng-switch-default>待选择</div>
+            </div>
+          </td>
+        </tr>
+        </div>
+        <tr>
+          <td colspan="2" class="tablea" style="background: white;text-align:center;vertical-align:center;">
+            <div ng-switch="selectinstrument">
+              <div ng-switch-default>待选择</div>
+              <div ng-switch-when="1">
+                <table width="100%" style="text-align:center;vertical-align:center">
+                  <thead style="border:2px">
+                    <tr>
+                      <th width="33.3%">温度1：{{result.temperature1.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度2：{{result.temperature2.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度3：{{result.temperature3.slice(0,5)}}℃</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div ng-switch-when="2">
+                <table width="100%" style="text-align:center;vertical-align:center">
+                  <thead style="border:2px">
+                    <tr>
+                      <th width="33.3%">温度1：{{result.temperature1.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度2：{{result.temperature2.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度3：{{result.temperature3.slice(0,5)}}℃</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div ng-switch-when="3">
+                <table width="100%" style="text-align:center;vertical-align:center">
+                  <thead style="border:2px">
+                    <tr>
+                      <th width="33.3%">温度1：{{result.temperature1.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度2：{{result.temperature2.slice(0,5)}}℃</th>
+                      <th width="33.3%">温度3：{{result.temperature3.slice(0,5)}}℃</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div ng-switch-when="4">
+                <table width="100%" style="text-align:center;vertical-align:center">
+                  <thead style="border:2px">
+                    <tr>
+                      <th width="15%">温度</th>
+                      <th width="15%">湿度</th>
+                      <th width="15%">压力</th>
+                      <th width="27.5%">过氧化氢浓度高</th>
+                      <th width="27.5%">过氧化氢浓度低</th>
+                    </tr>
+                    <tr>
+                      <th>{{result.temperature}}℃</th>
+                      <th>{{result.humid}}</th>
+                      <th>{{result.pressure}}</th>
+                      <th>{{result.H2O2h}}</th>
+                      <th>{{result.H2O2l}}</th>
+                    </tr>
+                  </thead>
+                </table>                
+              </div>
+              <div ng-switch-when="5">
+                <table width="100%" style="text-align:center;vertical-align:center">
+                  <thead style="border:2px">
+                    <tr>
+                      <th width="15%">温度</th>
+                      <th width="15%">湿度</th>
+                      <th width="15%">压力</th>
+                      <th width="27.5%">过氧化氢浓度高</th>
+                      <th width="27.5%">过氧化氢浓度低</th>
+                    </tr>
+                    <tr>
+                      <th>{{result.temperature}}℃</th>
+                      <th>{{result.humid}}</th>
+                      <th>{{result.pressure}}</th>
+                      <th>{{result.H2O2h}}</th>
+                      <th>{{result.H2O2l}}</th>
+                    </tr>
+                  </thead>
+                </table> 
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <!-- <video width="100%" height="400" controls="controls">
+        <source src="movie.mp4" type="video/mp4" />
+        <source src="movie.ogg" type="video/ogg" />
+        <source src="movie.webm" type="video/webm" />
+        <object data="movie.mp4" width="320" height="240">
+          <embed src="movie.swf" width="320" height="240" />
+        </object>
+      </video> -->
+      <div class="video" style="width: 400px;height: 300px;"></div>
+<script type="text/javascript">
+  var videoObject = {
+    container: '.video',//“#”代表容器的ID，“.”或“”代表容器的class
+    variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
+    autoplay:true,//自动播放
+    live:true,//直播视频形式
+    video:'rtmp://live.hkstv.hk.lxdns.com/live/hks'//视频地址
+  };
+  var player = new ckplayer(videoObject);
+</script>
+  </ion-content>
+</ion-view>

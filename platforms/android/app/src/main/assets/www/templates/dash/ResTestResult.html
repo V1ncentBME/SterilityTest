@@ -1,0 +1,75 @@
+<ion-view view-title="检测结果记录表">
+    <ion-nav-buttons side="left">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/tab/dash">返回</a>
+    </ion-nav-buttons>
+    <!-- <ion-nav-buttons side="right">
+      <a class="button button-clear button-dark" href="#/catalog/machine_view">检测结果数据</a>   	
+    </ion-nav-buttons> -->
+  <ion-content>
+	<div>
+        <table style="width:100%;text-align:center;vertical-align:middle;">
+            <thead style="background-color:#8B7E66;border:2px;color:white">
+	            <tr height="50px">
+	            	<th style="text-align:center;vertical-align:middle;" width="20%">检测编号</th>
+	            	<th style="text-align:center;vertical-align:middle;" width="20%">供应商</th>
+                <!-- <th width="5%">样品名</th> -->
+	            	<th style="text-align:center;vertical-align:middle;" width="40%">
+ 						         <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectother" ng-options="other.id as other.name for other in others">
+                      <option selected id="1">产品编号</option>
+                    </select>
+	            	</th>
+	            	<!-- <th>
+                        <select style="background-color:#8B7E66;border:2px;color:white;text-align:center;vertical-align:center" ng-model="selectrevision" ng-options="revisioninfo.id as revisioninfo.name for revisioninfo in revisioninfos">
+                            <option selected value="">更新记录</option>
+                        </select>
+                    </th> -->
+                  <th style="text-align:center;vertical-align:middle;" width="20%">检测结果</th>
+	          	</tr>
+            </thead>
+            <tbody>
+            	<tr height="50px" ng-style="contents[$index%2]" ng-repeat="resultinfo in resultinfos|orderObjectBy:'CollectStart':true|filter:query">
+                <td style="text-align:center;vertical-align:middle;" >{{resultinfo.TestId.slice(4)}}</td>
+                <td style="text-align:center;vertical-align:middle;" >{{resultinfo.ObjCompany}}</td>
+                <!-- <td></td> -->
+                <td style="text-align:center;vertical-align:middle;" >
+                  <div ng-switch="selectother">
+                    <div ng-switch-when="1">{{resultinfo.ObjectNo}}</div>
+                    <div ng-switch-when="2">{{resultinfo.ObjIncuSeq}}</div>
+                    <div ng-switch-when="3">{{resultinfo.TestType}}</div>
+                    <div ng-switch-when="4">{{resultinfo.TestStand}}</div>
+                    <div ng-switch-when="5">{{resultinfo.TestEquip}}</div>
+                    <div ng-switch-when="6">{{resultinfo.Description}}</div>
+                    <div ng-switch-when="7">{{resultinfo.CollectStart}}</div>
+                    <div ng-switch-when="8">{{resultinfo.CollectEnd}}</div>
+                    <div ng-switch-when="9">{{resultinfo.TestTime}}</div>
+                    <div ng-switch-when="10">{{resultinfo.TestResult}}</div>
+                    <div ng-switch-when="11">{{resultinfo.TestPeople}}</div>
+                    <div ng-switch-when="12">{{resultinfo.ReStatus}}</div>
+                    <div ng-switch-when="13">{{resultinfo.RePeople}}</div>
+                    <div ng-switch-when="14">{{resultinfo.ReTime}}</div>
+                    <div ng-switch-when="15">{{resultinfo.revDateTime}}</div>
+                    <div ng-switch-when="16">{{resultinfo.TerminalIP}}</div>
+                    <div ng-switch-when="17">{{resultinfo.TerminalName}}</div>
+                    <div ng-switch-when="18">{{resultinfo.revUserId}}</div>
+                    <div ng-switch-when="19">{{resultinfo.revIdentify}}</div>
+                  </div>
+                </td>
+                <!-- <td>
+                   <div ng-switch="selectrevision">
+                    <div ng-switch-when="1">{{resultinfo.revDateTime}}</div>
+                    <div ng-switch-when="2">{{resultinfo.TerminalIP}}</div>
+                    <div ng-switch-when="3">{{resultinfo.TerminalName}}</div>
+                    <div ng-switch-when="4">{{resultinfo.revUserId}}</div>
+                    <div ng-switch-when="5">{{resultinfo.revIdentify}}</div>
+                  </div>
+                </td> -->
+                <td style="text-align:center;vertical-align:middle;" > 
+                  <button style="background-color:#63B8FF;color:white" ng-click="GoMachineView('{{resultinfo.TestId}}')">查看</button>
+                </td>
+              </tr>
+            </tbody>
+        
+        </table>
+  	</div>
+  </ion-content>
+</ion-view>

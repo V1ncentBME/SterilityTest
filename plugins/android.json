@@ -1,37 +1,40 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-calendar": {
+      "PACKAGE_NAME": "io.ionic.starter"
     },
-    "config_munge": {
-        "files": {}
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "io.ionic.starter"
     },
-    "installed_plugins": {
-        "cordova-plugin-calendar": {
-            "PACKAGE_NAME": "com.ionicframework.sterilitytest401624"
-        },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.sterilitytest401624"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.sterilitytest401624"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.sterilitytest401624"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.sterilitytest401624"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.sterilitytest401624"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.sterilitytest401624"
-        }
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.ionic.starter"
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.ionicframework.sterilitytest401624"
-        }
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.ionic.starter"
     }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    }
+  }
 }
