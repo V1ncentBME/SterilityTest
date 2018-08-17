@@ -58,9 +58,6 @@
     }
   },
   "installed_plugins": {
-    "cordova-plugin-compat": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
     "cordova-plugin-calendar": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
@@ -130,7 +127,6 @@
     }
   ],
   "plugin_metadata": {
-    "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-calendar": "4.5.5",
     "cordova-plugin-console": "1.0.5",
     "cordova-plugin-device": "1.1.4",

@@ -56,14 +56,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-compat": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-compat"
-    },
-    "is_top_level": false,
-    "variables": {}
-  },
   "cordova-plugin-ionic-webview": {
     "source": {
       "type": "registry",
@@ -78,6 +70,14 @@
       "id": "cordova-plugin-ionic-keyboard@2.0.5"
     },
     "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-compat": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-compat@^1.0.0"
+    },
+    "is_top_level": false,
     "variables": {}
   }
 }
